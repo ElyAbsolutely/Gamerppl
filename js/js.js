@@ -1,5 +1,5 @@
-var game = document.getElementById("game");
-var ctx = game.getContext("2d");
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext;
 
 document.getElementById("button").addEventListener("click", start);
 
