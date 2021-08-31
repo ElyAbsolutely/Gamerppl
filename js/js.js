@@ -22,7 +22,7 @@ const player = {
 }
 
 const wall = {
-    x: 500,
+    x: 500, //Pitää muuttaa
     y: Math.random() * canvas.height,
     h: Math.random() * canvas.height,
     w: Math.random() * 40,
@@ -53,13 +53,25 @@ function newPos() {
 }
 
 function detectWalls() {
-
+    //Vasen puoli seinästä
+    if (player.x + player.w > wall.x && player.y + player.h > wall.y && player.y > wall.y + wall.h) {
+        //törmää seinään pääse ohi ylä- ja alapuolelta?
+        console.log('hit left');
+    }
+    //Oikea puoli seinästä
+    if (player.x < wall.x + wall.w && player.y + player.h > wall.y && player.y > wall.y + wall.h) {
+        //törmää seinään pääse ohi ylä- ja alapuolelta?
+        console.log('hit right');
+    }
 }
 
 function update() {
     clear();
+
     drawWall();
     drawPlayer();
+    
     newPos();
+    
     requestAnimationFrame(update);
 }
