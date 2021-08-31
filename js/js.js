@@ -22,25 +22,41 @@ const player = {
 }
 
 const wall = [
-    {
+    { // Left
         x: 0,
         y: 0,
-        h: 600,
-        w: 50,
-        speed: 0,
+        h: canvas.height,
+        w: 100,
+        speed: 5,
         color: 'blue',
         dx: 0,
         dy: 0
     }, 
-    {
-        x: 100,
+    { // Top
+        x: 0,
         y: 0,
-        h: 500,
-        w: 100,
-        speed: 0,
+        h: 100,
+        w: canvas.width,
+        speed: 5,
         color: 'blue',
         dx: 0,
         dy: 0
+    },
+    { // Bottom
+        x: 100,
+        y: canvas.height - 100,
+        h: 100,
+        w: canvas.width,
+        speed: 5,
+        color: 'blue',
+    }, 
+    { // Right
+        x: canvas.width - 100,
+        y: 0,
+        h: canvas.height - 100,
+        w: 100,
+        speed: 0,
+        color: 'blue',
     }
 ]
 
@@ -62,8 +78,31 @@ function clear() {
 
 function newPos() {
 
-
     detectWalls();
+}
+
+function moveLeft() {
+    for(let i = 0; wall.length > i; i++) {
+        wall[i].x += wall[i].speed;
+    }
+}
+
+function moveRight() {
+    for(let i = 0; wall.length > i; i++) {
+        wall[i].x -= wall[i].speed;
+    }
+}
+
+function moveUp() {
+    for(let i = 0; wall.length > i; i++) {
+        wall[i].y += wall[i].speed;
+    }
+}
+
+function moveDown() {
+    for(let i = 0; wall.length > i; i++) {
+        wall[i].y -= wall[i].speed;
+    }
 }
 
 function detectWalls() {
@@ -85,17 +124,21 @@ document.addEventListener("keydown", function (event) {
     if (event.key === "w") {
         //go up
         console.log("W")
+        moveUp();
     } else if (event.key === "s") {
         //go down
         console.log("S")
+        moveDown();
     }
 
     if (event.key === "a") {
         //go left
         console.log("A")
+        moveLeft();
     } else if (event.key === "d") {
         //go right
         console.log("D")
+        moveRight()
     }
 
     //attack
@@ -120,7 +163,7 @@ function update() {
     drawPlayer();
     drawWalls();
     
-    newPos();
+    // newPos();
     
     requestAnimationFrame(update);
 }
