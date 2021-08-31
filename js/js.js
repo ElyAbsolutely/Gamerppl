@@ -77,64 +77,55 @@ function newPos() {
     detectWalls();
 }
 
+function detectWalls() {
+    //Ei toimi oikein
+    // for (let i = 0; i < wall.length; i++) {
+    //     if (player.x > 0 + wall[i].x + wall[i].w) {
+    //         wall[i].speed = 0;
+    //     } else {
+    //         wall[i].speed = 5;
+    //     }
+    // }
+}
+
 function moveLeft() {
-    for(let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++) {
         wall[i].x += wall[i].speed;
     }
 }
 
 function moveRight() {
-    for(let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++) {
         wall[i].x -= wall[i].speed;
     }
 }
 
 function moveUp() {
-    for(let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++) {
         wall[i].y += wall[i].speed;
     }
 }
 
 function moveDown() {
-    for(let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++) {
         wall[i].y -= wall[i].speed;
     }
-}
-
-function detectWalls() {
-    // Ei toimi
-    // //Vasen puoli seinästä
-    // if (player.x + player.w > wall.x && player.y + player.h > wall.y && player.y > wall.y + wall.h) {
-    //     //törmää seinään pääse ohi ylä- ja alapuolelta?
-    //     console.log('hit left');
-    // }
-    // //Oikea puoli seinästä
-    // if (player.x < wall.x + wall.w && player.y + player.h > wall.y && player.y > wall.y + wall.h && player.x > wall.x + wall.w) {
-    //     //törmää seinään pääse ohi ylä- ja alapuolelta?
-    //     console.log('hit right');
-    // } 
 }
 
 document.addEventListener("keydown", function (event) {
     //move
     if (event.key === "w") {
         //go up
-        console.log("W")
         moveUp();
     } else if (event.key === "s") {
         //go down
-        console.log("S")
         moveDown();
-    }
-
-    if (event.key === "a") {
+    } else if (event.key === "a") {
         //go left
-        console.log("A")
         moveLeft();
     } else if (event.key === "d") {
         //go right
-        console.log("D")
-        moveRight()
+        moveRight();
     }
 
     //attack
@@ -159,7 +150,7 @@ function update() {
     drawPlayer();
     drawWalls();
     
-    // newPos();
+    newPos();
     
     requestAnimationFrame(update);
 }
