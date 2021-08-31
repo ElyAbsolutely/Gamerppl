@@ -21,15 +21,25 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
+const wall = {
+    x: 500,
+    y: Math.random() * canvas.height,
+    h: Math.random() * canvas.height,
+    w: Math.random() * 40,
+    speed: 0,
+    color: 'blue',
+    dx: 0,
+    dy: 0
+}
+
 function drawPlayer() {
     ctx.fillStyle = player.color;
     ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
-function drawWalls() {    
-    ctx.fillRect(20, 20, 40, 40);
-    ctx.fillStyle = 'orange';
-    ctx.translate
+function drawWall() { 
+    ctx.fillStyle = wall.color;   
+    ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
 }
 
 function clear() {
@@ -48,6 +58,7 @@ function detectWalls() {
 
 function update() {
     clear();
+    drawWall();
     drawPlayer();
     newPos();
     requestAnimationFrame(update);
