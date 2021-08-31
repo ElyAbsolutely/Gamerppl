@@ -8,8 +8,8 @@ function start() {
     update();
 }
 
-var midx = game.width / 2;
-var midy = game.height / 2;
+var midx = canvas.width / 2;
+var midy = canvas.height / 2;
 
 const player = {
     x: midx - 10,
@@ -33,7 +33,7 @@ function drawWalls() {
 }
 
 function clear() {
-    ctx.clearRect(0, 0, game.width, game.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
 function newPos() {
