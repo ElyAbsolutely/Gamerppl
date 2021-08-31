@@ -22,10 +22,10 @@ const player = {
 }
 
 const wall = {
-    x: 500, //Pitää muuttaa
+    x: 0,
     y: Math.random() * canvas.height,
-    h: Math.random() * canvas.height,
-    w: Math.random() * 40,
+    h: Math.random() * (canvas.height - 150) + 150,
+    w: Math.random() * (25 - 10) + 10,
     speed: 0,
     color: 'blue',
     dx: 0,
@@ -37,13 +37,13 @@ function drawPlayer() {
     ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
-function drawWall() { 
+function drawWalls() { 
     ctx.fillStyle = wall.color;   
-    ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+    ctx.fillRect(canvas.width - wall.w, wall.y, wall.w, wall.h);
 }
 
 function clear() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function newPos() {
@@ -53,16 +53,17 @@ function newPos() {
 }
 
 function detectWalls() {
-    //Vasen puoli seinästä
-    if (player.x + player.w > wall.x && player.y + player.h > wall.y && player.y > wall.y + wall.h) {
-        //törmää seinään pääse ohi ylä- ja alapuolelta?
-        console.log('hit left');
-    }
-    //Oikea puoli seinästä
-    if (player.x < wall.x + wall.w && player.y + player.h > wall.y && player.y > wall.y + wall.h) {
-        //törmää seinään pääse ohi ylä- ja alapuolelta?
-        console.log('hit right');
-    }
+    // Ei toimi
+    // //Vasen puoli seinästä
+    // if (player.x + player.w > wall.x && player.y + player.h > wall.y && player.y > wall.y + wall.h) {
+    //     //törmää seinään pääse ohi ylä- ja alapuolelta?
+    //     console.log('hit left');
+    // }
+    // //Oikea puoli seinästä
+    // if (player.x < wall.x + wall.w && player.y + player.h > wall.y && player.y > wall.y + wall.h && player.x > wall.x + wall.w) {
+    //     //törmää seinään pääse ohi ylä- ja alapuolelta?
+    //     console.log('hit right');
+    // } 
 }
 
 document.addEventListener("keydown", function (event) {
@@ -99,8 +100,8 @@ document.addEventListener("keydown", function (event) {
 function update() {
     clear();
 
-    drawWall();
     drawPlayer();
+    drawWalls();
     
     newPos();
     
