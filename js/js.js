@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
 
 document.getElementById("button").addEventListener("click", start);
 
@@ -55,6 +55,12 @@ document.addEventListener("keydown", function (event) {
 function drawPlayer() {
     ctx.fillStyle = player.color;
     ctx.fillRect(player.x, player.y, player.w, player.h);
+}
+
+function drawWalls() {    
+    ctx.fillRect(20, 20, 40, 40);
+    ctx.fillStyle = 'orange';
+    ctx.translate
 }
 
 function clear() {
