@@ -71,16 +71,19 @@ document.addEventListener("keydown", function (event) {
     if (event.key === "w") {
         //go up
         console.log("W")
-    } else if (event.key === "a") {
-        //go left
-        console.log("A")
     } else if (event.key === "s") {
         //go down
         console.log("S")
+    }
+
+    if (event.key === "a") {
+        //go left
+        console.log("A")
     } else if (event.key === "d") {
         //go right
         console.log("D")
     }
+
     //attack
     if (event.key === "ArrowUp") {
         //attact up
