@@ -21,16 +21,28 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
-const wall = {
-    x: 0,
-    y: Math.random() * canvas.height,
-    h: Math.random() * (canvas.height - 150) + 150,
-    w: Math.random() * (25 - 10) + 10,
-    speed: 0,
-    color: 'blue',
-    dx: 0,
-    dy: 0
-}
+const wall = [
+    {
+        x: 0,
+        y: 0,
+        h: 600,
+        w: 50,
+        speed: 0,
+        color: 'blue',
+        dx: 0,
+        dy: 0
+    }, 
+    {
+        x: 100,
+        y: 0,
+        h: 500,
+        w: 100,
+        speed: 0,
+        color: 'blue',
+        dx: 0,
+        dy: 0
+    }
+]
 
 function drawPlayer() {
     ctx.fillStyle = player.color;
@@ -38,8 +50,10 @@ function drawPlayer() {
 }
 
 function drawWalls() { 
-    ctx.fillStyle = wall.color;   
-    ctx.fillRect(canvas.width - wall.w, wall.y, wall.w, wall.h);
+    for (let i = 0; i < wall.length; i++) {
+        ctx.fillStyle = wall[i].color;   
+        ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+    }
 }
 
 function clear() {
