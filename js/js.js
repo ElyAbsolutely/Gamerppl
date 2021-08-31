@@ -29,8 +29,6 @@ const wall = [
         w: 100,
         speed: 5,
         color: 'blue',
-        dx: 0,
-        dy: 0
     }, 
     { // Top
         x: 0,
@@ -39,8 +37,6 @@ const wall = [
         w: canvas.width,
         speed: 5,
         color: 'blue',
-        dx: 0,
-        dy: 0
     },
     { // Bottom
         x: 100,
@@ -55,7 +51,7 @@ const wall = [
         y: 0,
         h: canvas.height - 100,
         w: 100,
-        speed: 0,
+        speed: 5,
         color: 'blue',
     }
 ]
