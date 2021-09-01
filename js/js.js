@@ -240,6 +240,10 @@ document.addEventListener("keydown", function (event) {
             //go right
             player.moveDir = "right";
             break;
+        case "r":
+            //stop momentarily
+            player.moveDir = "none";
+            break;
     }
 
     //attack
