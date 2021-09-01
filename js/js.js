@@ -22,6 +22,7 @@ const player = {
     color: "red",
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
+    moveDir: "none", // none, up, left, down, right
     png: null //Halutaanko kuvat myöhemmin?
 }
 
@@ -151,6 +152,22 @@ function clear(sky) { //Testaan tauskakuva taivaan tekemistä
 }
 
 function newPos() {
+    switch (player.moveDir) {
+        case "none":
+            break;
+        case "up":
+            moveUp();
+            break;
+        case "left":
+            moveLeft();
+            break;
+        case "down":
+            moveDown();
+            break;
+        case "right":
+            moveRight();
+            break;
+    }
 
     detectWalls();
 }
@@ -209,19 +226,19 @@ document.addEventListener("keydown", function (event) {
     switch (event.key) {
         case "w":
             //go up
-            moveUp();
+            player.moveDir = "up";
             break;
         case "a":
             //go left
-            moveLeft();
+            player.moveDir = "left";
             break;
         case "s":
             //go down
-            moveDown();
+            player.moveDir = "down";
             break;
         case "d":
             //go right
-            moveRight();
+            player.moveDir = "right";
             break;
     }
 
