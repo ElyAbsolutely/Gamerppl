@@ -12,6 +12,8 @@ var midx = canvas.width / 2;
 var midy = canvas.height / 2;
 
 var weapon01 = document.getElementById("dagger");
+var sky01 = document.getElementById("sky01");
+var sky02 = document.getElementById("sky02");
 
 const player = {
     x: midx - 10,
@@ -21,7 +23,7 @@ const player = {
     speed: 1,
     color: "red",
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
-    attackDir: "none",
+    attackDir: "none", // none, up, left, down, right
     png: null //Halutaanko kuvat myöhemmin?
 }
 
@@ -100,8 +102,18 @@ function drawWalls() {
     }
 }
 
-function clear() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function clear(sky) { //Testaan tauskakuva taivaan tekemistä
+    switch (sky) {
+        case 0:
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 1:
+            ctx.drawImage(sky01, 0, 0, canvas.width, canvas.height);
+            break;
+        case 2:
+            ctx.drawImage(sky02, 0, 0, canvas.width, canvas.height);
+            break;
+    }
 }
 
 function newPos() {
@@ -194,7 +206,7 @@ document.addEventListener("keydown", function (event) {
 })
 
 function update() {
-    clear();
+    clear(2);
 
     drawPlayer();
     drawWalls();
