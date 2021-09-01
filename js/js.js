@@ -68,14 +68,19 @@ function drawPlayer() {
 function drawAttack() {
     console.log(player.attackFrames + player.attackDir);
     if (player.attackFrames > -1) {
-        if (player.attackDir == "up") {
-            ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
-        } else if (player.attackDir == "left") {
-            ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
-        } else if (player.attackDir == "down") {
-            ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
-        } else if (player.attackDir == "right") {
-            ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
+        switch (player.attackDir) {
+            case "up":
+                ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
+                break;
+            case "left":
+                ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
+                break;
+            case "down":
+                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
+                break;
+            case "right":
+                ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
+                break;
         }
 
         player.attackFrames++;
@@ -140,39 +145,50 @@ function moveDown() {
 }
 
 document.addEventListener("keydown", function (event) {
+
     //move
-    if (event.key === "w") {
-        //go up
-        moveUp();
-    } else if (event.key === "s") {
-        //go down
-        moveDown();
-    } else if (event.key === "a") {
-        //go left
-        moveLeft();
-    } else if (event.key === "d") {
-        //go right
-        moveRight();
+    switch (event.key) {
+        case "w":
+            //go up
+            moveUp();
+            break;
+        case "a":
+            //go left
+            moveLeft();
+            break;
+        case "s":
+            //go down
+            moveDown();
+            break;
+        case "d":
+            //go right
+            moveRight();
+            break;
     }
 
     //attack
     if (player.attackFrames == -1) {
-        if (event.key === "ArrowUp") {
-            //attact up
-            player.attackDir = "up";
-            player.attackFrames = 0;
-        } else if (event.key === "ArrowLeft") {
-            //attack left
-            player.attackDir = "left";
-            player.attackFrames = 0;
-        } else if (event.key === "ArrowDown") {
-            //attack down
-            player.attackDir = "down";
-            player.attackFrames = 0;
-        } else if (event.key === "ArrowRight") {
-            //attack right
-            player.attackDir = "right";
-            player.attackFrames = 0;
+        switch (event.key) {
+            case "ArrowUp":
+                //attact up
+                player.attackDir = "up";
+                player.attackFrames = 0;
+                break;
+            case "ArrowLeft":
+                //attack left
+                player.attackDir = "left";
+                player.attackFrames = 0;
+                break;
+            case "ArrowDown":
+                //attack down
+                player.attackDir = "down";
+                player.attackFrames = 0;
+                break;
+            case "ArrowRight":
+                //attack right
+                player.attackDir = "right";
+                player.attackFrames = 0;
+                break;
         }
     }
 })
