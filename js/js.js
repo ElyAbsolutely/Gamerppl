@@ -1,17 +1,43 @@
-const canvas = document.getElementById('game');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
 document.getElementById("button").addEventListener("click", start);
+document.getElementById("sky").addEventListener("click", changeSky);
+document.getElementById("overlay").addEventListener("click", changeOverlay);
+document.getElementById("sound").addEventListener("click", toggleVolume);
+
+document.getElementById("sky").disabled = true;
+document.getElementById("overlay").disabled = true;
+document.getElementById("sound").disabled = true;
+
+//Asset Warmup
+var sky01 = new Image();
+sky01.src = "img/skybox/cloudyDay.jpg";
+var sky02 = new Image();
+sky02.src = "img/skybox/oceanSunset.jpg";
+var weapon01 = new Image();
+weapon01.src = "img/weapons/steelDagger.png";
+
+var footstep01 = new Audio("sounds/player/footsteps/concrete1.wav");
+var footstep02 = new Audio("sounds/player/footsteps/concrete2.wav");
+var footstep03 = new Audio("sounds/player/footsteps/concrete3.wav");
+var footstep04 = new Audio("sounds/player/footsteps/concrete4.wav");
+var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
 function start() {
     document.getElementById("button").disabled = true;
+    document.getElementById("sky").disabled = false;
+    document.getElementById("overlay").disabled = false;
+    document.getElementById("sound").disabled = false;
     update();
 }
 
 let midx = canvas.width / 2;
 let midy = canvas.height / 2;
 
-let weapon01 = document.getElementById("dagger");
+const gameSettings = {
+    volume: false
+}
 
 const player = {
     x: midx - 10,
@@ -20,10 +46,33 @@ const player = {
     w: 20,
     speed: 1,
     color: "red",
+
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
+
     moveDir: "none", // none, up, left, down, right
+    footsteps: 0,
+
     png: null //Halutaanko kuvat myöhemmin?
+}
+
+const stage = {
+    sky: 0,
+    overlay: 0,
+
+    id: null
+}
+
+function changeSky() {
+    if (stage.sky == 2) {
+        stage.sky = 0;
+        return;
+    }
+    stage.sky++;
+}
+
+function changeOverlay() {
+    stage.overlay++;
 }
 
 const wall = [
@@ -82,26 +131,6 @@ function drawPlayer() {
     ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
-function attack(dir) {
-    if (player.attackFrames == -1) {
-        switch (dir) {
-            case "up":
-                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
-                break;
-            case "left":
-                ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
-                break;
-            case "down":
-                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
-                break;
-            case "right":
-                ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
-                break;
-        }
-        player.attackFrames = 0;
-    }
-}
-
 function drawAttack() {
     if (player.attackFrames > -1) {
 
@@ -124,7 +153,6 @@ function drawAttack() {
 
         if (player.attackFrames == 25) {
             player.attackFrames = -1;
-
             player.attackDir = "none";
         }
     }
@@ -137,8 +165,8 @@ function drawWalls() {
     }
 }
 
-function clear(sky) { //Testaan tauskakuva taivaan tekemistä
-    switch (sky) {
+function clear() { //Testaan tauskakuva taivaan tekemistä
+    switch (stage.sky) {
         case 0:
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             break;
@@ -269,10 +297,6 @@ document.addEventListener("keydown", function (event) {
             //go right
             player.moveDir = "right";
             break;
-        case "r":
-            //stop momentarily
-            player.moveDir = "none";
-            break;
     }
 
     //attack
@@ -282,28 +306,28 @@ document.addEventListener("keydown", function (event) {
                 //attact up
                 player.attackDir = "up";
                 player.attackFrames = 0;
-                break;
+                return;
             case "ArrowLeft":
                 //attack left
                 player.attackDir = "left";
                 player.attackFrames = 0;
-                break;
+                return;
             case "ArrowDown":
                 //attack down
                 player.attackDir = "down";
                 player.attackFrames = 0;
-                break;
+                return;
             case "ArrowRight":
                 //attack right
                 player.attackDir = "right";
                 player.attackFrames = 0;
-                break;
+                return;
         }
     }
 })
 
 function update() {
-    clear(2);
+    clear();
 
     drawPlayer();
     drawWalls();
@@ -311,5 +335,56 @@ function update() {
 
     newPos();
 
+    playSounds();
+
     requestAnimationFrame(update);
+}
+
+function toggleVolume() {
+    if (gameSettings.volume) {
+        gameSettings.volume = false;
+        document.getElementById("sound").style.background = "red";
+    } else {
+        gameSettings.volume = true;
+        document.getElementById("sound").style.background = "green";
+    }
+}
+
+function playSounds() {
+    if (!(gameSettings.volume)) {
+        console.log("sounds are off");
+        return;
+    }
+
+    if (player.attackFrames == 2) {
+        knifemelee01.play();
+        console.log("meleeknife1");
+    }
+
+    if (!(player.moveDir == "none")) {
+        if (player.footsteps == 17) {
+            player.footsteps = 0;
+            switch (Math.floor(Math.random() * 4)) {
+                case 0:
+                    footstep01.play();
+                    console.log("footstepsound1");
+                    return;
+                case 1:
+                    footstep02.play();
+                    console.log("footstepsound2");
+                    return;
+                case 2:
+                    footstep03.play();
+                    console.log("footstepsound3");
+                    return;
+                case 3:
+                    footstep04.play();
+                    console.log("footstepsound4");
+                    return;
+            }
+        }
+        player.footsteps++;
+    } else {
+        player.footsteps = 0;
+    }
 }
