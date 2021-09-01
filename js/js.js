@@ -77,11 +77,10 @@ function changeOverlay() {
 
 const wall = [
     { // Left
-        x: 0,
-        y: 100,
+        x: -300,
+        y: 50,
         h: canvas.height - 100,
-        w: 100,
-        speed: 5,
+        w: 350,
         color: 'blue',
         goDown: 5,
         goUp: 5,
@@ -89,11 +88,10 @@ const wall = [
         goRight: 5
     },
     { // Top
-        x: 0,
-        y: 0,
-        h: 100,
-        w: canvas.width - 100,
-        speed: 5,
+        x: -300,
+        y: -300,
+        h: 350,
+        w: canvas.width * 3,
         color: 'red',
         goDown: 5,
         goUp: 5,
@@ -101,11 +99,10 @@ const wall = [
         goRight: 5
     },
     { // Bottom
-        x: 100,
-        y: canvas.height - 100,
-        h: 100,
-        w: canvas.width - 100,
-        speed: 5,
+        x: -300,
+        y: canvas.height - 50,
+        h: 300,
+        w: canvas.width * 3,
         color: 'orange',
         goDown: 5,
         goUp: 5,
@@ -113,11 +110,10 @@ const wall = [
         goRight: 5
     },
     { // Right
-        x: canvas.width - 100,
-        y: 0,
+        x: canvas.width * 2,
+        y: 50,
         h: canvas.height - 100,
-        w: 100,
-        speed: 5,
+        w: 300,
         color: 'black',
         goDown: 5,
         goUp: 5,
@@ -195,6 +191,8 @@ function newPos() {
         case "right":
             moveRight();
             break;
+        default:
+            break;
     }
 
     detectWalls();
@@ -214,8 +212,7 @@ function detectWalls() { // Toimii neliön kanssa
         } else if (player.x <= wall[0].x + wall[0].w) {
             console.log('hit left');
             wall[i].goLeft = 0;
-        }
-        else {
+        } else {
             wall[i].goDown = 5;
             wall[i].goLeft = 5;
             wall[i].goRight = 5;
@@ -272,10 +269,10 @@ document.addEventListener("keyup", function (event) {
                 player.moveDir = "none";
                 break;
             }
+        default:
+            break;
     }
 })
-
-
 
 document.addEventListener("keydown", function (event) {
 
