@@ -20,7 +20,8 @@ const player = {
     w: 20,
     speed: 1,
     color: "red",
-    attackFrames: -1, //max 25
+    attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
+    attackDir: "none",
     png: null //Halutaanko kuvat myöhemmin?
 }
 
@@ -64,45 +65,16 @@ function drawPlayer() {
     ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
-var attackUp = false;
-var attackLeft = false;
-var attackRight = false;
-var attackDown = false;
-
-function attack(dir) {
-    if (player.attackFrames == -1) {
-        switch (dir) {
-            case 1:
-                attackUp = true;
-                console.log("keyUp");
-                break;
-            case 2:
-                attackLeft = true;
-                console.log("keyLeft");
-                break;
-            case 3:
-                attackDown = true;
-                console.log("keyDown");
-                break;
-            case 4:
-                attackRight = true;
-                console.log("keyRight");
-                break;
-        }
-        player.attackFrames = 0;
-    }
-}
-
 function drawAttack() {
-    console.log(player.attackFrames);
+    console.log(player.attackFrames + player.attackDir);
     if (player.attackFrames > -1) {
-        if (attackUp) {
+        if (player.attackDir == "up") {
             ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
-        } else if (attackLeft) {
+        } else if (player.attackDir == "left") {
             ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
-        } else if (attackDown) {
+        } else if (player.attackDir == "down") {
             ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
-        } else if (attackRight) {
+        } else if (player.attackDir == "right") {
             ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
         }
 
@@ -111,10 +83,7 @@ function drawAttack() {
         if (player.attackFrames == 25) {
             player.attackFrames = -1;
 
-            attackUp = false;
-            attackLeft = false;
-            attackRight = false;
-            attackDown = false;
+            player.attackDir = "none";
         }
     }
 }
@@ -187,18 +156,24 @@ document.addEventListener("keydown", function (event) {
     }
 
     //attack
-    if (event.key === "ArrowUp") {
-        //attact up
-        attack(1);
-    } else if (event.key === "ArrowLeft") {
-        //attack left
-        attack(2);
-    } else if (event.key === "ArrowDown") {
-        //attack down
-        attack(3);
-    } else if (event.key === "ArrowRight") {
-        //attack right
-        attack(4);
+    if (player.attackFrames == -1) {
+        if (event.key === "ArrowUp") {
+            //attact up
+            player.attackDir = "up";
+            player.attackFrames = 0;
+        } else if (event.key === "ArrowLeft") {
+            //attack left
+            player.attackDir = "left";
+            player.attackFrames = 0;
+        } else if (event.key === "ArrowDown") {
+            //attack down
+            player.attackDir = "down";
+            player.attackFrames = 0;
+        } else if (event.key === "ArrowRight") {
+            //attack right
+            player.attackDir = "right";
+            player.attackFrames = 0;
+        }
     }
 })
 
