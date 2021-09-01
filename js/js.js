@@ -29,10 +29,9 @@ const player = {
 const wall = [
     { // Left
         x: -300,
-        y: 100,
-        h: canvas.height - 200,
-        w: 400,
-        speed: 5,
+        y: 50,
+        h: canvas.height - 100,
+        w: 350,
         color: 'blue',
         goDown: 5,
         goUp: 5,
@@ -42,9 +41,8 @@ const wall = [
     { // Top
         x: -300,
         y: -300,
-        h: 400,
-        w: canvas.width * 2,
-        speed: 5,
+        h: 350,
+        w: canvas.width * 3,
         color: 'red',
         goDown: 5,
         goUp: 5,
@@ -53,10 +51,9 @@ const wall = [
     },
     { // Bottom
         x: -300,
-        y: canvas.height - 100,
-        h: 400,
-        w: canvas.width * 2,
-        speed: 5,
+        y: canvas.height - 50,
+        h: 300,
+        w: canvas.width * 3,
         color: 'orange',
         goDown: 5,
         goUp: 5,
@@ -64,11 +61,10 @@ const wall = [
         goRight: 5
     },
     { // Right
-        x: canvas.width - 100,
-        y: 100,
-        h: canvas.height - 200,
-        w: 400,
-        speed: 5,
+        x: canvas.width * 2,
+        y: 50,
+        h: canvas.height - 100,
+        w: 300,
         color: 'black',
         goDown: 5,
         goUp: 5,
@@ -275,6 +271,8 @@ document.addEventListener("keydown", function (event) {
         case "r":
             //stop momentarily
             player.moveDir = "none";
+            break;
+        default:
             break;
     }
 
