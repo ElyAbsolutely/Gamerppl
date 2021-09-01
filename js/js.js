@@ -8,10 +8,10 @@ function start() {
     update();
 }
 
-var midx = canvas.width / 2;
-var midy = canvas.height / 2;
+let midx = canvas.width / 2;
+let midy = canvas.height / 2;
 
-var weapon01 = document.getElementById("dagger");
+let weapon01 = document.getElementById("dagger");
 
 const player = {
     x: midx - 10,
@@ -27,27 +27,39 @@ const player = {
 const wall = [
     { // Left
         x: 0,
-        y: 0,
-        h: canvas.height,
+        y: 100,
+        h: canvas.height - 100,
         w: 100,
         speed: 5,
         color: 'blue',
+        goDown: 5,
+        goUp: 5,
+        goLeft: 5,
+        goRight: 5
     },
     { // Top
         x: 0,
         y: 0,
         h: 100,
-        w: canvas.width,
+        w: canvas.width - 100,
         speed: 5,
-        color: 'blue',
+        color: 'red',
+        goDown: 5,
+        goUp: 5,
+        goLeft: 5,
+        goRight: 5
     },
     { // Bottom
         x: 100,
         y: canvas.height - 100,
         h: 100,
-        w: canvas.width,
+        w: canvas.width - 100,
         speed: 5,
-        color: 'blue',
+        color: 'orange',
+        goDown: 5,
+        goUp: 5,
+        goLeft: 5,
+        goRight: 5
     },
     { // Right
         x: canvas.width - 100,
@@ -55,7 +67,11 @@ const wall = [
         h: canvas.height - 100,
         w: 100,
         speed: 5,
-        color: 'blue',
+        color: 'black',
+        goDown: 5,
+        goUp: 5,
+        goLeft: 5,
+        goRight: 5
     }
 ]
 
@@ -64,10 +80,10 @@ function drawPlayer() {
     ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
-var attackUp = false;
-var attackLeft = false;
-var attackRight = false;
-var attackDown = false;
+let attackUp = false;
+let attackLeft = false;
+let attackRight = false;
+let attackDown = false;
 
 function attack(dir) {
     if (player.attackFrames == -1) {
@@ -94,7 +110,6 @@ function attack(dir) {
 }
 
 function drawAttack() {
-    console.log(player.attackFrames);
     if (player.attackFrames > -1) {
         if (attackUp) {
             ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
@@ -135,38 +150,51 @@ function newPos() {
     detectWalls();
 }
 
-function detectWalls() {
-    //Ei toimi oikein
-    // for (let i = 0; i < wall.length; i++) {
-    //     if (player.x > 0 + wall[i].x + wall[i].w) {
-    //         wall[i].speed = 0;
-    //     } else {
-    //         wall[i].speed = 5;
-    //     }
-    // }
+function detectWalls() { // Toimii neliön kanssa
+    for (let i = 0; i < wall.length; i++) {
+        if (player.y <= wall[1].y + wall[1].h) {
+            console.log('hit top');
+            wall[i].goUp = 0;
+        } else if (player.y + player.h >= wall[2].y) {
+            console.log('hit bottom');
+            wall[i].goDown = 0;
+        } else if (player.x + player.w >= wall[3].x) {
+            console.log('hit right');
+            wall[i].goRight = 0;
+        } else if (player.x <= wall[0].x + wall[0].w) {
+            console.log('hit left');
+            wall[i].goLeft = 0;
+        }
+        else {
+            wall[i].goDown = 5;
+            wall[i].goLeft = 5;
+            wall[i].goRight = 5;
+            wall[i].goUp = 5;
+        }
+    }
 }
 
 function moveLeft() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x += wall[i].speed;
+        wall[i].x += wall[i].goLeft;
     }
 }
 
 function moveRight() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x -= wall[i].speed;
+        wall[i].x -= wall[i].goRight;
     }
 }
 
 function moveUp() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y += wall[i].speed;
+        wall[i].y += wall[i].goUp;
     }
 }
 
 function moveDown() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y -= wall[i].speed;
+        wall[i].y -= wall[i].goDown;
     }
 }
 
@@ -209,7 +237,7 @@ function update() {
     drawWalls();
     drawAttack();
 
-    // newPos();
+    newPos();
 
     requestAnimationFrame(update);
 }
