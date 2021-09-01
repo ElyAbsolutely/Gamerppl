@@ -28,10 +28,10 @@ const player = {
 
 const wall = [
     { // Left
-        x: 0,
+        x: -300,
         y: 100,
-        h: canvas.height - 100,
-        w: 100,
+        h: canvas.height - 200,
+        w: 400,
         speed: 5,
         color: 'blue',
         goDown: 5,
@@ -40,10 +40,10 @@ const wall = [
         goRight: 5
     },
     { // Top
-        x: 0,
-        y: 0,
-        h: 100,
-        w: canvas.width - 100,
+        x: -300,
+        y: -300,
+        h: 400,
+        w: canvas.width * 2,
         speed: 5,
         color: 'red',
         goDown: 5,
@@ -52,10 +52,10 @@ const wall = [
         goRight: 5
     },
     { // Bottom
-        x: 100,
+        x: -300,
         y: canvas.height - 100,
-        h: 100,
-        w: canvas.width - 100,
+        h: 400,
+        w: canvas.width * 2,
         speed: 5,
         color: 'orange',
         goDown: 5,
@@ -65,9 +65,9 @@ const wall = [
     },
     { // Right
         x: canvas.width - 100,
-        y: 0,
-        h: canvas.height - 100,
-        w: 100,
+        y: 100,
+        h: canvas.height - 200,
+        w: 400,
         speed: 5,
         color: 'black',
         goDown: 5,
@@ -167,6 +167,8 @@ function newPos() {
         case "right":
             moveRight();
             break;
+        default:
+            break;
     }
 
     detectWalls();
@@ -186,8 +188,7 @@ function detectWalls() { // Toimii neliön kanssa
         } else if (player.x <= wall[0].x + wall[0].w) {
             console.log('hit left');
             wall[i].goLeft = 0;
-        }
-        else {
+        } else {
             wall[i].goDown = 5;
             wall[i].goLeft = 5;
             wall[i].goRight = 5;
@@ -240,6 +241,8 @@ document.addEventListener("keydown", function (event) {
             //go right
             player.moveDir = "right";
             break;
+        default:
+            break;
     }
 
     //attack
@@ -264,6 +267,8 @@ document.addEventListener("keydown", function (event) {
                 //attack right
                 player.attackDir = "right";
                 player.attackFrames = 0;
+                break;
+            default:
                 break;
         }
     }
