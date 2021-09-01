@@ -20,7 +20,8 @@ const player = {
     w: 20,
     speed: 1,
     color: "red",
-    attackFrames: -1, //max 25
+    attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
+    attackDir: "none", // none, up, left, down, right
     png: null //Halutaanko kuvat myöhemmin?
 }
 
@@ -92,17 +93,14 @@ function attack(dir) {
                 attackUp = true;
                 console.log("keyUp");
                 break;
-            case 2:
-                attackLeft = true;
-                console.log("keyLeft");
+            case "left":
+                ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
                 break;
-            case 3:
-                attackDown = true;
-                console.log("keyDown");
+            case "down":
+                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
                 break;
-            case 4:
-                attackRight = true;
-                console.log("keyRight");
+            case "right":
+                ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
                 break;
         }
         player.attackFrames = 0;
@@ -126,10 +124,7 @@ function drawAttack() {
         if (player.attackFrames == 25) {
             player.attackFrames = -1;
 
-            attackUp = false;
-            attackLeft = false;
-            attackRight = false;
-            attackDown = false;
+            player.attackDir = "none";
         }
     }
 }
@@ -141,8 +136,18 @@ function drawWalls() {
     }
 }
 
-function clear() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function clear(sky) { //Testaan tauskakuva taivaan tekemistä
+    switch (sky) {
+        case 0:
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 1:
+            ctx.drawImage(sky01, 0, 0, canvas.width, canvas.height);
+            break;
+        case 2:
+            ctx.drawImage(sky02, 0, 0, canvas.width, canvas.height);
+            break;
+    }
 }
 
 function newPos() {
@@ -199,39 +204,56 @@ function moveDown() {
 }
 
 document.addEventListener("keydown", function (event) {
+
     //move
-    if (event.key === "w") {
-        //go up
-        moveUp();
-    } else if (event.key === "s") {
-        //go down
-        moveDown();
-    } else if (event.key === "a") {
-        //go left
-        moveLeft();
-    } else if (event.key === "d") {
-        //go right
-        moveRight();
+    switch (event.key) {
+        case "w":
+            //go up
+            moveUp();
+            break;
+        case "a":
+            //go left
+            moveLeft();
+            break;
+        case "s":
+            //go down
+            moveDown();
+            break;
+        case "d":
+            //go right
+            moveRight();
+            break;
     }
 
     //attack
-    if (event.key === "ArrowUp") {
-        //attact up
-        attack(1);
-    } else if (event.key === "ArrowLeft") {
-        //attack left
-        attack(2);
-    } else if (event.key === "ArrowDown") {
-        //attack down
-        attack(3);
-    } else if (event.key === "ArrowRight") {
-        //attack right
-        attack(4);
+    if (player.attackFrames == -1) {
+        switch (event.key) {
+            case "ArrowUp":
+                //attact up
+                player.attackDir = "up";
+                player.attackFrames = 0;
+                break;
+            case "ArrowLeft":
+                //attack left
+                player.attackDir = "left";
+                player.attackFrames = 0;
+                break;
+            case "ArrowDown":
+                //attack down
+                player.attackDir = "down";
+                player.attackFrames = 0;
+                break;
+            case "ArrowRight":
+                //attack right
+                player.attackDir = "right";
+                player.attackFrames = 0;
+                break;
+        }
     }
 })
 
 function update() {
-    clear();
+    clear(2);
 
     drawPlayer();
     drawWalls();
