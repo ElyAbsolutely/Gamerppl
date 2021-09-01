@@ -221,6 +221,37 @@ function moveDown() {
     }
 }
 
+document.addEventListener("keyup", function (event) {
+
+    //Stop
+    switch (event.key) {
+        case "w":
+            if (player.moveDir == "up") {
+                player.moveDir = "none";
+                break;
+            }
+        case "a":
+            if (player.moveDir == "left") {
+                player.moveDir = "none";
+                break;
+            }
+        case "s":
+            if (player.moveDir == "down") {
+                player.moveDir = "none";
+                break;
+            }
+        case "d":
+            if (player.moveDir == "right") {
+                player.moveDir = "none";
+                break;
+            }
+        default:
+            break;
+    }
+})
+
+
+
 document.addEventListener("keydown", function (event) {
 
     //move
@@ -241,7 +272,9 @@ document.addEventListener("keydown", function (event) {
             //go right
             player.moveDir = "right";
             break;
-        default:
+        case "r":
+            //stop momentarily
+            player.moveDir = "none";
             break;
     }
 
