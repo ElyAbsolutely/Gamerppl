@@ -81,17 +81,11 @@ function drawPlayer() {
     ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
-let attackUp = false;
-let attackLeft = false;
-let attackRight = false;
-let attackDown = false;
-
 function attack(dir) {
     if (player.attackFrames == -1) {
         switch (dir) {
-            case 1:
-                attackUp = true;
-                console.log("keyUp");
+            case "up":
+                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
                 break;
             case "left":
                 ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
@@ -109,14 +103,20 @@ function attack(dir) {
 
 function drawAttack() {
     if (player.attackFrames > -1) {
-        if (attackUp) {
-            ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
-        } else if (attackLeft) {
-            ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
-        } else if (attackDown) {
-            ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
-        } else if (attackRight) {
-            ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
+
+        switch (player.attackDir) {
+            case "up":
+                ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
+                break;
+            case "left":
+                ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
+                break;
+            case "down":
+                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
+                break;
+            case "right":
+                ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
+                break;
         }
 
         player.attackFrames++;
