@@ -73,6 +73,49 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
+const enemies = [
+    {
+        x: 400,
+        y: 300,
+        w: 20,
+        h: 20,
+        speed: 4,
+        color: 'blue'
+    },
+    {
+        x: 600,
+        y: 50,
+        w: 20,
+        h: 20,
+        speed: 4,
+        color: 'blue'
+    },
+    {
+        x: 1000,
+        y: 500,
+        w: 20,
+        h: 20,
+        speed: 4,
+        color: 'blue'
+    },
+    {
+        x: 800,
+        y: 400,
+        w: 20,
+        h: 20,
+        speed: 4,
+        color: 'blue'
+    },
+    {
+        x: 560,
+        y: 150,
+        w: 20,
+        h: 20,
+        speed: 4,
+        color: 'blue'
+    },
+];
+
 const stage = {
     x: null,
     y: null,
@@ -170,6 +213,13 @@ function drawWalls() {
     }
 }
 
+function drawEnemies() {
+    for (let i = 0; i < enemies.length; i++) {
+        ctx.fillStyle = enemies[i].color;
+        ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].w, enemies[i].h);
+    }
+}
+
 function clear() { //Testaan tauskakuva taivaan tekemistä
     switch (stage.sky) {
         case 0:
@@ -211,11 +261,17 @@ function moveLeft() {
     for (let i = 0; wall.length > i; i++) {
         wall[i].x += speed;
     }
+    for (let i = 0; enemies.length > i; i++) {
+        enemies[i].x += speed;
+    }
 }
 
 function moveRight() {
     for (let i = 0; wall.length > i; i++) {
         wall[i].x -= speed;
+    }
+    for (let i = 0; enemies.length > i; i++) {
+        enemies[i].x -= speed;
     }
 }
 
@@ -223,11 +279,17 @@ function moveUp() {
     for (let i = 0; wall.length > i; i++) {
         wall[i].y += speed;
     }
+    for (let i = 0; enemies.length > i; i++) {
+        enemies[i].y += speed;
+    }
 }
 
 function moveDown() {
     for (let i = 0; wall.length > i; i++) {
         wall[i].y -= speed;
+    }
+    for (let i = 0; enemies.length > i; i++) {
+        enemies[i].y -= speed;
     }
 }
 
@@ -330,6 +392,7 @@ function update() {
 
     newPos();
     drawPlayer();
+    drawEnemies();
     drawWalls();
     drawAttack();
 
