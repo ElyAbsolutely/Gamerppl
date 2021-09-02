@@ -73,6 +73,7 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
+// x and y can be changed later when the stage is set
 const enemies = [
     {
         x: 400,
@@ -81,8 +82,8 @@ const enemies = [
         h: 20,
         speed: 5,
         color: 'blue',
-        dx: 2,
-        dy: 2
+        dx: 1.5,
+        dy: 1.5
     },
     {
         x: 600,
@@ -91,8 +92,8 @@ const enemies = [
         h: 20,
         speed: 5,
         color: 'blue',
-        dx: 2,
-        dy: 2
+        dx: 1.5,
+        dy: 1.5
     },
     {
         x: 1000,
@@ -101,8 +102,8 @@ const enemies = [
         h: 20,
         speed: 5,
         color: 'blue',
-        dx: 2,
-        dy: 2
+        dx: 1.5,
+        dy: 1.5
     },
     {
         x: 800,
@@ -111,8 +112,8 @@ const enemies = [
         h: 20,
         speed: 5,
         color: 'blue',
-        dx: 2,
-        dy: 2
+        dx: 1.5,
+        dy: 1.5
     }
 ];
 
