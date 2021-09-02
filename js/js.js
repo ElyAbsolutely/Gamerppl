@@ -329,7 +329,7 @@ function getDistance(x1, y1, x2, y2) {
 function enemyMove() {
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y)
-        
+
         if (distance < 250) {
             if (player.x + player.w < enemies[i].x) {
                 enemies[i].x -= enemies[i].dx;
@@ -465,10 +465,11 @@ function update() {
     clear();
 
     newPos();
+
+    drawAttack();
+    drawWalls();
     drawPlayer();
     drawEnemies();
-    drawWalls();
-    drawAttack();
 
     drawOverlay();
 
