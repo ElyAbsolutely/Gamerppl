@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     text-align: center;
     object-position: center;
-
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #start {
@@ -18,6 +18,16 @@ body {
     background-color: #f4f4f4;
     width: 50%;
     border-radius: 25px;
+}
+
+#inst-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#start ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 #canvas {
