@@ -80,7 +80,9 @@ const enemies = [
         w: 20,
         h: 20,
         speed: 5,
-        color: 'blue'
+        color: 'blue',
+        dx: 2,
+        dy: 2
     },
     {
         x: 600,
@@ -88,7 +90,9 @@ const enemies = [
         w: 20,
         h: 20,
         speed: 5,
-        color: 'blue'
+        color: 'blue',
+        dx: 2,
+        dy: 2
     },
     {
         x: 1000,
@@ -96,7 +100,9 @@ const enemies = [
         w: 20,
         h: 20,
         speed: 5,
-        color: 'blue'
+        color: 'blue',
+        dx: 2,
+        dy: 2
     },
     {
         x: 800,
@@ -104,7 +110,9 @@ const enemies = [
         w: 20,
         h: 20,
         speed: 5,
-        color: 'blue'
+        color: 'blue',
+        dx: 2,
+        dy: 2
     }
 ];
 
@@ -314,11 +322,15 @@ function enemyMove() {
     for(let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y)
         
-        if (distance < 200) {
-            console.log('distance')
-            if (player.x + player.width < enemies[i].x) {
-                enemies[i].x -= enemies[i].speed;
-                console.log('enemy move')
+        if (distance < 250) {
+            if (player.x + player.w < enemies[i].x) {
+                enemies[i].x -= enemies[i].dx;
+            } else if (player.y + player.h < enemies[i].y) {
+                enemies[i].y -= enemies[i].dy;
+            } else if (player.x > enemies[i].x + enemies[i].w) {
+                enemies[i].x += enemies[i].dx;
+            } else if (player.y > enemies[i].y + enemies[i].h) {
+                enemies[i].y += enemies[i].dy;
             }
         }
     }
