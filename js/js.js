@@ -240,7 +240,6 @@ function drawWalls() {
     }
 }
 
-
 function drawEnemies() {
     for (let i = 0; i < enemies.length; i++) {
         ctx.fillStyle = enemies[i].color;
@@ -341,6 +340,24 @@ function enemyMove() {
                 enemies[i].y += enemies[i].dy;
             }
         }
+
+        loseLife(enemies[i]);
+    }
+}
+
+// Ei toimi vielä
+function loseLife(enemy) {
+    if (enemy.x === player.x + player.w) {
+        // dead
+    }
+    if (enemy.x + enemy.w === player.x) {
+        // dead
+    }
+    if (enemy.y === player.y + player.h) {
+        // dead
+    }
+    if (enemy.y + enemy.h === player.y) {
+        // dead
     }
 }
 
@@ -461,25 +478,6 @@ document.addEventListener("keydown", function (event) {
     }
 })
 
-function update() {
-    clear();
-
-    newPos();
-    drawPlayer();
-    drawEnemies();
-    drawWalls();
-    drawAttack();
-
-    drawOverlay();
-
-    enemyMove();
-
-    playSounds();
-    drawHUD();
-
-    requestAnimationFrame(update);
-}
-
 function toggleVolume() {
     if (gameSettings.volume) {
         gameSettings.volume = false;
@@ -583,4 +581,23 @@ function drawHUD() {
     }
     ctx.fillText("Weapon: " + player.weaponID, 5, 595);
 
+}
+
+function update() {
+    clear();
+
+    newPos();
+    drawPlayer();
+    drawEnemies();
+    drawWalls();
+    drawAttack();
+
+    drawOverlay();
+
+    enemyMove();
+
+    playSounds();
+    drawHUD();
+
+    requestAnimationFrame(update);
 }
