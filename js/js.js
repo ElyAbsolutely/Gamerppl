@@ -64,6 +64,8 @@ const player = {
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
+    health: 3,
+    weaponID: "Dagger",
 
     moveDir: "none", // none, up, left, down, right
     footsteps: 0,
@@ -90,6 +92,10 @@ function changeSky() {
 }
 
 function changeOverlay() {
+    if (stage.overlay == 4) {
+        stage.overlay = 0;
+        return;
+    }
     stage.overlay++;
 }
 
@@ -203,7 +209,7 @@ function newPos() {
 
 function moveLeft() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x += speed; 
+        wall[i].x += speed;
     }
 }
 
@@ -322,13 +328,15 @@ document.addEventListener("keydown", function (event) {
 function update() {
     clear();
 
+    newPos();
     drawPlayer();
     drawWalls();
     drawAttack();
 
-    newPos();
+    drawOverlay();
 
     playSounds();
+    drawHUD();
 
     requestAnimationFrame(update);
 }
@@ -380,4 +388,48 @@ function playSounds() {
     } else {
         player.footsteps = 0;
     }
+}
+
+function drawOverlay() {
+
+    switch (stage.overlay) {
+        case 0: // Empty
+            return;
+        case 1: // Warm sunset
+            ctx.globalAlpha = 0.2;
+            ctx.fillStyle = "orange";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 2: // Nighttime
+            ctx.globalAlpha = 0.6;
+            ctx.fillStyle = "darkblue";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 3: // Nuclear fallout / Alien
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "green";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 4: // Foggy 
+            ctx.globalAlpha = 0.6;
+            ctx.fillStyle = "lightblue";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+        case 4: // It's A Secret To Everybody
+            return;
+            ctx.globalAlpha = 0.6;
+            ctx.fillStyle = "darkblue";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            break;
+    }
+    ctx.globalAlpha = 1.0;
+}
+
+function drawHUD() {
+
+    ctx.font = "20px Arial";
+    ctx.fillText("Life: " + player.health, 5, 25);
+
+    ctx.fillText("Weapon: " + player.weaponID, 5, 595);
+
 }
