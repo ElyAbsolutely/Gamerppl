@@ -427,6 +427,7 @@ function drawOverlay() {
 
 function drawHUD() {
 
+    ctx.fillStyle = "black";
     ctx.font = "20px Arial";
     ctx.fillText("Life: " + player.health, 5, 25);
 
