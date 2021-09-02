@@ -44,7 +44,7 @@ const player = {
     y: midy - 10,
     h: 20,
     w: 20,
-    speed: 1,
+    speed: 5,
     color: "red",
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
@@ -81,44 +81,28 @@ const wall = [
         y: 50,
         h: canvas.height - 100,
         w: 350,
-        color: 'blue',
-        goDown: 5,
-        goUp: 5,
-        goLeft: 5,
-        goRight: 5
+        color: 'blue'
     },
     { // Top
         x: -300,
         y: -300,
         h: 350,
         w: canvas.width * 3,
-        color: 'red',
-        goDown: 5,
-        goUp: 5,
-        goLeft: 5,
-        goRight: 5
+        color: 'red'
     },
     { // Bottom
         x: -300,
         y: canvas.height - 50,
         h: 300,
         w: canvas.width * 3,
-        color: 'orange',
-        goDown: 5,
-        goUp: 5,
-        goLeft: 5,
-        goRight: 5
+        color: 'orange'
     },
     { // Right
         x: canvas.width * 2,
         y: 50,
         h: canvas.height - 100,
         w: 300,
-        color: 'black',
-        goDown: 5,
-        goUp: 5,
-        goLeft: 5,
-        goRight: 5
+        color: 'black'
     }
 ]
 
@@ -198,50 +182,45 @@ function newPos() {
     detectWalls();
 }
 
-function detectWalls() { // Toimii neliön kanssa
+function detectWalls() { // Testattu ja toimii neliön kanssa
     for (let i = 0; i < wall.length; i++) {
-        if (player.y <= wall[1].y + wall[1].h) {
+        if (player.y < wall[1].y + wall[1].h) {
             console.log('hit top');
-            wall[i].goUp = 0;
-        } else if (player.y + player.h >= wall[2].y) {
+            moveDown();
+        } else if (player.y + player.h > wall[2].y) {
             console.log('hit bottom');
-            wall[i].goDown = 0;
-        } else if (player.x + player.w >= wall[3].x) {
+            moveUp();
+        } else if (player.x + player.w > wall[3].x) {
             console.log('hit right');
-            wall[i].goRight = 0;
-        } else if (player.x <= wall[0].x + wall[0].w) {
+            moveLeft();
+        } else if (player.x < wall[0].x + wall[0].w) {
             console.log('hit left');
-            wall[i].goLeft = 0;
-        } else {
-            wall[i].goDown = 5;
-            wall[i].goLeft = 5;
-            wall[i].goRight = 5;
-            wall[i].goUp = 5;
+            moveRight();
         }
     }
 }
 
 function moveLeft() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x += wall[i].goLeft;
+        wall[i].x += player.speed;
     }
 }
 
 function moveRight() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x -= wall[i].goRight;
+        wall[i].x -= player.speed;
     }
 }
 
 function moveUp() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y += wall[i].goUp;
+        wall[i].y += player.speed;
     }
 }
 
 function moveDown() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y -= wall[i].goDown;
+        wall[i].y -= player.speed;
     }
 }
 
