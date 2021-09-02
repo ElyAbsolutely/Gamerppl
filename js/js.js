@@ -44,7 +44,7 @@ const player = {
     y: midy - 10,
     h: 20,
     w: 20,
-    speed: 5,
+    speed: 1,
     color: "red",
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
@@ -75,6 +75,7 @@ function changeOverlay() {
     stage.overlay++;
 }
 
+let wallSpeed = 5;
 const wall = [
     { // Left
         x: -300,
@@ -182,6 +183,30 @@ function newPos() {
     detectWalls();
 }
 
+function moveLeft() {
+    for (let i = 0; wall.length > i; i++) {
+        wall[i].x += wallSpeed;
+    }
+}
+
+function moveRight() {
+    for (let i = 0; wall.length > i; i++) {
+        wall[i].x -= wallSpeed;
+    }
+}
+
+function moveUp() {
+    for (let i = 0; wall.length > i; i++) {
+        wall[i].y += wallSpeed;
+    }
+}
+
+function moveDown() {
+    for (let i = 0; wall.length > i; i++) {
+        wall[i].y -= wallSpeed;
+    }
+}
+
 function detectWalls() { // Testattu ja toimii neliön kanssa
     for (let i = 0; i < wall.length; i++) {
         if (player.y < wall[1].y + wall[1].h) {
@@ -197,30 +222,6 @@ function detectWalls() { // Testattu ja toimii neliön kanssa
             console.log('hit left');
             moveRight();
         }
-    }
-}
-
-function moveLeft() {
-    for (let i = 0; wall.length > i; i++) {
-        wall[i].x += player.speed;
-    }
-}
-
-function moveRight() {
-    for (let i = 0; wall.length > i; i++) {
-        wall[i].x -= player.speed;
-    }
-}
-
-function moveUp() {
-    for (let i = 0; wall.length > i; i++) {
-        wall[i].y += player.speed;
-    }
-}
-
-function moveDown() {
-    for (let i = 0; wall.length > i; i++) {
-        wall[i].y -= player.speed;
     }
 }
 
