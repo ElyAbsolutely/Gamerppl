@@ -57,6 +57,9 @@ const player = {
 }
 
 const stage = {
+    x: null,
+    y: null,
+
     sky: 0,
     overlay: 0,
 
