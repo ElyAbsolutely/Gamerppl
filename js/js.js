@@ -51,7 +51,8 @@ let midx = canvas.width / 2;
 let midy = canvas.height / 2;
 
 const gameSettings = {
-    volume: false
+    volume: false,
+    devMode: false
 }
 
 const player = {
@@ -229,10 +230,16 @@ function drawWalls() {
     for (let i = 0; i < wall.length; i++) {
         if (wall[i].id != 1) {
             ctx.fillStyle = wall[i].color;
+
             ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+        } else if (wall[i].id == 1 && gameSettings.devMode) {
+            ctx.beginPath();
+            ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+            ctx.stroke();
         }
     }
 }
+
 
 function drawEnemies() {
     for (let i = 0; i < enemies.length; i++) {
@@ -320,7 +327,7 @@ function getDistance(x1, y1, x2, y2) {
 }
 
 function enemyMove() {
-    for(let i = 0; i < enemies.length; i++) {
+    for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y)
         
         if (distance < 250) {
@@ -396,6 +403,10 @@ document.addEventListener("keydown", function (event) {
 
     //move
     switch (event.key) {
+        case "r":
+            //switch devMode
+            toggleDevMode();
+            return;
         case "w":
             //go up
             player.moveDir = "up";
@@ -479,6 +490,14 @@ function toggleVolume() {
     }
 }
 
+function toggleDevMode() {
+    if (gameSettings.devMode) {
+        gameSettings.devMode = false;
+    } else {
+        gameSettings.devMode = true;
+    }
+}
+
 function playSounds() {
     if (!(gameSettings.volume)) {
         console.log("sounds are off");
@@ -559,6 +578,9 @@ function drawHUD() {
     ctx.font = "20px Arial";
     ctx.fillText("Life: " + player.health, 5, 25);
 
+    if (gameSettings.devMode) {
+        ctx.fillText("DevMode: on", 450, 25);
+    }
     ctx.fillText("Weapon: " + player.weaponID, 5, 595);
 
 }
