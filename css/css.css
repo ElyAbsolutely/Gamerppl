@@ -5,8 +5,45 @@
 body {
     margin: 0;
     background: #333;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    object-position: center;
+
 }
 
-#game {
-    background: #fff;
+#start {
+    margin: 200px auto;
+    padding: 40px;
+    background-color: #f4f4f4;
+    width: 50%;
+    border-radius: 25px;
 }
+
+#canvas {
+    margin: 70px auto;
+    background: #f4f4f4;
+}
+
+.btns {
+    display: inline-block;
+    padding: 10px 20px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #20461c;
+    color: #f4f4f4;
+    margin: 0 10px;
+}
+
+#start-btn {
+    padding: 15px 25px;
+    margin: 20px;
+    font-size: 20px;
+    border: 2px solid #05b905;
+}
+
+#sound-btn {
+    background-color: #d63c3c;
+}
+

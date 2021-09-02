@@ -1,14 +1,19 @@
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-document.getElementById("button").addEventListener("click", start);
-document.getElementById("sky").addEventListener("click", changeSky);
-document.getElementById("overlay").addEventListener("click", changeOverlay);
-document.getElementById("sound").addEventListener("click", toggleVolume);
+const skyBtn = document.getElementById('sky-btn');
+const overlayBtn = document.getElementById('overlay-btn');
+const soundBtn = document.getElementById('sound-btn');
 
-document.getElementById("sky").disabled = true;
-document.getElementById("overlay").disabled = true;
-document.getElementById("sound").disabled = true;
+window.addEventListener('load', hideGame);
+document.getElementById('start-btn').addEventListener('click', start);
+skyBtn.addEventListener('click', changeSky);
+overlayBtn.addEventListener('click', changeOverlay);
+soundBtn.addEventListener('click', toggleVolume);
+
+skyBtn.disabled = true;
+overlayBtn.disabled = true;
+soundBtn.disabled = true;
 
 //Asset Warmup
 var sky01 = new Image();
@@ -24,11 +29,21 @@ var footstep03 = new Audio("sounds/player/footsteps/concrete3.wav");
 var footstep04 = new Audio("sounds/player/footsteps/concrete4.wav");
 var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
+const gameDiv = document.getElementById('game');
+function hideGame() {
+    gameDiv.style.display = 'none';
+}
+
+function showGame() {
+    document.getElementById('start').style.display = 'none';
+    gameDiv.style.display = 'block';
+}
+
 function start() {
-    document.getElementById("button").disabled = true;
-    document.getElementById("sky").disabled = false;
-    document.getElementById("overlay").disabled = false;
-    document.getElementById("sound").disabled = false;
+    showGame();
+    skyBtn.disabled = false;
+    overlayBtn.disabled = false;
+    soundBtn.disabled = false;
     update();
 }
 
@@ -78,7 +93,7 @@ function changeOverlay() {
     stage.overlay++;
 }
 
-let wallSpeed = 5;
+let speed = 5;
 const wall = [
     { // Left
         x: -300,
@@ -188,43 +203,41 @@ function newPos() {
 
 function moveLeft() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x += wallSpeed;
+        wall[i].x += speed; 
     }
 }
 
 function moveRight() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x -= wallSpeed;
+        wall[i].x -= speed;
     }
 }
 
 function moveUp() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y += wallSpeed;
+        wall[i].y += speed;
     }
 }
 
 function moveDown() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y -= wallSpeed;
+        wall[i].y -= speed;
     }
 }
 
 function detectWalls() { // Testattu ja toimii neliön kanssa
-    for (let i = 0; i < wall.length; i++) {
-        if (player.y < wall[1].y + wall[1].h) {
-            console.log('hit top');
-            moveDown();
-        } else if (player.y + player.h > wall[2].y) {
-            console.log('hit bottom');
-            moveUp();
-        } else if (player.x + player.w > wall[3].x) {
-            console.log('hit right');
-            moveLeft();
-        } else if (player.x < wall[0].x + wall[0].w) {
-            console.log('hit left');
-            moveRight();
-        }
+    if (player.y < wall[1].y + wall[1].h) {
+        console.log('hit top');
+        moveDown();
+    } else if (player.y + player.h > wall[2].y) {
+        console.log('hit bottom');
+        moveUp();
+    } else if (player.x + player.w > wall[3].x) {
+        console.log('hit right');
+        moveLeft();
+    } else if (player.x < wall[0].x + wall[0].w) {
+        console.log('hit left');
+        moveRight();
     }
 }
 

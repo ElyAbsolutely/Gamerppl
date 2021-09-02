@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberpunk 2077</title>
+    <title>Game</title>
     <link rel="stylesheet" href="css/css.css">
     <link rel="shortcut icon" href="img/favicon.ico">
 
@@ -16,14 +16,25 @@
 
 <body>
 
-    <canvas id="game" height="600" width="600"></canvas>
+    <section id="main">
+    
+        <div id="start">
+            <button id="start-btn" class="btns">Start Game</button>
+        </div>
+        
+        <div id="game">
+            <div id="div-canvas">
+                <canvas id="canvas" height="600" width="600"></canvas>
+            </div>
 
-    <br><br>
-    <button id="button">Hello</button>
-    <br><br>
-    <button id="sky">sky</button>
-    <button id="overlay">overlay</button>
-    <button style="background-color: red;" id="sound">sound</button>
+            <div id="buttons">
+                <button id="sky-btn" class="btns">sky</button>
+                <button id="overlay-btn" class="btns">overlay</button>
+                <button id="sound-btn" class="btns">sound</button>
+            </div>
+        </div>
+
+    </section>
 
     <script src="js/js.js"></script>
 
