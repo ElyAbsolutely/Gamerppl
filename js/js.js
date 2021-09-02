@@ -59,7 +59,7 @@ const player = {
     y: midy - 10,
     h: 20,
     w: 20,
-    speed: 1,
+    speed: 5,
     color: "red",
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
@@ -114,7 +114,6 @@ const stage = {
 
     sky: 0,
     overlay: 0,
-
     id: null
 }
 
@@ -133,35 +132,55 @@ function changeOverlay() {
     }
     stage.overlay++;
 }
-
+// wall.i(0) = CAN be seen and WILL block player, wall.passable(1) = CANNOT be seen and WILL block player, wall.passable(2) = CAN be seen and will NOT block player
 const wall = [
     { // Left
         x: -300,
         y: 50,
         h: canvas.height - 100,
         w: 350,
-        color: '#072e06'
+        color: "#072e062",
+        id: 0
     },
     { // Top
         x: -300,
         y: -300,
         h: 350,
         w: canvas.width * 3,
-        color: '#072e06'
+        color: "#072e06",
+        id: 0
     },
     { // Bottom
         x: -300,
         y: canvas.height - 50,
         h: 300,
         w: canvas.width * 3,
-        color: '#072e06'
+        color: "#072e06",
+        id: 0
     },
     { // Right
         x: canvas.width * 2,
         y: 50,
         h: canvas.height - 100,
         w: 300,
-        color: '#072e06'
+        color: "#072e06",
+        id: 0
+    },
+    { // ground
+        x: 50,
+        y: 50,
+        h: 200,
+        w: 200,
+        color: "lightgreen",
+        id: 2
+    },
+    { // test
+        x: 50,
+        y: 250,
+        h: 200,
+        w: 200,
+        color: null,
+        id: 1
     }
 ]
 
@@ -199,8 +218,10 @@ function drawAttack() {
 
 function drawWalls() {
     for (let i = 0; i < wall.length; i++) {
-        ctx.fillStyle = wall[i].color;
-        ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+        if (wall[i].id != 1) {
+            ctx.fillStyle = wall[i].color;
+            ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+        }
     }
 }
 
@@ -228,7 +249,7 @@ function clear() { //Testaan tauskakuva taivaan tekemistä
 function newPos() {
     switch (player.moveDir) {
         case "none":
-            break;
+            return;
         case "up":
             moveUp();
             break;
@@ -241,8 +262,6 @@ function newPos() {
         case "right":
             moveRight();
             break;
-        default:
-            break;
     }
 
     detectWalls();
@@ -250,37 +269,37 @@ function newPos() {
 
 function moveLeft() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x += speed;
+        wall[i].x += player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].x += speed;
+        enemies[i].x += enemies[i].speed;
     }
 }
 
 function moveRight() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].x -= speed;
+        wall[i].x -= player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].x -= speed;
+        enemies[i].x -= enemies[i].speed;
     }
 }
 
 function moveUp() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y += speed;
+        wall[i].y += player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].y += speed;
+        enemies[i].y += enemies[i].speed;
     }
 }
 
 function moveDown() {
     for (let i = 0; wall.length > i; i++) {
-        wall[i].y -= speed;
+        wall[i].y -= player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].y -= speed;
+        enemies[i].y -= enemies[i].speed;
     }
 }
 
@@ -306,20 +325,30 @@ function enemyMove() {
 }
 
 function detectWalls() { // Testattu ja toimii neliön kanssa
-    if (player.y < wall[1].y + wall[1].h) {
-        console.log('hit top');
-        moveDown();
-    } else if (player.y + player.h > wall[2].y) {
-        console.log('hit bottom');
-        moveUp();
-    } else if (player.x + player.w > wall[3].x) {
-        console.log('hit right');
-        moveLeft();
-    } else if (player.x < wall[0].x + wall[0].w) {
-        console.log('hit left');
-        moveRight();
+
+    for (let i = 0; wall.length > i; i++) {
+        if (wall[i].id != 2) {
+            if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
+                console.log("hit");
+                switch (player.moveDir) {
+                    case "up":
+                        moveDown();
+                        return;
+                    case "left":
+                        moveRight();
+                        return;
+                    case "down":
+                        moveUp();
+                        return;
+                    case "right":
+                        moveLeft();
+                        return;
+                }
+            }
+        }
     }
 }
+
 
 document.addEventListener("keyup", function (event) {
 
@@ -357,45 +386,54 @@ document.addEventListener("keydown", function (event) {
         case "w":
             //go up
             player.moveDir = "up";
-            break;
+            return;
         case "a":
             //go left
             player.moveDir = "left";
-            break;
+            return;
         case "s":
             //go down
             player.moveDir = "down";
-            break;
+            return;
         case "d":
             //go right
             player.moveDir = "right";
-            break;
-    }
+            return;
 
-    //attack
-    if (player.attackFrames == -1) {
-        switch (event.key) {
-            case "ArrowUp":
-                //attact up
-                player.attackDir = "up";
-                player.attackFrames = 0;
+        //attack
+
+        case "ArrowUp":
+            //attact up
+            if (player.attackFrames != -1) {
                 return;
-            case "ArrowLeft":
-                //attack left
-                player.attackDir = "left";
-                player.attackFrames = 0;
+            }
+            player.attackDir = "up";
+            player.attackFrames = 0;
+            return;
+        case "ArrowLeft":
+            //attack left
+            if (player.attackFrames != -1) {
                 return;
-            case "ArrowDown":
-                //attack down
-                player.attackDir = "down";
-                player.attackFrames = 0;
+            }
+            player.attackDir = "left";
+            player.attackFrames = 0;
+            return;
+        case "ArrowDown":
+            //attack down
+            if (player.attackFrames != -1) {
                 return;
-            case "ArrowRight":
-                //attack right
-                player.attackDir = "right";
-                player.attackFrames = 0;
+            }
+            player.attackDir = "down";
+            player.attackFrames = 0;
+            return;
+        case "ArrowRight":
+            //attack right
+            if (player.attackFrames != -1) {
                 return;
-        }
+            }
+            player.attackDir = "right";
+            player.attackFrames = 0;
+            return;
     }
 })
 
