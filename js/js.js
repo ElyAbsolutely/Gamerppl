@@ -29,6 +29,14 @@ var footstep03 = new Audio("sounds/player/footsteps/concrete3.wav");
 var footstep04 = new Audio("sounds/player/footsteps/concrete4.wav");
 var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
+function start() {
+    showGame();
+    skyBtn.disabled = false;
+    overlayBtn.disabled = false;
+    soundBtn.disabled = false;
+    update();
+}
+
 const gameDiv = document.getElementById('game');
 function hideGame() {
     gameDiv.style.display = 'none';
@@ -37,14 +45,6 @@ function hideGame() {
 function showGame() {
     document.getElementById('start').style.display = 'none';
     gameDiv.style.display = 'block';
-}
-
-function start() {
-    showGame();
-    skyBtn.disabled = false;
-    overlayBtn.disabled = false;
-    soundBtn.disabled = false;
-    update();
 }
 
 let midx = canvas.width / 2;
@@ -97,28 +97,28 @@ const wall = [
         y: 50,
         h: canvas.height - 100,
         w: 350,
-        color: 'blue'
+        color: '#072e06'
     },
     { // Top
         x: -300,
         y: -300,
         h: 350,
         w: canvas.width * 3,
-        color: 'red'
+        color: '#072e06'
     },
     { // Bottom
         x: -300,
         y: canvas.height - 50,
         h: 300,
         w: canvas.width * 3,
-        color: 'orange'
+        color: '#072e06'
     },
     { // Right
         x: canvas.width * 2,
         y: 50,
         h: canvas.height - 100,
         w: 300,
-        color: 'black'
+        color: '#072e06'
     }
 ]
 
