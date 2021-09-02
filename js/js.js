@@ -181,8 +181,7 @@ const wall = [
         w: 200,
         color: "lightgreen",
         id: 2
-    }
-    ,
+    },
     { // test
         x: 50,
         y: 250,
@@ -281,7 +280,7 @@ function moveLeft() {
         wall[i].x += player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].x += speed;
+        enemies[i].x += enemies[i].speed;
     }
 }
 
@@ -290,7 +289,7 @@ function moveRight() {
         wall[i].x -= player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].x -= speed;
+        enemies[i].x -= enemies[i].speed;
     }
 }
 
@@ -299,7 +298,7 @@ function moveUp() {
         wall[i].y += player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].y += speed;
+        enemies[i].y += enemies[i].speed;
     }
 }
 
@@ -308,7 +307,7 @@ function moveDown() {
         wall[i].y -= player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].y -= speed;
+        enemies[i].y -= enemies[i].speed;
     }
 }
 
