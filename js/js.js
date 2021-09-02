@@ -79,7 +79,7 @@ const enemies = [
         y: 300,
         w: 20,
         h: 20,
-        speed: 4,
+        speed: 5,
         color: 'blue'
     },
     {
@@ -87,7 +87,7 @@ const enemies = [
         y: 50,
         w: 20,
         h: 20,
-        speed: 4,
+        speed: 5,
         color: 'blue'
     },
     {
@@ -95,7 +95,7 @@ const enemies = [
         y: 500,
         w: 20,
         h: 20,
-        speed: 4,
+        speed: 5,
         color: 'blue'
     },
     {
@@ -103,17 +103,9 @@ const enemies = [
         y: 400,
         w: 20,
         h: 20,
-        speed: 4,
+        speed: 5,
         color: 'blue'
-    },
-    {
-        x: 560,
-        y: 150,
-        w: 20,
-        h: 20,
-        speed: 4,
-        color: 'blue'
-    },
+    }
 ];
 
 const stage = {
@@ -142,7 +134,6 @@ function changeOverlay() {
     stage.overlay++;
 }
 
-let speed = 5;
 const wall = [
     { // Left
         x: -300,
@@ -293,6 +284,27 @@ function moveDown() {
     }
 }
 
+function getDistance(x1, y1, x2, y2) {
+    const xDiff = x1 - x2;
+    const yDiff = y1 - y2;
+
+    return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+}
+
+function enemyMove() {
+    for(let i = 0; i < enemies.length; i++) {
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y)
+        
+        if (distance < 200) {
+            console.log('distance')
+            if (player.x + player.width < enemies[i].x) {
+                enemies[i].x -= enemies[i].speed;
+                console.log('enemy move')
+            }
+        }
+    }
+}
+
 function detectWalls() { // Testattu ja toimii neliön kanssa
     if (player.y < wall[1].y + wall[1].h) {
         console.log('hit top');
@@ -397,6 +409,8 @@ function update() {
     drawAttack();
 
     drawOverlay();
+
+    enemyMove();
 
     playSounds();
     drawHUD();
