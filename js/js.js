@@ -287,6 +287,23 @@ const wall = [
 
     //JT
 
+    {
+        x: -200,
+        y: 100,
+        h: 1000,
+        w: 1000,
+        color: "lightgreen",
+        id: 2
+    },
+    { 
+        x: -200,
+        y: 1100,
+        h: 350,
+        w: 1000,
+        color: "#072e06",
+        id: 0
+    },
+
 ]
 
 function drawPlayer() {
@@ -434,7 +451,6 @@ function enemyMove() {
             } else if (player.y > enemies[i].y + enemies[i].h) {
                 enemies[i].y += enemies[i].dy;
             }
-            console.log(distance);
         }
     }
 }
