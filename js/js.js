@@ -124,7 +124,7 @@ const stage = {
 
     sky: 0,
     overlay: 0,
-    id: null
+    map: 0
 }
 
 function changeSky() {
@@ -147,50 +147,152 @@ const wall = [
     { // Left
         x: -300,
         y: 50,
-        h: canvas.height - 100,
+        h: 500,
         w: 350,
-        color: "#072e062",
-        id: 0
+        color: "#072e06",
+        id: 0,
+        map: 0
     },
     { // Top
         x: -300,
         y: -300,
         h: 350,
-        w: canvas.width * 3,
+        w: 1500,
         color: "#072e06",
-        id: 0
+        id: 0,
+        map: 0
     },
     { // Bottom
         x: -300,
-        y: canvas.height - 50,
+        y: 550,
         h: 300,
-        w: canvas.width * 3,
+        w: 2400,
         color: "#072e06",
-        id: 0
+        id: 0,
+        map: 0
     },
     { // Right
-        x: canvas.width * 2,
-        y: 50,
-        h: canvas.height - 100,
-        w: 300,
+        x: 1800,
+        y: -300,
+        h: 850,
+        w: 500,
         color: "#072e06",
-        id: 0
+        id: 0,
+        map: 0
     },
+
     { // ground
         x: 50,
         y: 50,
-        h: 200,
-        w: 200,
+        h: 500,
+        w: 750,
         color: "lightgreen",
-        id: 2
+        id: 2,
+        map: 0
+    }, {
+        x: 1050,
+        y: 50,
+        h: 500,
+        w: 750,
+        color: "lightgreen",
+        id: 2,
+        map: 0
+    }, {
+        x: 1200,
+        y: -800,
+        h: 850,
+        w: 600,
+        color: "lightgreen",
+        id: 2,
+        map: 0
     },
-    { // test
+
+    { //beach
+        x: 1085,
+        y: -800,
+        h: 500,
+        w: 115,
+        color: "#FCB983",
+        id: 2,
+        map: 0
+    }, {
+        x: 1085,
+        y: -915,
+        h: 115,
+        w: 715,
+        color: "#FCB983",
+        id: 2,
+        map: 0
+    }, {
+        x: 1800,
+        y: -915,
+        h: 615,
+        w: 115,
+        color: "#FCB983",
+        id: 2,
+        map: 0
+    },
+
+    { //ocean
+        x: 500,
+        y: -915,
+        h: 615,
+        w: 585,
+        color: "#4A83F5",
+        id: 0,
+        map: 0
+    }, {
+        x: 500,
+        y: -1500,
+        h: 585,
+        w: 800,
+        color: "#4A83F5",
+        id: 0,
+        map: 0
+    },
+
+    { //river
+        x: 800,
+        y: 50,
+        h: 500,
+        w: 250,
+        color: "#6396FA",
+        id: 2,
+        map: 0
+    }, {
+        x: 850,
+        y: 50,
+        h: 150,
+        w: 150,
+        color: "#4A83F5",
+        id: 0,
+        map: 0
+    }, {
+        x: 850,
+        y: 400,
+        h: 150,
+        w: 150,
+        color: "#4A83F5",
+        id: 0,
+        map: 0
+    }, {
+        x: 775,
+        y: 200,
+        h: 200,
+        w: 300,
+        color: "#EF785A",
+        id: 2,
+        map: 0
+    },
+
+
+    { // invisblock
         x: 50,
         y: 250,
-        h: 200,
-        w: 200,
-        color: null,
-        id: 1
+        h: 196,
+        w: 196,
+        id: 1,
+        map: 0
     }
 ]
 
@@ -466,8 +568,8 @@ function update() {
 
     newPos();
 
-    drawAttack();
     drawWalls();
+    drawAttack();
     drawPlayer();
     drawEnemies();
 
@@ -501,7 +603,6 @@ function toggleDevMode() {
 
 function playSounds() {
     if (!(gameSettings.volume)) {
-        console.log("sounds are off");
         return;
     }
 
@@ -575,13 +676,16 @@ function drawOverlay() {
 
 function drawHUD() {
 
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText("Life: " + player.health, 5, 25);
-
     if (gameSettings.devMode) {
-        ctx.fillText("DevMode: on", 450, 25);
+        ctx.fillStyle = "red";
+        ctx.font = "10px Arial";
+        ctx.fillText("DevMode: on", 525, 590);
     }
-    ctx.fillText("Weapon: " + player.weaponID, 5, 595);
+
+    //ctx.fillStyle = "black";
+    //ctx.font = "20px Arial";
+    //ctx.fillText("Life: " + player.health, 5, 25);
+
+    //ctx.fillText("Weapon: " + player.weaponID, 5, 595);
 
 }
