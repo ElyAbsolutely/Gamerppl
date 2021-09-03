@@ -40,11 +40,23 @@ function start() {
 const gameDiv = document.getElementById('game');
 function hideGame() {
     gameDiv.style.display = 'none';
+    hideEnd();
 }
 
 function showGame() {
     document.getElementById('start').style.display = 'none';
+    hideEnd();
     gameDiv.style.display = 'block';
+}
+
+function showEnd() {
+    hideGame();
+    cancelAnimationFrame(update);
+    document.getElementById('end-screen').style.display = 'block';
+}
+
+function hideEnd() {
+    document.getElementById('end-screen').style.display = 'none';
 }
 
 let midx = canvas.width / 2;
@@ -74,7 +86,7 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
-// x and y can be changed later when the stage is set
+// x and y can be changed later when the map is done
 const enemies = [
     {
         x: 400,
@@ -453,18 +465,22 @@ function loseLife() { // Works when the enemies are directly beside the player ,
         if (distance <= enemies[i].w) {
             player.health -= 1;
             console.log('life lost');
+            // showEnd();
         }
         if (distance <= player.w) {
             player.health -= 1;
             console.log('life lost');
+            // showEnd();
         }
         if (distance <= enemies[i].h) {
             player.health -= 1;
             console.log('life lost');
+            // showEnd();
         }
         if (distance <= player.h) {
             player.health -= 1;
             console.log('life lost');
+            // showEnd();
         }
     }
 }
@@ -602,6 +618,7 @@ function update() {
     drawOverlay();
 
     enemyMove();
+    loseLife();
 
     playSounds();
     drawHUD();
@@ -714,24 +731,4 @@ function drawHUD() {
 
     //ctx.fillText("Weapon: " + player.weaponID, 5, 595);
 
-}
-
-function update() {
-    clear();
-
-    newPos();
-    drawPlayer();
-    drawEnemies();
-    drawWalls();
-    drawAttack();
-
-    drawOverlay();
-
-    enemyMove();
-    loseLife();
-
-    playSounds();
-    drawHUD();
-
-    requestAnimationFrame(update);
 }
