@@ -340,24 +340,29 @@ function enemyMove() {
                 enemies[i].y += enemies[i].dy;
             }
         }
-
-        loseLife(enemies[i]);
     }
 }
 
-// Ei toimi vielä
-function loseLife(enemy) {
-    if (enemy.x === player.x + player.w) {
-        // dead
-    }
-    if (enemy.x + enemy.w === player.x) {
-        // dead
-    }
-    if (enemy.y === player.y + player.h) {
-        // dead
-    }
-    if (enemy.y + enemy.h === player.y) {
-        // dead
+function loseLife() { // Works when the enemies are directly beside the player , need to tweak the enemy movements
+    for (let i = 0; i < enemies.length; i++) {
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+
+        if (distance < enemies[i].w) {
+                player.health -= 1;
+                console.log('log');
+        }
+        if (distance < player.w) {
+            player.health -= 1;
+            console.log('log');
+        }
+        if (distance < enemies[i].h) {
+                player.health -= 1;
+                console.log('log');
+        }
+        if (distance < player.h) {
+            player.health -= 1;
+            console.log('log');
+        }
     }
 }
 
@@ -385,7 +390,6 @@ function detectWalls() { // Testattu ja toimii neliön kanssa
         }
     }
 }
-
 
 document.addEventListener("keyup", function (event) {
 
@@ -595,6 +599,7 @@ function update() {
     drawOverlay();
 
     enemyMove();
+    loseLife();
 
     playSounds();
     drawHUD();
