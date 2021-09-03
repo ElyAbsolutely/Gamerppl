@@ -328,7 +328,7 @@ function getDistance(x1, y1, x2, y2) {
 function enemyMove() {
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y)
-        
+
         if (distance < 250) {
             if (player.x + player.w < enemies[i].x) {
                 enemies[i].x -= enemies[i].dx;
@@ -339,6 +339,7 @@ function enemyMove() {
             } else if (player.y > enemies[i].y + enemies[i].h) {
                 enemies[i].y += enemies[i].dy;
             }
+            console.log(distance);
         }
     }
 }
@@ -347,23 +348,27 @@ function loseLife() { // Works when the enemies are directly beside the player ,
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
-        if (distance < enemies[i].w) {
-                player.health -= 1;
-                console.log('log');
-        }
-        if (distance < player.w) {
+        if (distance <= enemies[i].w) {
             player.health -= 1;
-            console.log('log');
+            console.log('life lost');
         }
-        if (distance < enemies[i].h) {
-                player.health -= 1;
-                console.log('log');
-        }
-        if (distance < player.h) {
+        if (distance <= player.w) {
             player.health -= 1;
-            console.log('log');
+            console.log('life lost');
+        }
+        if (distance <= enemies[i].h) {
+            player.health -= 1;
+            console.log('life lost');
+        }
+        if (distance <= player.h) {
+            player.health -= 1;
+            console.log('life lost');
         }
     }
+}
+
+function death() {
+    // tekeillä
 }
 
 function detectWalls() { // Testattu ja toimii neliön kanssa
