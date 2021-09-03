@@ -696,23 +696,3 @@ function drawHUD() {
     //ctx.fillText("Weapon: " + player.weaponID, 5, 595);
 
 }
-
-function update() {
-    clear();
-
-    newPos();
-    drawPlayer();
-    drawEnemies();
-    drawWalls();
-    drawAttack();
-
-    drawOverlay();
-
-    enemyMove();
-    loseLife();
-
-    playSounds();
-    drawHUD();
-
-    requestAnimationFrame(update);
-}
