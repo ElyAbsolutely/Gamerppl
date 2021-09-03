@@ -136,7 +136,7 @@ const stage = {
 
     sky: 0,
     overlay: 0,
-    map: 0
+    map: null
 }
 
 function changeSky() {
@@ -156,32 +156,24 @@ function changeOverlay() {
 }
 // wall.i(0) = CAN be seen and WILL block player, wall.passable(1) = CANNOT be seen and WILL block player, wall.passable(2) = CAN be seen and will NOT block player
 const wall = [
-    { // Left
-        x: -300,
-        y: 50,
-        h: 500,
-        w: 350,
-        color: "#072e06",
-        id: 0,
-        map: 0
-    },
+
+    //JM
+
     { // Top
-        x: -300,
+        x: 1050,
         y: -300,
         h: 350,
-        w: 1500,
+        w: 150,
         color: "#072e06",
-        id: 0,
-        map: 0
+        id: 0
     },
     { // Bottom
-        x: -300,
+        x: 1050,
         y: 550,
         h: 300,
-        w: 2400,
+        w: 1100,
         color: "#072e06",
-        id: 0,
-        map: 0
+        id: 0
     },
     { // Right
         x: 1800,
@@ -189,34 +181,23 @@ const wall = [
         h: 850,
         w: 500,
         color: "#072e06",
-        id: 0,
-        map: 0
+        id: 0
     },
 
     { // ground
-        x: 50,
-        y: 50,
-        h: 500,
-        w: 750,
-        color: "lightgreen",
-        id: 2,
-        map: 0
-    }, {
         x: 1050,
         y: 50,
         h: 500,
         w: 750,
         color: "lightgreen",
-        id: 2,
-        map: 0
+        id: 2
     }, {
         x: 1200,
         y: -800,
         h: 850,
         w: 600,
         color: "lightgreen",
-        id: 2,
-        map: 0
+        id: 2
     },
 
     { //beach
@@ -225,24 +206,21 @@ const wall = [
         h: 500,
         w: 115,
         color: "#FCB983",
-        id: 2,
-        map: 0
+        id: 2
     }, {
         x: 1085,
         y: -915,
         h: 115,
         w: 715,
         color: "#FCB983",
-        id: 2,
-        map: 0
+        id: 2
     }, {
         x: 1800,
         y: -915,
         h: 615,
         w: 115,
         color: "#FCB983",
-        id: 2,
-        map: 0
+        id: 2
     },
 
     { //ocean
@@ -251,61 +229,64 @@ const wall = [
         h: 615,
         w: 585,
         color: "#4A83F5",
-        id: 0,
-        map: 0
+        id: 0
     }, {
         x: 500,
         y: -1500,
         h: 585,
         w: 800,
         color: "#4A83F5",
-        id: 0,
-        map: 0
+        id: 0
     },
+
+    //Middle
 
     { //river
         x: 800,
-        y: 50,
-        h: 500,
+        y: -300,
+        h: 2000,
         w: 250,
         color: "#6396FA",
-        id: 2,
-        map: 0
+        id: 2
     }, {
         x: 850,
-        y: 50,
-        h: 150,
+        y: -300,
+        h: 500,
         w: 150,
         color: "#4A83F5",
-        id: 0,
-        map: 0
+        id: 0
     }, {
         x: 850,
         y: 400,
-        h: 150,
+        h: 1300,
         w: 150,
         color: "#4A83F5",
-        id: 0,
-        map: 0
+        id: 0
     }, {
         x: 775,
         y: 200,
         h: 200,
         w: 300,
         color: "#EF785A",
-        id: 2,
-        map: 0
+        id: 2
     },
 
+    {
+        x: 800,
+        y: -300,
+        h: 350,
+        w: 250,
+        id: 1
+    }, {
+        x: 800,
+        y: 550,
+        h: 300,
+        w: 250,
+        id: 1
+    },
 
-    { // invisblock
-        x: 50,
-        y: 250,
-        h: 196,
-        w: 196,
-        id: 1,
-        map: 0
-    }
+    //JT
+
 ]
 
 function drawPlayer() {
