@@ -40,23 +40,11 @@ function start() {
 const gameDiv = document.getElementById('game');
 function hideGame() {
     gameDiv.style.display = 'none';
-    hideEnd();
 }
 
 function showGame() {
     document.getElementById('start').style.display = 'none';
-    hideEnd();
     gameDiv.style.display = 'block';
-}
-
-function showEnd() {
-    hideGame();
-    cancelAnimationFrame(update);
-    document.getElementById('end-screen').style.display = 'block';
-}
-
-function hideEnd() {
-    document.getElementById('end-screen').style.display = 'none';
 }
 
 let midx = canvas.width / 2;
@@ -86,7 +74,7 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
-// x and y can be changed later when the map is done
+// x and y can be changed later when the stage is set
 const enemies = [
     {
         x: 400,
@@ -235,6 +223,34 @@ const wall = [
         y: -1500,
         h: 585,
         w: 800,
+        color: "#4A83F5",
+        id: 0
+    }, {
+        x: 1915,
+        y: -1500,
+        h: 1200,
+        w: 375,
+        color: "#4A83F5",
+        id: 0
+    }, {
+        x: 1425,
+        y: -1500,
+        h: 585,
+        w: 500,
+        color: "#4A83F5",
+        id: 0
+    }, {
+        x: 1300,
+        y: -1175,
+        h: 425,
+        w: 125,
+        color: "#EF785A",
+        id: 2
+    }, {
+        x: 1300,
+        y: -1500,
+        h: 325,
+        w: 125,
         color: "#4A83F5",
         id: 0
     },
@@ -446,22 +462,18 @@ function loseLife() { // Works when the enemies are directly beside the player ,
         if (distance <= enemies[i].w) {
             player.health -= 1;
             console.log('life lost');
-            // showEnd();
         }
         if (distance <= player.w) {
             player.health -= 1;
             console.log('life lost');
-            // showEnd();
         }
         if (distance <= enemies[i].h) {
             player.health -= 1;
             console.log('life lost');
-            // showEnd();
         }
         if (distance <= player.h) {
             player.health -= 1;
             console.log('life lost');
-            // showEnd();
         }
     }
 }
@@ -599,7 +611,6 @@ function update() {
     drawOverlay();
 
     enemyMove();
-    loseLife();
 
     playSounds();
     drawHUD();
