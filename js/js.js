@@ -212,7 +212,8 @@ const wall = [
         w: 115,
         color: "#FCB983",
         id: 2
-    }, {
+    }, 
+    {
         x: 1800,
         y: -915,
         h: 615,
@@ -237,28 +238,32 @@ const wall = [
         w: 800,
         color: "#4A83F5",
         id: 0
-    }, {
+    }, 
+    {
         x: 1915,
         y: -1500,
         h: 1200,
         w: 375,
         color: "#4A83F5",
         id: 0
-    }, {
+    }, 
+    {
         x: 1425,
         y: -1500,
         h: 585,
         w: 500,
         color: "#4A83F5",
         id: 0
-    }, {
+    }, 
+    {
         x: 1300,
         y: -1175,
         h: 425,
         w: 125,
         color: "#EF785A",
         id: 2
-    }, { // Triggers end-game
+    }, 
+    { // Triggers end-game
         x: 1300,
         y: -1175,
         h: 100,
@@ -320,12 +325,13 @@ const wall = [
     {
         x: 800,
         y: 550,
-        h: 1000,
+        h: 650,
         w: 250,
         id: 1
     },
 
     // JT
+
     // Ground
     {
         x: -200,
@@ -343,7 +349,170 @@ const wall = [
         color: "lightgreen",
         id: 2
     },
-    // Wall
+
+    // Flowers
+    { // Leaves
+        x: 750,
+        y: -50,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 760,
+        y: -60,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 760,
+        y: -40,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 770,
+        y: -50,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    { // Middle
+        x: 760,
+        y: -50,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+    { // Leaves
+        x: 700,
+        y: -100,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 710,
+        y: -110,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 710,
+        y: -90,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 720,
+        y: -100,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    { // Middle
+        x: 710,
+        y: -100,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+    { // Leaves
+        x: 760,
+        y: 550,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 770,
+        y: 560,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 770,
+        y: 540,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 780,
+        y: 550,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    { // Middle
+        x: 770,
+        y: 550,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+    { // Leaves
+        x: 750,
+        y: 850,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 760,
+        y: 860,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 760,
+        y: 840,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    {
+        x: 770,
+        y: 850,
+        h: 10,
+        w: 10,
+        color: "#fcb503",
+        id: 2
+    },
+    { // Middle
+        x: 760,
+        y: 850,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+
+    // Walls
     {  // Bottom
         x: -200,
         y: 1200,
@@ -368,8 +537,9 @@ const wall = [
         color: "#072e06",
         id: 0
     },
+
     // Inner walls
-    { // Top room
+    { // Top room walls
         x: -50,
         y: -300,
         h: 150,
@@ -377,7 +547,7 @@ const wall = [
         color: "#072e06",
         id: 0
     },
-    { // Bottom room
+    { // Bottom room walls
         x: -200,
         y: 600,
         h: 100,
