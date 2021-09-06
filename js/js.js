@@ -142,7 +142,9 @@ function changeOverlay() {
     }
     stage.overlay++;
 }
-// wall.i(0) = CAN be seen and WILL block player, wall.passable(1) = CANNOT be seen and WILL block player, wall.passable(2) = CAN be seen and will NOT block player
+
+// wall.id(0) = CAN be seen and WILL block player, wall.id(1) = CANNOT be seen and WILL block player, wall.id(2) = CAN be seen and will NOT block player
+//wall.id(3) = triggers a function touch
 const wall = [
 
     //JM
@@ -209,6 +211,15 @@ const wall = [
         w: 115,
         color: "#FCB983",
         id: 2
+    }, {
+        x: 1800,
+        y: -915,
+        h: 615,
+        w: 115,
+        color: "#FCB983",
+        id: 3,
+        event: 1,
+        overlay: 1
     },
 
     { //ocean
@@ -246,6 +257,14 @@ const wall = [
         w: 125,
         color: "#EF785A",
         id: 2
+    }, { // Triggers end-game
+        x: 1300,
+        y: -1175,
+        h: 100,
+        w: 125,
+        color: "#EF785A",
+        id: 3,
+        event: 0
     }, {
         x: 1300,
         y: -1500,
@@ -311,7 +330,7 @@ const wall = [
         color: "lightgreen",
         id: 2
     },
-    { 
+    {
         x: -200,
         y: 1100,
         h: 350,
@@ -356,14 +375,27 @@ function drawAttack() {
 
 function drawWalls() {
     for (let i = 0; i < wall.length; i++) {
-        if (wall[i].id != 1) {
-            ctx.fillStyle = wall[i].color;
-
-            ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
-        } else if (wall[i].id == 1 && gameSettings.devMode) {
-            ctx.beginPath();
-            ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
-            ctx.stroke();
+        switch (wall[i].id) {
+            case 1:
+                if (gameSettings.devMode) {
+                    ctx.fillStyle = "black";
+                    ctx.beginPath();
+                    ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+                    ctx.stroke();
+                }
+                break;
+            case 3:
+                if (gameSettings.devMode) {
+                    ctx.fillStyle = "orange";
+                    ctx.beginPath();
+                    ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+                    ctx.stroke();
+                }
+                break;
+            default:
+                ctx.fillStyle = wall[i].color;
+                ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
+                break;
         }
     }
 }
@@ -501,25 +533,46 @@ function death() {
 function detectWalls() { // Testattu ja toimii neliön kanssa
 
     for (let i = 0; wall.length > i; i++) {
-        if (wall[i].id != 2) {
-            if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
-                console.log("hit");
-                switch (player.moveDir) {
-                    case "up":
-                        moveDown();
-                        return;
-                    case "left":
-                        moveRight();
-                        return;
-                    case "down":
-                        moveUp();
-                        return;
-                    case "right":
-                        moveLeft();
-                        return;
+
+        switch (wall[i].id) {
+
+            case 0:
+            case 1:
+                if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
+                    switch (player.moveDir) {
+                        case "up":
+                            moveDown();
+                            return;
+                        case "left":
+                            moveRight();
+                            return;
+                        case "down":
+                            moveUp();
+                            return;
+                        case "right":
+                            moveLeft();
+                            return;
+                    }
                 }
-            }
+            case 3:
+                if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
+                    triggerEvent(wall[i].event);
+                }
         }
+    }
+}
+
+function triggerEvent(sasha) {
+    switch (sasha) {
+        // 0 = endgame
+        // 1 = overlay change
+
+        case 0:
+            console.log("Player has touched the escape area");
+            return;
+        case 1:
+            stage.overlay = 1;
+            return;
     }
 }
 
@@ -530,25 +583,23 @@ document.addEventListener("keyup", function (event) {
         case "w":
             if (player.moveDir == "up") {
                 player.moveDir = "none";
-                break;
+                return;
             }
         case "a":
             if (player.moveDir == "left") {
                 player.moveDir = "none";
-                break;
+                return;
             }
         case "s":
             if (player.moveDir == "down") {
                 player.moveDir = "none";
-                break;
+                return;
             }
         case "d":
             if (player.moveDir == "right") {
                 player.moveDir = "none";
-                break;
+                return;
             }
-        default:
-            break;
     }
 })
 
