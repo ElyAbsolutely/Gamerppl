@@ -74,7 +74,7 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
-// x and y can be changed later when the stage is set
+// x and y can be changed later when setting the stage
 const enemies = [
     {
         x: 400,
@@ -759,6 +759,7 @@ function enemyMove() {
                 enemies[i].y += enemies[i].dy;
             }
         }
+        loseLife();
     }
 }
 
@@ -782,11 +783,15 @@ function loseLife() { // Works when the enemies are directly beside the player ,
             player.health -= 1;
             console.log('life lost');
         }
+        death();
     }
+    
 }
 
 function death() {
-    // tekeillä
+    if (player.health <= 0) {
+        console.log('death');
+    }
 }
 
 function detectWalls() { // Testattu ja toimii neliön kanssa
