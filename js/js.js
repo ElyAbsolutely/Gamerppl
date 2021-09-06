@@ -144,7 +144,7 @@ function changeOverlay() {
 }
 
 // wall.id(0) = CAN be seen and WILL block player, wall.id(1) = CANNOT be seen and WILL block player, wall.id(2) = CAN be seen and will NOT block player
-//wall.id(3) = triggers a function touch
+//wall.id(3) = triggers a function on touch
 const wall = [
 
     // JM
@@ -160,8 +160,22 @@ const wall = [
     { // Bottom
         x: 1050,
         y: 550,
-        h: 300,
-        w: 1100,
+        h: 100,
+        w: 200,
+        color: "#072e06",
+        id: 0
+    }, {
+        x: 1450,
+        y: 550,
+        h: 100,
+        w: 150,
+        color: "#072e06",
+        id: 0
+    }, {
+        x: 1800,
+        y: 550,
+        h: 100,
+        w: 500,
         color: "#072e06",
         id: 0
     },
@@ -180,7 +194,7 @@ const wall = [
         w: 750,
         color: "lightgreen",
         id: 2
-    }, 
+    },
     {
         x: 1200,
         y: -800,
@@ -189,6 +203,191 @@ const wall = [
         color: "lightgreen",
         id: 2
     },
+
+    //Swamp
+
+    { //Left
+        x: 1050,
+        y: 650,
+        h: 1550,
+        w: 100,
+        color: "#072e06",
+        id: 0
+    },
+    { // Right
+        x: 2150,
+        y: 650,
+        h: 1550,
+        w: 100,
+        color: "#072e06",
+        id: 0
+    },
+    { // Ground
+        x: 1250,
+        y: 550,
+        h: 100,
+        w: 200,
+        color: "lightgreen",
+        id: 2
+    }, {
+        x: 1550,
+        y: 550,
+        h: 100,
+        w: 250,
+        color: "lightgreen",
+        id: 2
+    }, {
+        x: 1150,
+        y: 650,
+        h: 1350,
+        w: 1000,
+        color: "lightgreen",
+        id: 2
+    },
+    { // Fog change
+        x: 1050,
+        y: 560,
+        h: 1,
+        w: 750,
+        id: 3,
+        event: 4
+    }, { // Fog change
+        x: 1050,
+        y: 580,
+        h: 120,
+        w: 1500,
+        id: 3,
+        event: 1
+    }, { // Fog change
+        x: 1050,
+        y: 720,
+        h: 250,
+        w: 1500,
+        id: 3,
+        event: 2
+    }, { // Fog change
+        x: 1050,
+        y: 980,
+        h: 1010,
+        w: 1500,
+        id: 3,
+        event: 3
+    },{ // Fog change
+        x: 1050,
+        y: 2040,
+        h: 1,
+        w: 1500,
+        id: 3,
+        event: 2
+    },{ // Fog change
+        x: 1050,
+        y: 2120,
+        h: 1,
+        w: 1500,
+        id: 3,
+        event: 1
+    },{ // Fog change
+        x: 1050,
+        y: 2190,
+        h: 1,
+        w: 1500,
+        id: 3,
+        event: 4
+    },
+    {//Brickwall
+        x: 1150,
+        y: 1980,
+        h: 20,
+        w: 400,
+        color: "gray",
+        id: 0
+    }, {
+        x: 1750,
+        y: 1980,
+        h: 20,
+        w: 400,
+        color: "gray",
+        id: 0
+    },
+
+    // Front yard
+
+    { // Grass
+        x: 1150,
+        y: 2000,
+        h: 200,
+        w: 400,
+        color: "lightgreen",
+        id: 2
+    }, {
+        x: 1750,
+        y: 2000,
+        h: 200,
+        w: 400,
+        color: "lightgreen",
+        id: 2
+    }, { // Road
+        x: 1550,
+        y: 1900,
+        h: 300,
+        w: 200,
+        color: "#F3A15E",
+        id: 2
+    },
+
+    //Estate
+
+    { // Floor
+        x: 1150,
+        y: 2200,
+        h: 500,
+        w: 1000,
+        color: "lightgray",
+        id: 2
+    }, { // Front Wall
+        x: 1150,
+        y: 2200,
+        h: 10,
+        w: 420,
+        color: "gray",
+        id: 0
+    }, {
+        x: 1730,
+        y: 2200,
+        h: 10,
+        w: 420,
+        color: "gray",
+        id: 0
+    }, { // Left Wall
+        x: 1150,
+        y: 2200,
+        h: 500,
+        w: 10,
+        color: "gray",
+        id: 0
+    }, { // Left Wall
+        x: 1150,
+        y: 2200,
+        h: 500,
+        w: 10,
+        color: "gray",
+        id: 0
+    }, { // Bottom Wall
+        x: 1150,
+        y: 2690,
+        h: 10,
+        w: 1000,
+        color: "gray",
+        id: 0
+    }, { // Right Wall
+        x: 2140,
+        y: 2200,
+        h: 500,
+        w: 10,
+        color: "gray",
+        id: 0
+    },
+
     { // beach
         x: 1085,
         y: -800,
@@ -196,7 +395,7 @@ const wall = [
         w: 115,
         color: "#FCB983",
         id: 2
-    }, 
+    },
     {
         x: 1085,
         y: -915,
@@ -204,7 +403,7 @@ const wall = [
         w: 715,
         color: "#FCB983",
         id: 2
-    }, 
+    },
     {
         x: 1800,
         y: -915,
@@ -220,7 +419,7 @@ const wall = [
         w: 585,
         color: "#4A83F5",
         id: 0
-    }, 
+    },
     {
         x: 500,
         y: -1500,
@@ -228,7 +427,7 @@ const wall = [
         w: 800,
         color: "#4A83F5",
         id: 0
-    }, 
+    },
     {
         x: 1915,
         y: -1500,
@@ -236,7 +435,7 @@ const wall = [
         w: 375,
         color: "#4A83F5",
         id: 0
-    }, 
+    },
     {
         x: 1425,
         y: -1500,
@@ -244,7 +443,7 @@ const wall = [
         w: 500,
         color: "#4A83F5",
         id: 0
-    }, 
+    },
     {
         x: 1300,
         y: -1175,
@@ -252,7 +451,7 @@ const wall = [
         w: 125,
         color: "#EF785A",
         id: 2
-    }, 
+    },
     { // Triggers end-game
         x: 1300,
         y: -1175,
@@ -279,7 +478,7 @@ const wall = [
         w: 250,
         color: "#6396FA",
         id: 2
-    }, 
+    },
     {
         x: 850,
         y: -300,
@@ -287,7 +486,7 @@ const wall = [
         w: 150,
         color: "#4A83F5",
         id: 0
-    }, 
+    },
     {
         x: 850,
         y: 400,
@@ -295,7 +494,7 @@ const wall = [
         w: 150,
         color: "#4A83F5",
         id: 0
-    }, 
+    },
     {
         x: 775,
         y: 200,
@@ -311,7 +510,7 @@ const wall = [
         h: 350,
         w: 250,
         id: 1
-    }, 
+    },
     {
         x: 800,
         y: 550,
@@ -796,7 +995,16 @@ function triggerEvent(sasha) {
             console.log("Player has touched the escape area");
             return;
         case 1:
-            stage.overlay = 1;
+            stage.overlay = 4;
+            return;
+        case 2:
+            stage.overlay = 5;
+            return;
+        case 3:
+            stage.overlay = 6;
+            return;
+        case 4:
+            stage.overlay = 0;
             return;
     }
 }
