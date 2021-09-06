@@ -211,15 +211,6 @@ const wall = [
         w: 115,
         color: "#FCB983",
         id: 2
-    }, {
-        x: 1800,
-        y: -915,
-        h: 615,
-        w: 115,
-        color: "#FCB983",
-        id: 3,
-        event: 1,
-        overlay: 1
     },
 
     { //ocean
@@ -558,6 +549,7 @@ function detectWalls() { // Testattu ja toimii neliön kanssa
                 if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
                     triggerEvent(wall[i].event);
                 }
+                break;
         }
     }
 }
@@ -662,6 +654,20 @@ document.addEventListener("keydown", function (event) {
             player.attackDir = "right";
             player.attackFrames = 0;
             return;
+
+        // Cheats
+
+        case "o":
+            // Increse speed
+            if (gameSettings.devMode) {
+                if (player.speed == 5) {
+                    player.speed = 50;
+
+                } else {
+                    player.speed = 5;
+                }
+                return;
+            }
     }
 })
 
