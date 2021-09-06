@@ -136,7 +136,7 @@ function changeSky() {
 }
 
 function changeOverlay() {
-    if (stage.overlay == 4) {
+    if (stage.overlay == 6) {
         stage.overlay = 0;
         return;
     }
@@ -751,32 +751,66 @@ function drawOverlay() {
 
     switch (stage.overlay) {
         case 0: // Empty
-            return;
+            break;
         case 1: // Warm sunset
-            ctx.globalAlpha = 0.2;
+            ctx.globalAlpha = 0.1;
             ctx.fillStyle = "orange";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, 600, 600);
             break;
         case 2: // Nighttime
             ctx.globalAlpha = 0.6;
             ctx.fillStyle = "darkblue";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, 600, 600);
             break;
         case 3: // Nuclear fallout / Alien
             ctx.globalAlpha = 0.4;
             ctx.fillStyle = "green";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, 600, 600);
             break;
-        case 4: // Foggy 
-            ctx.globalAlpha = 0.6;
+        case 4: // Foggy level 1
+            ctx.globalAlpha = 0.2;
             ctx.fillStyle = "lightblue";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, 600, 600);
             break;
-        case 4: // It's A Secret To Everybody
+        case 5: // Foggy level 2
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = "lightblue";
+            ctx.fillRect(0, 0, 50, 600);
+            ctx.fillRect(50, 0, 550, 50);
+            ctx.fillRect(550, 50, 50, 550);
+            ctx.fillRect(50, 550, 500, 50);
+
+            ctx.globalAlpha = 0.5;
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 6: // Foggy level 3
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "lightblue";
+            ctx.fillRect(0, 0, 50, 600);
+            ctx.fillRect(50, 0, 550, 50);
+            ctx.fillRect(550, 50, 50, 550);
+            ctx.fillRect(50, 550, 500, 50);
+
+            ctx.globalAlpha = 0.2;
+            ctx.fillRect(50, 50, 500, 50);
+            ctx.fillRect(50, 100, 50, 450);
+            ctx.fillRect(500, 100, 50, 400);
+            ctx.fillRect(100, 500, 450, 50);
+
+            ctx.globalAlpha = 0.1;
+            ctx.fillRect(100, 100, 400, 50);
+            ctx.fillRect(100, 150, 50, 350);
+            ctx.fillRect(450, 150, 50, 350);
+            ctx.fillRect(150, 450, 300, 50);
+
+            ctx.globalAlpha = 0.75;
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 10: // It's A Secret To Everybody
             return;
             ctx.globalAlpha = 0.6;
             ctx.fillStyle = "darkblue";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, 600, 600);
             break;
     }
     ctx.globalAlpha = 1.0;
