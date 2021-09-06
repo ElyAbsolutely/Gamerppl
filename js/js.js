@@ -157,7 +157,7 @@ function changeOverlay() {
 // wall.i(0) = CAN be seen and WILL block player, wall.passable(1) = CANNOT be seen and WILL block player, wall.passable(2) = CAN be seen and will NOT block player
 const wall = [
 
-    //JM
+    // JM
 
     { // Top
         x: 1050,
@@ -183,7 +183,6 @@ const wall = [
         color: "#072e06",
         id: 0
     },
-
     { // ground
         x: 1050,
         y: 50,
@@ -191,7 +190,8 @@ const wall = [
         w: 750,
         color: "lightgreen",
         id: 2
-    }, {
+    }, 
+    {
         x: 1200,
         y: -800,
         h: 850,
@@ -199,22 +199,23 @@ const wall = [
         color: "lightgreen",
         id: 2
     },
-
-    { //beach
+    { // beach
         x: 1085,
         y: -800,
         h: 500,
         w: 115,
         color: "#FCB983",
         id: 2
-    }, {
+    }, 
+    {
         x: 1085,
         y: -915,
         h: 115,
         w: 715,
         color: "#FCB983",
         id: 2
-    }, {
+    }, 
+    {
         x: 1800,
         y: -915,
         h: 615,
@@ -222,15 +223,15 @@ const wall = [
         color: "#FCB983",
         id: 2
     },
-
-    { //ocean
+    { // ocean
         x: 500,
         y: -915,
         h: 615,
         w: 585,
         color: "#4A83F5",
         id: 0
-    }, {
+    }, 
+    {
         x: 500,
         y: -1500,
         h: 585,
@@ -239,30 +240,33 @@ const wall = [
         id: 0
     },
 
-    //Middle
+    // Middle
 
-    { //river
+    { // river
         x: 800,
         y: -300,
         h: 2000,
         w: 250,
         color: "#6396FA",
         id: 2
-    }, {
+    }, 
+    {
         x: 850,
         y: -300,
         h: 500,
         w: 150,
         color: "#4A83F5",
         id: 0
-    }, {
+    }, 
+    {
         x: 850,
         y: 400,
         h: 1300,
         w: 150,
         color: "#4A83F5",
         id: 0
-    }, {
+    }, 
+    {
         x: 775,
         y: 200,
         h: 200,
@@ -277,32 +281,92 @@ const wall = [
         h: 350,
         w: 250,
         id: 1
-    }, {
+    }, 
+    {
         x: 800,
         y: 550,
-        h: 300,
+        h: 1000,
         w: 250,
         id: 1
     },
 
-    //JT
-
+    // JT
+    // Ground
     {
         x: -200,
-        y: 100,
-        h: 1000,
+        y: -300,
+        h: 1500,
         w: 1000,
         color: "lightgreen",
         id: 2
     },
-    { 
+    {
         x: -200,
-        y: 1100,
+        y: -600,
+        h: 350,
+        w: 700,
+        color: "lightgreen",
+        id: 2
+    },
+    // Wall
+    {  // Bottom
+        x: -200,
+        y: 1200,
         h: 350,
         w: 1000,
         color: "#072e06",
         id: 0
     },
+    {  // Left
+        x: -500,
+        y: -900,
+        h: 2500,
+        w: 300,
+        color: "#072e06",
+        id: 0
+    },
+    { // Top
+        x: -200,
+        y: -900,
+        h: 350,
+        w: 700,
+        color: "#072e06",
+        id: 0
+    },
+    // Inner walls
+    { // Top room
+        x: -50,
+        y: -300,
+        h: 150,
+        w: 850,
+        color: "#072e06",
+        id: 0
+    },
+    { // Bottom room
+        x: -200,
+        y: 600,
+        h: 100,
+        w: 700,
+        color: "#072e06",
+        id: 0
+    },
+    {
+        x: 400,
+        y: 700,
+        h: 400,
+        w: 100,
+        color: "#072e06",
+        id: 0
+    },
+    {
+        x: 200,
+        y: 800,
+        h: 400,
+        w: 100,
+        color: "#072e06",
+        id: 0
+    },
+
 
 ]
 
