@@ -538,36 +538,38 @@ const wall = [
         color: "lightgreen",
         id: 2
     },
+    { // Floor
+        x: -200,
+        y: 700,
+        h: 550,
+        w: 645,
+        color: "#d49363",
+        id: 2
+    },
+    {
+        x: -200,
+        y: -600,
+        h: 370,
+        w: 700,
+        color: "#d49363",
+        id: 2
+    },
+
 
     // Flowers
-    { // Leaves
+    // yellow
+    { // Left and right leaf
         x: 750,
         y: -50,
         h: 10,
-        w: 10,
+        w: 30,
         color: "#fcb503",
         id: 2
     },
-    {
+    { // Top and bottom leaf
         x: 760,
         y: -60,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
-        x: 760,
-        y: -40,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
-        x: 770,
-        y: -50,
-        h: 10,
+        h: 30,
         w: 10,
         color: "#fcb503",
         id: 2
@@ -580,34 +582,18 @@ const wall = [
         color: "#524600",
         id: 2
     },
-    { // Leaves
+    { // Left and right leaf
         x: 700,
         y: -100,
         h: 10,
-        w: 10,
+        w: 30,
         color: "#fcb503",
         id: 2
     },
-    {
+    { // Top and bottom leaf
         x: 710,
         y: -110,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
-        x: 710,
-        y: -90,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
-        x: 720,
-        y: -100,
-        h: 10,
+        h: 30,
         w: 10,
         color: "#fcb503",
         id: 2
@@ -620,34 +606,18 @@ const wall = [
         color: "#524600",
         id: 2
     },
-    { // Leaves
+    { // Left and right leaf
         x: 760,
         y: 550,
         h: 10,
-        w: 10,
+        w: 30,
         color: "#fcb503",
         id: 2
     },
-    {
-        x: 770,
-        y: 560,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
+    { // Top and bottom leaf
         x: 770,
         y: 540,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
-        x: 780,
-        y: 550,
-        h: 10,
+        h: 30,
         w: 10,
         color: "#fcb503",
         id: 2
@@ -660,34 +630,18 @@ const wall = [
         color: "#524600",
         id: 2
     },
-    { // Leaves
+    { // Left and right leaf
         x: 750,
         y: 850,
         h: 10,
-        w: 10,
+        w: 30,
         color: "#fcb503",
         id: 2
     },
-    {
-        x: 760,
-        y: 860,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
+    { // Top and bottom leaf
         x: 760,
         y: 840,
-        h: 10,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    {
-        x: 770,
-        y: 850,
-        h: 10,
+        h: 30,
         w: 10,
         color: "#fcb503",
         id: 2
@@ -695,6 +649,79 @@ const wall = [
     { // Middle
         x: 760,
         y: 850,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+    // white
+    { // Left and right leaf
+        x: 270,
+        y: 50,
+        h: 10,
+        w: 30,
+        color: "#f4f4f4",
+        id: 2
+    },
+    { // Top and bottom leaf
+        x: 280,
+        y: 40,
+        h: 30,
+        w: 10,
+        color: "#f4f4f4",
+        id: 2
+    },
+    { // Middle
+        x: 280,
+        y: 50,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+    { // Left and right leaf
+        x: 290,
+        y: 450,
+        h: 10,
+        w: 30,
+        color: "#f4f4f4",
+        id: 2
+    },
+    { // Top and bottom leaf
+        x: 300,
+        y: 440,
+        h: 30,
+        w: 10,
+        color: "#f4f4f4",
+        id: 2
+    },
+    { // Middle
+        x: 300,
+        y: 450,
+        h: 10,
+        w: 10,
+        color: "#524600",
+        id: 2
+    },
+    { // Top and bottom leaf
+        x: -40,
+        y: 300,
+        h: 30,
+        w: 10,
+        color: "#f4f4f4",
+        id: 2
+    },
+    { // Left and right leaf
+        x: -50,
+        y: 310,
+        h: 10,
+        w: 30,
+        color: "#f4f4f4",
+        id: 2
+    },
+    { // Middle
+        x: -40,
+        y: 310,
         h: 10,
         w: 10,
         color: "#524600",
@@ -733,6 +760,14 @@ const wall = [
         y: -300,
         h: 150,
         w: 850,
+        color: "#072e06",
+        id: 0
+    },
+    {
+        x: 400,
+        y: -550,
+        h: 250,
+        w: 100,
         color: "#072e06",
         id: 0
     },
