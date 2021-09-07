@@ -6,7 +6,7 @@ const overlayBtn = document.getElementById('overlay-btn');
 const soundBtn = document.getElementById('sound-btn');
 
 window.addEventListener('load', hideGame);
-window.addEventListener('reload', showGame);
+window.addEventListener('reload', start);
 document.getElementById('start-btn').addEventListener('click', start);
 skyBtn.addEventListener('click', changeSky);
 overlayBtn.addEventListener('click', changeOverlay);
@@ -65,7 +65,7 @@ let midy = canvas.height / 2;
 const gameSettings = {
     volume: false,
     devMode: false
-}
+};
 
 const player = {
     x: midx - 10,
@@ -83,8 +83,8 @@ const player = {
     moveDir: "none", // none, up, left, down, right
     footsteps: 0,
 
-    png: null //Halutaanko kuvat myöhemmin?
-}
+    chests: 0 // keeping count on how many chests have been opened
+};
 
 // Keep the same colour on enemies. It'll get confusing otherwise
 const enemies = [
@@ -155,7 +155,7 @@ const stage = {
     sky: 0,
     overlay: 0,
     map: null
-}
+};
 
 function changeSky() {
     if (stage.sky == 2) {
@@ -906,7 +906,7 @@ const wall = [
     },
 
 
-]
+];
 
 const chests = [
 
@@ -940,7 +940,7 @@ const chests = [
         color2: 'LightSteelBlue'
     },
 
-]
+];
 
 function drawPlayer() {
     ctx.fillStyle = player.color;
@@ -979,7 +979,7 @@ function drawWalls() {
         switch (wall[i].id) {
             case 1:
                 if (gameSettings.devMode) {
-                    ctx.fillStyle = "black";
+                    ctx.strokeStyle = "black";
                     ctx.beginPath();
                     ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
                     ctx.stroke();
@@ -1130,7 +1130,7 @@ function enemyMove() {
     }
 }
 
-function death() { // Works when the enemies are directly beside the player , need to tweak the enemy movements
+function death() { // Doesn't work properly anymore, hmm
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
@@ -1194,6 +1194,17 @@ function detectChests() {
                     moveLeft();
                     return;
             }
+        }
+    }
+}
+
+function openChests() { // Doesn't work
+    let distance = getDistance(player.x, player.y, chests.x, chests.y);
+    for (let i = 0; chests.length > i; i++) {
+        if (distance <= chests[i].w || distance <= player.w || distance <= chests[i].h || distance <= player.h) {
+            player.chests += 1;
+            chests.splice(i, 1);
+            console.log('touch');
         }
     }
 }
@@ -1338,6 +1349,8 @@ function update() {
     drawOverlay();
 
     enemyMove();
+
+    openChests();
 
     playSounds();
     drawHUD();
