@@ -140,7 +140,7 @@ const enemies = [
         w: 200,
         h: 200,
         speed: 5,
-        color: 'lightblue',
+        color: '#b50000',
         dx: 1.5,
         dy: 1.5
     }
@@ -172,7 +172,7 @@ function changeOverlay() {
 }
 
 // wall.id(0) = CAN be seen and WILL block player, wall.id(1) = CANNOT be seen and WILL block player, wall.id(2) = CAN be seen and will NOT block player
-//wall.id(3) = triggers a function on touch
+//wall.id(3) = triggers a function on touch, is invisible and doesnt block the player, 0-99 varattu JM, 100-199 varattu JT
 const wall = [
 
     // JM
@@ -1314,7 +1314,7 @@ function openChests() { // Doesn't work
 }
 
 function triggerEvent(sasha) {
-    switch (sasha) {
+    switch (sasha) { // 0-99 varattu JM, 100-199 varattu JT
         // 0 = endgame
         // 1 = overlay change
 
