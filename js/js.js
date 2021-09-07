@@ -130,6 +130,19 @@ const enemies = [
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
+    },
+
+    //JM
+
+    {
+        x: 1200,
+        y: 2225,
+        w: 200,
+        h: 200,
+        speed: 5,
+        color: 'lightblue',
+        dx: 1.5,
+        dy: 1.5
     }
 
     // JM - Right side of the river
@@ -291,21 +304,21 @@ const wall = [
         w: 1500,
         id: 3,
         event: 3
-    },{ // Fog change
+    }, { // Fog change
         x: 1050,
         y: 2040,
         h: 1,
         w: 1500,
         id: 3,
         event: 2
-    },{ // Fog change
+    }, { // Fog change
         x: 1050,
         y: 2120,
         h: 1,
         w: 1500,
         id: 3,
         event: 1
-    },{ // Fog change
+    }, { // Fog change
         x: 1050,
         y: 2190,
         h: 1,
@@ -313,7 +326,7 @@ const wall = [
         id: 3,
         event: 4
     },
-    {//Brickwall
+    { // Brickwall
         x: 1150,
         y: 1980,
         h: 20,
@@ -405,6 +418,69 @@ const wall = [
         w: 10,
         color: "gray",
         id: 0
+    }, { // Middle Wall
+        x: 1400,
+        y: 2445,
+        h: 10,
+        w: 500,
+        color: "gray",
+        id: 0
+    }, {
+        x: 1150,
+        y: 2445,
+        h: 10,
+        w: 100,
+        color: "gray",
+        id: 0
+    }, {
+        x: 1500,
+        y: 2350,
+        h: 100,
+        w: 10,
+        color: "gray",
+        id: 0
+    }, {
+        x: 1800,
+        y: 2350,
+        h: 100,
+        w: 10,
+        color: "gray",
+        id: 0
+    }, { //red
+        x: 1425,
+        y: 2500,
+        h: 150,
+        w: 450,
+        color: "darkred",
+        id: 2
+    }, { //Gold edge
+        x: 1425,
+        y: 2500,
+        h: 5,
+        w: 450,
+        color: "GoldenRod",
+        id: 2
+    }, {
+        x: 1425,
+        y: 2645,
+        h: 5,
+        w: 450,
+        color: "GoldenRod",
+        id: 2
+    }, {
+        x: 1870,
+        y: 2500,
+        h: 150,
+        w: 5,
+        color: "GoldenRod",
+        id: 2
+    }, {
+        x: 1425,
+        y: 2500,
+        h: 150,
+        w: 5,
+        color: "GoldenRod",
+        id: 2
     },
 
     { // beach
@@ -851,11 +927,20 @@ const chests = [
         y: -460,
         h: 90,
         w: 60,
-        color1: '#3b1e09',
-        color2: '#f7b525'
+        color1: 'oak',
+        color2: 'silver'
     },
 
     // JM
+
+    { // Estate
+        x: 1630,
+        y: 2555,
+        h: 40,
+        w: 50,
+        color1: 'Sienna',
+        color2: 'LightSteelBlue'
+    },
 
 ]
 
@@ -1057,7 +1142,8 @@ function death() { // Works when the enemies are directly beside the player , ne
             showEnd();
             console.log('dead');
         }
-    }    
+    }
+
 }
 
 function detectWalls() {
