@@ -776,7 +776,7 @@ const wall = [
         y: 600,
         h: 100,
         w: 700,
-        color: "#5e5e5e",
+        color: "#3d3d3d",
         id: 0
     },
     {
@@ -784,7 +784,7 @@ const wall = [
         y: 700,
         h: 400,
         w: 100,
-        color: "#5e5e5e",
+        color: "#3d3d3d",
         id: 0
     },
     {
@@ -792,7 +792,7 @@ const wall = [
         y: 800,
         h: 400,
         w: 100,
-        color: "#5e5e5e",
+        color: "#3d3d3d",
         id: 0
     },
     {
@@ -800,7 +800,7 @@ const wall = [
         y: 600,
         h: 700,
         w: 100,
-        color: "#5e5e5e",
+        color: "#3d3d3d",
         id: 0
     },
     {
@@ -808,7 +808,7 @@ const wall = [
         y: 1200,
         h: 100,
         w: 700,
-        color: "#5e5e5e",
+        color: "#3d3d3d",
         id: 0
     },
 
@@ -816,13 +816,28 @@ const wall = [
 ]
 
 const chests = [
-    {
+
+    // JT
+
+    { // Left map side, bottom
         x: -50,
         y: 1125,
         h: 60,
         w: 90,
-        color: "#5c3f10",
+        color1: '#3b1e09',
+        color2: '#f7b525'
     },
+    { // Left map side, top
+        x: 320,
+        y: -460,
+        h: 90,
+        w: 60,
+        color1: '#3b1e09',
+        color2: '#f7b525'
+    },
+
+    // JM
+
 ]
 
 function drawPlayer() {
@@ -893,8 +908,13 @@ function drawEnemies() {
 
 function drawChests() {
     for (let i = 0; i < chests.length; i++) {
-        ctx.fillStyle = chests[i].color;
+        ctx.fillStyle = chests[i].color1;
         ctx.fillRect(chests[i].x, chests[i].y, chests[i].w, chests[i].h);
+        ctx.strokeStyle = chests[i].color2;
+        ctx.beginPath();
+        ctx.rect(chests[i].x, chests[i].y, chests[i].w, chests[i].h);
+        ctx.lineWidth = 3;
+        ctx.stroke();
     }
 }
 
@@ -931,6 +951,7 @@ function newPos() {
     }
 
     detectWalls();
+    detectChests();
 }
 
 function moveLeft() {
@@ -1067,6 +1088,27 @@ function detectWalls() {
                     triggerEvent(wall[i].event);
                 }
                 break;
+        }
+    }
+}
+
+function detectChests() {
+    for (let i = 0; chests.length > i; i++) {
+        if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
+            switch (player.moveDir) {
+                case "up":
+                    moveDown();
+                    return;
+                case "left":
+                    moveRight();
+                    return;
+                case "down":
+                    moveUp();
+                    return;
+                case "right":
+                    moveLeft();
+                    return;
+            }
         }
     }
 }
