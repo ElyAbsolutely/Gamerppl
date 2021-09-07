@@ -86,16 +86,16 @@ const player = {
     png: null //Halutaanko kuvat myöhemmin?
 }
 
-// x and y can be changed later when setting the stage
+// Keep the same colour on enemies. It'll get confusing otherwise
 const enemies = [
 
     // JT - Left side of the river
 
     { // Top room enemy
         x: 275,
-        y: -420,
-        w: 20,
-        h: 20,
+        y: -440,
+        w: 30,
+        h: 30,
         speed: 5,
         color: '#b50000',
         dx: 1.5,
@@ -104,8 +104,8 @@ const enemies = [
     { // Bottom room inside
         x: -100,
         y: 1100,
-        w: 20,
-        h: 20,
+        w: 30,
+        h: 30,
         speed: 5,
         color: '#b50000',
         dx: 1.5,
@@ -113,26 +113,26 @@ const enemies = [
     },
     { // Bottom room door
         x: 420,
-        y: 1150,
-        w: 20,
-        h: 20,
+        y: 1130,
+        w: 30,
+        h: 30,
         speed: 5,
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
     },
     { // On the bridge
-        x: 900,
-        y: 300,
-        w: 20,
-        h: 20,
+        x: 880,
+        y: 275,
+        w: 35,
+        h: 35,
         speed: 5,
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
     },
-
-    //JM
+    // Keep the same colour on enemies. It'll get confusing otherwise
+    //JM - Right side of the river
 
     {
         x: 1200,
@@ -144,8 +144,6 @@ const enemies = [
         dx: 1.5,
         dy: 1.5
     }
-
-    // JM - Right side of the river
 
     
 ];
