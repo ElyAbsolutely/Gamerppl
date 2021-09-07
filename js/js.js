@@ -6,7 +6,7 @@ const overlayBtn = document.getElementById('overlay-btn');
 const soundBtn = document.getElementById('sound-btn');
 
 window.addEventListener('load', hideGame);
-window.addEventListener('reload', showGame);
+window.addEventListener('reload', start);
 document.getElementById('start-btn').addEventListener('click', start);
 skyBtn.addEventListener('click', changeSky);
 overlayBtn.addEventListener('click', changeOverlay);
@@ -65,7 +65,7 @@ let midy = canvas.height / 2;
 const gameSettings = {
     volume: false,
     devMode: false
-}
+};
 
 const player = {
     x: midx - 10,
@@ -73,7 +73,7 @@ const player = {
     h: 20,
     w: 20,
     speed: 5,
-    color: "red",
+    color: '#4614de',
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
@@ -83,53 +83,56 @@ const player = {
     moveDir: "none", // none, up, left, down, right
     footsteps: 0,
 
-    png: null //Halutaanko kuvat myöhemmin?
-}
+    chests: 0 // keeping count on how many chests have been opened
+};
 
-// x and y can be changed later when setting the stage
+// Keep the same colour on enemies. It'll get confusing otherwise
 const enemies = [
-    /* {
-         x: 400,
-         y: 300,
-         w: 20,
-         h: 20,
-         speed: 5,
-         color: 'blue',
-         dx: 1.5,
-         dy: 1.5
-     },
-     {
-         x: 600,
-         y: 50,
-         w: 20,
-         h: 20,
-         speed: 5,
-         color: 'blue',
-         dx: 1.5,
-         dy: 1.5
-     },
-     {
-         x: 1000,
-         y: 500,
-         w: 20,
-         h: 20,
-         speed: 5,
-         color: 'blue',
-         dx: 1.5,
-         dy: 1.5
-     },
-     {
-         x: 800,
-         y: 400,
-         w: 20,
-         h: 20,
-         speed: 5,
-         color: 'blue',
-         dx: 1.5,
-         dy: 1.5
-     },*/
 
-    //JM
+    // JT - Left side of the river
+
+    { // Top room enemy
+        x: 275,
+        y: -440,
+        w: 30,
+        h: 30,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    { // Bottom room inside
+        x: -100,
+        y: 1100,
+        w: 30,
+        h: 30,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    { // Bottom room door
+        x: 420,
+        y: 1130,
+        w: 30,
+        h: 30,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    { // On the bridge
+        x: 880,
+        y: 275,
+        w: 35,
+        h: 35,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    // Keep the same colour on enemies. It'll get confusing otherwise
+    //JM - Right side of the river
 
     { // Estate Terror
         x: 1200,
@@ -150,7 +153,7 @@ const stage = {
     sky: 0,
     overlay: 0,
     map: null
-}
+};
 
 function changeSky() {
     if (stage.sky == 2) {
@@ -1007,7 +1010,7 @@ const wall = [
     },
 
 
-]
+];
 
 const chests = [
 
@@ -1041,7 +1044,7 @@ const chests = [
         color2: 'LightSteelBlue'
     },
 
-]
+];
 
 function drawPlayer() {
     ctx.fillStyle = player.color;
@@ -1080,7 +1083,7 @@ function drawWalls() {
         switch (wall[i].id) {
             case 1:
                 if (gameSettings.devMode) {
-                    ctx.fillStyle = "black";
+                    ctx.strokeStyle = "black";
                     ctx.beginPath();
                     ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
                     ctx.stroke();
@@ -1231,29 +1234,11 @@ function enemyMove() {
     }
 }
 
-function death() { // Works when the enemies are directly beside the player , need to tweak the enemy movements
+function death() { // Doesn't work properly anymore, hmm
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
-        if (distance <= enemies[i].w) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
-        }
-        if (distance <= player.w) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
-        }
-        if (distance <= enemies[i].h) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
-        }
-        if (distance <= player.h) {
+        if (distance <= enemies[i].w || distance <= player.w || distance <= enemies[i].h || distance <= player.h) {
             player.health -= 1;
             hideGame();
             showEnd();
@@ -1313,6 +1298,17 @@ function detectChests() {
                     moveLeft();
                     return;
             }
+        }
+    }
+}
+
+function openChests() { // Doesn't work
+    let distance = getDistance(player.x, player.y, chests.x, chests.y);
+    for (let i = 0; chests.length > i; i++) {
+        if (distance <= chests[i].w || distance <= player.w || distance <= chests[i].h || distance <= player.h) {
+            player.chests += 1;
+            chests.splice(i, 1);
+            console.log('touch');
         }
     }
 }
@@ -1457,6 +1453,8 @@ function update() {
     drawOverlay();
 
     enemyMove();
+
+    openChests();
 
     playSounds();
     drawHUD();
