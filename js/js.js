@@ -73,7 +73,7 @@ const player = {
     h: 20,
     w: 20,
     speed: 5,
-    color: "red",
+    color: '#4614de',
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
@@ -88,46 +88,53 @@ const player = {
 
 // x and y can be changed later when setting the stage
 const enemies = [
-    {
-        x: 400,
+
+    // JT - Left side of the river
+
+    { // Top room enemy
+        x: 275,
+        y: -420,
+        w: 20,
+        h: 20,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    { // Bottom room inside
+        x: -100,
+        y: 1100,
+        w: 20,
+        h: 20,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    { // Bottom room door
+        x: 420,
+        y: 1150,
+        w: 20,
+        h: 20,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
+    { // On the bridge
+        x: 900,
         y: 300,
         w: 20,
         h: 20,
         speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
-    {
-        x: 600,
-        y: 50,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
-    {
-        x: 1000,
-        y: 500,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
-    {
-        x: 800,
-        y: 400,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
+        color: '#b50000',
         dx: 1.5,
         dy: 1.5
     }
+
+    // JM - Right side of the river
+
+    
 ];
 
 const stage = {
@@ -1044,32 +1051,13 @@ function death() { // Works when the enemies are directly beside the player , ne
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
-        if (distance <= enemies[i].w) {
+        if (distance <= enemies[i].w || distance <= player.w || distance <= enemies[i].h || distance <= player.h) {
             player.health -= 1;
             hideGame();
             showEnd();
             console.log('dead');
         }
-        if (distance <= player.w) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
-        }
-        if (distance <= enemies[i].h) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
-        }
-        if (distance <= player.h) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
-        }
-    }
-    
+    }    
 }
 
 function detectWalls() {
