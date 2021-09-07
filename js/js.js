@@ -88,50 +88,50 @@ const player = {
 
 // x and y can be changed later when setting the stage
 const enemies = [
-    {
-        x: 400,
-        y: 300,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
-    {
-        x: 600,
-        y: 50,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
-    {
-        x: 1000,
-        y: 500,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
-    {
-        x: 800,
-        y: 400,
-        w: 20,
-        h: 20,
-        speed: 5,
-        color: 'blue',
-        dx: 1.5,
-        dy: 1.5
-    },
+    /* {
+         x: 400,
+         y: 300,
+         w: 20,
+         h: 20,
+         speed: 5,
+         color: 'blue',
+         dx: 1.5,
+         dy: 1.5
+     },
+     {
+         x: 600,
+         y: 50,
+         w: 20,
+         h: 20,
+         speed: 5,
+         color: 'blue',
+         dx: 1.5,
+         dy: 1.5
+     },
+     {
+         x: 1000,
+         y: 500,
+         w: 20,
+         h: 20,
+         speed: 5,
+         color: 'blue',
+         dx: 1.5,
+         dy: 1.5
+     },
+     {
+         x: 800,
+         y: 400,
+         w: 20,
+         h: 20,
+         speed: 5,
+         color: 'blue',
+         dx: 1.5,
+         dy: 1.5
+     },*/
 
     //JM
 
-    {
+    { // Estate Terror
         x: 1200,
         y: 2225,
         w: 200,
@@ -207,7 +207,14 @@ const wall = [
     { // Right
         x: 1800,
         y: -300,
-        h: 850,
+        h: 450,
+        w: 500,
+        color: "#072e06",
+        id: 0
+    }, {
+        x: 1800,
+        y: 350,
+        h: 200,
         w: 500,
         color: "#072e06",
         id: 0
@@ -241,9 +248,23 @@ const wall = [
     },
     { // Right
         x: 2150,
-        y: 650,
-        h: 1550,
-        w: 100,
+        y: 450,
+        h: 700,
+        w: 500,
+        color: "#072e06",
+        id: 0
+    }, {
+        x: 2150,
+        y: 1400,
+        h: 800,
+        w: 800,
+        color: "#072e06",
+        id: 0
+    }, {
+        x: 2950,
+        y: 450,
+        h: 1500,
+        w: 800,
         color: "#072e06",
         id: 0
     },
@@ -266,6 +287,20 @@ const wall = [
         y: 650,
         h: 1350,
         w: 1000,
+        color: "lightgreen",
+        id: 2
+    }, { // Connector Floor
+        x: 2150,
+        y: 1150,
+        h: 250,
+        w: 500,
+        color: "lightgreen",
+        id: 2
+    }, {
+        x: 2650,
+        y: 450,
+        h: 950,
+        w: 300,
         color: "lightgreen",
         id: 2
     },
@@ -294,7 +329,7 @@ const wall = [
         x: 1050,
         y: 980,
         h: 1010,
-        w: 1500,
+        w: 1300,
         id: 3,
         event: 3
     }, { // Fog change
@@ -318,6 +353,77 @@ const wall = [
         w: 1500,
         id: 3,
         event: 4
+    }, { // Fog change Connector
+        x: 2380,
+        y: 1000,
+        h: 500,
+        w: 200,
+        id: 3,
+        event: 2
+    }, { // Fog change Connector
+        x: 2600,
+        y: 1000,
+        h: 500,
+        w: 400,
+        id: 3,
+        event: 1
+    }, { // Fog change Connector
+        x: 2600,
+        y: 800,
+        h: 180,
+        w: 400,
+        id: 3,
+        event: 4
+    },
+    { // Water
+        x: 1250,
+        y: 1600,
+        h: 200,
+        w: 400,
+        color: "#4A83F5",
+        id: 2
+    }, {
+        x: 1750,
+        y: 1600,
+        h: 240,
+        w: 200,
+        color: "#4A83F5",
+        id: 2
+    }, {
+        x: 1350,
+        y: 1400,
+        h: 150,
+        w: 250,
+        color: "#4A83F5",
+        id: 2
+    }, {
+        x: 1720,
+        y: 1400,
+        h: 120,
+        w: 210,
+        color: "#4A83F5",
+        id: 2
+    }, {
+        x: 1750,
+        y: 1100,
+        h: 220,
+        w: 220,
+        color: "#4A83F5",
+        id: 2
+    }, {
+        x: 1450,
+        y: 800,
+        h: 330,
+        w: 160,
+        color: "#4A83F5",
+        id: 2
+    }, {
+        x: 1200,
+        y: 950,
+        h: 320,
+        w: 220,
+        color: "#4A83F5",
+        id: 2
     },
     { // Brickwall
         x: 1150,
@@ -520,7 +626,7 @@ const wall = [
         x: 1915,
         y: -1500,
         h: 1200,
-        w: 375,
+        w: 2500,
         color: "#4A83F5",
         id: 0
     },
