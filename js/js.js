@@ -6,10 +6,12 @@ const overlayBtn = document.getElementById('overlay-btn');
 const soundBtn = document.getElementById('sound-btn');
 
 window.addEventListener('load', hideGame);
+window.addEventListener('reload', showGame);
 document.getElementById('start-btn').addEventListener('click', start);
 skyBtn.addEventListener('click', changeSky);
 overlayBtn.addEventListener('click', changeOverlay);
 soundBtn.addEventListener('click', toggleVolume);
+document.getElementById('end-btn').addEventListener('click', resetGame);
 
 skyBtn.disabled = true;
 overlayBtn.disabled = true;
@@ -40,11 +42,21 @@ function start() {
 const gameDiv = document.getElementById('game');
 function hideGame() {
     gameDiv.style.display = 'none';
+    hideEnd();
+}
+
+function hideEnd() {
+    document.getElementById('end-screen').style.display = 'none';
 }
 
 function showGame() {
+    hideEnd();
     document.getElementById('start').style.display = 'none';
     gameDiv.style.display = 'block';
+}
+
+function showEnd() {
+    document.getElementById('end-screen').style.display = 'block';
 }
 
 let midx = canvas.width / 2;
@@ -65,7 +77,7 @@ const player = {
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
-    health: 3,
+    health: 1,
     weaponID: "Dagger",
 
     moveDir: "none", // none, up, left, down, right
@@ -885,7 +897,7 @@ function drawWalls() {
                 break;
             case 3:
                 if (gameSettings.devMode) {
-                    ctx.fillStyle = "orange";
+                    ctx.strokeStyle = "orange";
                     ctx.beginPath();
                     ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
                     ctx.stroke();
@@ -1024,39 +1036,40 @@ function enemyMove() {
                 enemies[i].y += enemies[i].dy;
             }
         }
-        loseLife();
+        death();
     }
 }
 
-function loseLife() { // Works when the enemies are directly beside the player , need to tweak the enemy movements
+function death() { // Works when the enemies are directly beside the player , need to tweak the enemy movements
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
         if (distance <= enemies[i].w) {
             player.health -= 1;
-            console.log('life lost');
+            hideGame();
+            showEnd();
+            console.log('dead');
         }
         if (distance <= player.w) {
             player.health -= 1;
-            console.log('life lost');
+            hideGame();
+            showEnd();
+            console.log('dead');
         }
         if (distance <= enemies[i].h) {
             player.health -= 1;
-            console.log('life lost');
+            hideGame();
+            showEnd();
+            console.log('dead');
         }
         if (distance <= player.h) {
             player.health -= 1;
-            console.log('life lost');
+            hideGame();
+            showEnd();
+            console.log('dead');
         }
-        death();
     }
     
-}
-
-function death() {
-    if (player.health <= 0) {
-        console.log('death');
-    }
 }
 
 function detectWalls() {
@@ -1258,6 +1271,10 @@ function update() {
     drawHUD();
 
     requestAnimationFrame(update);
+}
+
+function resetGame() { // Kinda works?
+    location.reload();
 }
 
 function toggleVolume() {

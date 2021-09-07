@@ -12,7 +12,7 @@ body {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#start {
+#start, #end-screen {
     margin: 200px auto;
     padding: 40px;
     background-color: #f4f4f4;
@@ -46,7 +46,7 @@ body {
     margin: 0 10px;
 }
 
-#start-btn {
+#start-btn, #end-btn {
     padding: 15px 25px;
     margin: 20px;
     font-size: 20px;
