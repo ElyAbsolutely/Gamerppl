@@ -525,7 +525,7 @@ const wall = [
     {
         x: -200,
         y: -300,
-        h: 1500,
+        h: 1600,
         w: 1000,
         color: "lightgreen",
         id: 2
@@ -543,7 +543,7 @@ const wall = [
         y: 700,
         h: 550,
         w: 645,
-        color: "#d49363",
+        color: "#d1d1d1",
         id: 2
     },
     {
@@ -551,7 +551,7 @@ const wall = [
         y: -600,
         h: 370,
         w: 700,
-        color: "#d49363",
+        color: "#cca162",
         id: 2
     },
 
@@ -731,7 +731,7 @@ const wall = [
     // Walls
     {  // Bottom
         x: -200,
-        y: 1200,
+        y: 1300,
         h: 350,
         w: 1000,
         color: "#072e06",
@@ -776,7 +776,7 @@ const wall = [
         y: 600,
         h: 100,
         w: 700,
-        color: "#072e06",
+        color: "#5e5e5e",
         id: 0
     },
     {
@@ -784,7 +784,7 @@ const wall = [
         y: 700,
         h: 400,
         w: 100,
-        color: "#072e06",
+        color: "#5e5e5e",
         id: 0
     },
     {
@@ -792,11 +792,37 @@ const wall = [
         y: 800,
         h: 400,
         w: 100,
-        color: "#072e06",
+        color: "#5e5e5e",
+        id: 0
+    },
+    {
+        x: -300,
+        y: 600,
+        h: 700,
+        w: 100,
+        color: "#5e5e5e",
+        id: 0
+    },
+    {
+        x: -200,
+        y: 1200,
+        h: 100,
+        w: 700,
+        color: "#5e5e5e",
         id: 0
     },
 
 
+]
+
+const chests = [
+    {
+        x: -50,
+        y: 1125,
+        h: 60,
+        w: 90,
+        color: "#5c3f10",
+    },
 ]
 
 function drawPlayer() {
@@ -865,6 +891,13 @@ function drawEnemies() {
     }
 }
 
+function drawChests() {
+    for (let i = 0; i < chests.length; i++) {
+        ctx.fillStyle = chests[i].color;
+        ctx.fillRect(chests[i].x, chests[i].y, chests[i].w, chests[i].h);
+    }
+}
+
 function clear() { //Testaan tauskakuva taivaan tekemistä
     switch (stage.sky) {
         case 0:
@@ -907,6 +940,9 @@ function moveLeft() {
     for (let i = 0; enemies.length > i; i++) {
         enemies[i].x += enemies[i].speed;
     }
+    for (let i = 0; chests.length > i; i++) {
+        chests[i].x += player.speed;
+    }
 }
 
 function moveRight() {
@@ -915,6 +951,9 @@ function moveRight() {
     }
     for (let i = 0; enemies.length > i; i++) {
         enemies[i].x -= enemies[i].speed;
+    }
+    for (let i = 0; chests.length > i; i++) {
+        chests[i].x -= player.speed;
     }
 }
 
@@ -925,6 +964,9 @@ function moveUp() {
     for (let i = 0; enemies.length > i; i++) {
         enemies[i].y += enemies[i].speed;
     }
+    for (let i = 0; chests.length > i; i++) {
+        chests[i].y += player.speed;
+    }
 }
 
 function moveDown() {
@@ -933,6 +975,9 @@ function moveDown() {
     }
     for (let i = 0; enemies.length > i; i++) {
         enemies[i].y -= enemies[i].speed;
+    }
+    for (let i = 0; chests.length > i; i++) {
+        chests[i].y -= player.speed;
     }
 }
 
@@ -993,7 +1038,7 @@ function death() {
     }
 }
 
-function detectWalls() { // Testattu ja toimii neliön kanssa
+function detectWalls() {
 
     for (let i = 0; wall.length > i; i++) {
 
@@ -1158,9 +1203,10 @@ function update() {
     newPos();
 
     drawWalls();
-    drawAttack();
+    drawChests();
     drawPlayer();
     drawEnemies();
+    drawAttack();
 
     drawOverlay();
 
