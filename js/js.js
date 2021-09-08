@@ -1343,25 +1343,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-<<<<<<< HEAD
-                setTimeout(playerDeath(), 100);
-                break;
-            case 35:
-                if (distance < 255) {
-                    if (player.x + player.w < enemies[i].x) {
-                        enemies[i].x -= enemies[i].dx;
-                    } else if (player.y + player.h < enemies[i].y) {
-                        enemies[i].y -= enemies[i].dy;
-                    } else if (player.x > enemies[i].x + enemies[i].w) {
-                        enemies[i].x += enemies[i].dx;
-                    } else if (player.y > enemies[i].y + enemies[i].h) {
-                        enemies[i].y += enemies[i].dy;
-                    }
-                }
-                setTimeout(playerDeath(), 100);
-=======
                 setTimeout(playerDeath() , 10);
->>>>>>> 9a4c7fc7275f2448a3533f48e992642d2885039f
                 break;
             case 30:
                 if (distance < 250) {
@@ -1375,11 +1357,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-<<<<<<< HEAD
-                setTimeout(playerDeath(), 100);
-=======
                 setTimeout(playerDeath() , 10);
->>>>>>> 9a4c7fc7275f2448a3533f48e992642d2885039f
                 break;
 
         }
