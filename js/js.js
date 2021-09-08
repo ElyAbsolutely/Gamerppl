@@ -1342,7 +1342,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 10);
+                playerHit();
                 break;
             case 30:
                 if (distance < 250) {
@@ -1356,19 +1356,19 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 10);
+                playerHit();
                 break;
             
         }
     }
 }
 
-function playerDeath() { 
+function playerHit() { 
     for (let i = 0; i < enemies.length; i++) {
 
         if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-            setTimeout(player.health -= 1 , 1000 * 200);
-            setTimeout(console.log('player hit') , 1000 * 200);
+            player.health -= 1;
+            console.log('player hit');
         }
         // Needs tweaking
         // if (player.health === 0) {
