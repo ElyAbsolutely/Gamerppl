@@ -129,13 +129,8 @@ const enemies = [
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
-<<<<<<< HEAD
-    },
-
-=======
     },*/
     // Keep the same colour on enemies. It'll get confusing otherwise
->>>>>>> b356ea2c321bb8240d1b03ceee2934a9ade0fceb
     //JM - Right side of the river
 
     { // Estate Terror
