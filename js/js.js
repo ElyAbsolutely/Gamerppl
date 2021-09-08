@@ -84,7 +84,7 @@ const player = {
     moveDir: "none", // none, up, left, down, right
     footsteps: 0,
 
-    chests: 0 // keeping count on how many chests have been opened
+    chests: 0 // keeping count on how many chests have been touched
 };
 
 const enemies = [
@@ -101,16 +101,16 @@ const enemies = [
         dx: 1.5,
         dy: 1.5
     },
-    { // Bottom room inside
-        x: -100,
-        y: 1100,
-        w: 30,
-        h: 30,
-        speed: 5,
-        color: '#b50000',
-        dx: 1.5,
-        dy: 1.5
-    },
+    // { // Bottom room inside
+    //     x: -100,
+    //     y: 1100,
+    //     w: 30,
+    //     h: 30,
+    //     speed: 5,
+    //     color: '#b50000',
+    //     dx: 1.5,
+    //     dy: 1.5
+    // },
     { // Bottom room door
         x: 420,
         y: 1130,
@@ -1338,7 +1338,7 @@ function getDistance(x1, y1, x2, y2) {
 
 function enemyMove() {
     for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        let distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
         switch (enemies[i].h) {
             case 200:
@@ -1386,7 +1386,6 @@ function enemyMove() {
 
         }
     }
-    console.log(enemies);
 }
 
 function playerDeath() {
@@ -1826,6 +1825,6 @@ function drawHUD() {
     ctx.font = "20px Arial";
     ctx.fillText("Health: " + player.health + '/5', 5, 20);
 
-    ctx.fillText("Chests: " + player.chests + '/3?', 5, 595);
+    ctx.fillText("Chests: " + player.chests + '/4', 5, 595);
 
 }
