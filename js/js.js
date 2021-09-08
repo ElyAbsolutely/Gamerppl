@@ -74,6 +74,7 @@ const player = {
     w: 20,
     speed: 5,
     color: '#4614de',
+    active: "yes", // yes & no
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
@@ -1352,7 +1353,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 100);
+                setTimeout(playerDeath(), 100);
                 break;
             case 35:
                 if (distance < 255) {
@@ -1366,7 +1367,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 100);
+                setTimeout(playerDeath(), 100);
                 break;
             case 30:
                 if (distance < 250) {
@@ -1380,15 +1381,15 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 100);
+                setTimeout(playerDeath(), 100);
                 break;
-            
+
         }
     }
     console.log(enemies);
 }
 
-function playerDeath() { 
+function playerDeath() {
     for (let i = 0; i < enemies.length; i++) {
 
         if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
@@ -1408,7 +1409,7 @@ function attackUp() {
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
         if (enemies[i].y + enemies[i].h <= player.y && distance < 300) {
-            setTimeout(enemies.splice(i, 1) , 10);
+            setTimeout(enemies.splice(i, 1), 10);
             console.log('enemy dead');
         }
     }
@@ -1418,7 +1419,7 @@ function attackRight() {
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
         if (enemies[i].x >= player.x + player.w && distance < 300) {
-            setTimeout(enemies.splice(i, 1) , 10);
+            setTimeout(enemies.splice(i, 1), 10);
             console.log('enemy dead');
         }
     }
@@ -1428,7 +1429,7 @@ function attackDown() {
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
         if (enemies[i].y >= player.y + player.h && distance < 300) {
-            setTimeout(enemies.splice(i, 1) , 10);
+            setTimeout(enemies.splice(i, 1), 10);
             console.log('enemy dead');
         }
     }
@@ -1438,7 +1439,7 @@ function attackLeft() {
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
         if (enemies[i].x + enemies[i].w <= player.x && distance < 300) {
-            setTimeout(enemies.splice(i, 1) , 10);
+            setTimeout(enemies.splice(i, 1), 10);
             console.log('enemy dead');
         }
     }
@@ -1503,7 +1504,7 @@ function touchChests() {
     for (let i = 0; chests.length > i; i++) {
         if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
             console.log('chest touch');
-            setTimeout(chests.splice(i, 1) , 10);
+            setTimeout(chests.splice(i, 1), 10);
             player.chests += 1;
         }
     }
@@ -1516,6 +1517,7 @@ function triggerEvent(sasha) {
 
         case 0:
             console.log("Player has touched the escape area");
+
             return;
         case 1:
             stage.overlay = 4;
@@ -1560,6 +1562,9 @@ document.addEventListener("keyup", function (event) {
 })
 
 document.addEventListener("keydown", function (event) {
+
+    if (!(player.active))
+    return;
 
     //move
     switch (event.key) {
@@ -1779,7 +1784,27 @@ function drawOverlay() {
             ctx.globalAlpha = 0.75;
             ctx.fillRect(0, 0, 600, 600);
             break;
-        case 10: // It's A Secret To Everybody
+            case 7: // Blackout 1
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = "orange";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+            case 8: // Blackout 1
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = "orange";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+            case 9: // Blackout 1
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = "orange";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+            case 10: // Blackout 1
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = "orange";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 666: // It's A Secret To Everybody
             return;
             ctx.globalAlpha = 0.6;
             ctx.fillStyle = "darkblue";
