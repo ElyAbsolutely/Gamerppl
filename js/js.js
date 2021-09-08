@@ -121,7 +121,7 @@ const enemies = [
         dx: 1.5,
         dy: 1.5
     },
-    { // On the bridge
+    /*{ // On the bridge
         x: 880,
         y: 275,
         w: 35,
@@ -130,7 +130,7 @@ const enemies = [
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
-    },
+    },*/
     // Keep the same colour on enemies. It'll get confusing otherwise
     //JM - Right side of the river
 
@@ -142,7 +142,7 @@ const enemies = [
         speed: 5,
         color: '#b50000',
         dx: 1.5,
-        dy: 1.5
+        dy: 1.0
     }
 ];
 
@@ -211,14 +211,14 @@ const wall = [
         x: 1800,
         y: -300,
         h: 450,
-        w: 500,
+        w: 200,
         color: "#072e06",
         id: 0
     }, {
         x: 1800,
         y: 350,
         h: 200,
-        w: 500,
+        w: 200,
         color: "#072e06",
         id: 0
     },
@@ -585,6 +585,106 @@ const wall = [
         id: 2
     },
 
+    // Beach 2
+
+    { //Main entry
+        x: 1800,
+        y: 150,
+        h: 200,
+        w: 200,
+        color: "lightgreen",
+        id: 2
+    }, {
+        x: 2000,
+        y: 0,
+        h: 450,
+        w: 1500,
+        color: "lightgreen",
+        id: 2
+    },
+    { //small forest fix
+        x: 2000,
+        y: 450,
+        h: 100,
+        w: 200,
+        color: "#072e06",
+        id: 0
+    },
+    { //ocean
+        x: 2000,
+        y: -300,
+        h: 200,
+        w: 2400,
+        color: "#4A83F5",
+        id: 0
+    }, {
+        x: 2600,
+        y: -100,
+        h: 200,
+        w: 1800,
+        color: "#4A83F5",
+        id: 0
+    }, {
+        x: 2900,
+        y: 100,
+        h: 100,
+        w: 1500,
+        color: "#4A83F5",
+        id: 0
+    },{
+        x: 3200,
+        y: 200,
+        h: 250,
+        w: 1500,
+        color: "#4A83F5",
+        id: 0
+    },
+    { //beach
+        x: 2000,
+        y: -100,
+        h: 100,
+        w: 600,
+        color: "#FCB983",
+        id: 2
+    }, {
+        x: 2500,
+        y: -100,
+        h: 300,
+        w: 100,
+        color: "#FCB983",
+        id: 2
+    }, {
+        x: 2500,
+        y: 100,
+        h: 100,
+        w: 400,
+        color: "#FCB983",
+        id: 2
+    }, {
+        x: 2800,
+        y: 100,
+        h: 200,
+        w: 100,
+        color: "#FCB983",
+        id: 2
+    }, {
+        x: 2800,
+        y: 200,
+        h: 100,
+        w: 400,
+        color: "#FCB983",
+        id: 2
+    }, {
+        x: 3100,
+        y: 200,
+        h: 250,
+        w: 100,
+        color: "#FCB983",
+        id: 2
+    },
+
+    // Beach 1
+
     { // beach
         x: 1085,
         y: -800,
@@ -643,6 +743,14 @@ const wall = [
     },
     {
         x: 1300,
+        y: -1500,
+        h: 325,
+        w: 125,
+        color: "#4A83F5",
+        id: 0
+    },
+    {
+        x: 1300,
         y: -1175,
         h: 425,
         w: 125,
@@ -657,13 +765,6 @@ const wall = [
         color: "#EF785A",
         id: 3,
         event: 0
-    }, {
-        x: 1300,
-        y: -1500,
-        h: 325,
-        w: 125,
-        color: "#4A83F5",
-        id: 0
     },
 
     // Middle
@@ -1042,6 +1143,14 @@ const chests = [
         w: 50,
         color1: 'Sienna',
         color2: 'LightSteelBlue'
+    },
+    { // Beach 2
+        x: 2825,
+        y: 125,
+        h: 40,
+        w: 50,
+        color1: 'oak',
+        color2: 'SeaShell'
     },
 
 ];
