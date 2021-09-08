@@ -77,7 +77,7 @@ const player = {
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
-    health: 1,
+    health: 5,
     weaponID: "Dagger",
 
     moveDir: "none", // none, up, left, down, right
@@ -86,7 +86,6 @@ const player = {
     chests: 0 // keeping count on how many chests have been opened
 };
 
-// Keep the same colour on enemies. It'll get confusing otherwise
 const enemies = [
 
     // JT - Left side of the river
@@ -131,7 +130,7 @@ const enemies = [
         dx: 1.5,
         dy: 1.5
     },
-    // Keep the same colour on enemies. It'll get confusing otherwise
+
     //JM - Right side of the river
 
     { // Estate Terror
@@ -1219,31 +1218,109 @@ function getDistance(x1, y1, x2, y2) {
 
 function enemyMove() {
     for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y)
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
-        if (distance < 250) {
-            if (player.x + player.w < enemies[i].x) {
-                enemies[i].x -= enemies[i].dx;
-            } else if (player.y + player.h < enemies[i].y) {
-                enemies[i].y -= enemies[i].dy;
-            } else if (player.x > enemies[i].x + enemies[i].w) {
-                enemies[i].x += enemies[i].dx;
-            } else if (player.y > enemies[i].y + enemies[i].h) {
-                enemies[i].y += enemies[i].dy;
-            }
+        switch (enemies[i].h) {
+            case 200:
+                if (distance < 320) {
+                    if (player.x + player.w < enemies[i].x) {
+                        enemies[i].x -= enemies[i].dx;
+                    } else if (player.y + player.h < enemies[i].y) {
+                        enemies[i].y -= enemies[i].dy;
+                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                        enemies[i].x += enemies[i].dx;
+                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                        enemies[i].y += enemies[i].dy;
+                    }
+                }
+                setTimeout(playerDeath() , 100);
+                break;
+            case 35:
+                if (distance < 255) {
+                    if (player.x + player.w < enemies[i].x) {
+                        enemies[i].x -= enemies[i].dx;
+                    } else if (player.y + player.h < enemies[i].y) {
+                        enemies[i].y -= enemies[i].dy;
+                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                        enemies[i].x += enemies[i].dx;
+                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                        enemies[i].y += enemies[i].dy;
+                    }
+                }
+                setTimeout(playerDeath() , 100);
+                break;
+            case 30:
+                if (distance < 250) {
+                    if (player.x + player.w < enemies[i].x) {
+                        enemies[i].x -= enemies[i].dx;
+                    } else if (player.y + player.h < enemies[i].y) {
+                        enemies[i].y -= enemies[i].dy;
+                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                        enemies[i].x += enemies[i].dx;
+                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                        enemies[i].y += enemies[i].dy;
+                    }
+                }
+                setTimeout(playerDeath() , 100);
+                break;
+            
         }
-        playerDeath();
+    }
+    console.log(enemies);
+}
+
+function playerDeath() { 
+    for (let i = 0; i < enemies.length; i++) {
+
+        if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
+            player.health -= 1;
+            console.log('player hit');
+        }
+        // Needs tweaking
+        // if (player.health === 0) {
+        //     hideGame();
+        //     showEnd();
+        //     console.log('player dead');
+        // }
     }
 }
 
-function playerDeath() {
+function attackUp() {
     for (let i = 0; i < enemies.length; i++) {
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        if (enemies[i].y + enemies[i].h <= player.y && distance < 300) {
+            setTimeout(enemies.splice(i, 1) , 10);
+            console.log('enemy dead');
+        }
+    }
+}
 
-        if (player.y < enemies[i].y + enemies[i].h && player.x < enemies[i].x + enemies[i].w && player.y + player.h > enemies[i].y && player.x + player.w > enemies[i].x) {
-            player.health -= 1;
-            hideGame();
-            showEnd();
-            console.log('dead');
+function attackRight() {
+    for (let i = 0; i < enemies.length; i++) {
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        if (enemies[i].x >= player.x + player.w && distance < 300) {
+            setTimeout(enemies.splice(i, 1) , 10);
+            console.log('enemy dead');
+        }
+    }
+}
+
+function attackDown() {
+    for (let i = 0; i < enemies.length; i++) {
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        if (enemies[i].y >= player.y + player.h && distance < 300) {
+            setTimeout(enemies.splice(i, 1) , 10);
+            console.log('enemy dead');
+        }
+    }
+}
+
+function attackLeft() {
+    for (let i = 0; i < enemies.length; i++) {
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        if (enemies[i].x + enemies[i].w <= player.x && distance < 300) {
+            setTimeout(enemies.splice(i, 1) , 10);
+            console.log('enemy dead');
         }
     }
 }
@@ -1302,12 +1379,12 @@ function detectChests() {
     }
 }
 
+// Animation when the chest is touched? Blinking or something? Right now just disappears when touched.
 function touchChests() {
-    // Animation when the chest is touched?
     for (let i = 0; chests.length > i; i++) {
         if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
-            console.log('touch');
-            chests.splice(i, 1);
+            console.log('chest touch');
+            setTimeout(chests.splice(i, 1) , 10);
             player.chests += 1;
         }
     }
@@ -1397,6 +1474,7 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "up";
             player.attackFrames = 0;
+            attackUp();
             return;
         case "ArrowLeft":
             //attack left
@@ -1405,6 +1483,7 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "left";
             player.attackFrames = 0;
+            attackLeft();
             return;
         case "ArrowDown":
             //attack down
@@ -1413,6 +1492,7 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "down";
             player.attackFrames = 0;
+            attackDown();
             return;
         case "ArrowRight":
             //attack right
@@ -1421,6 +1501,7 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "right";
             player.attackFrames = 0;
+            attackRight();
             return;
 
         // Cheats
@@ -1597,10 +1678,10 @@ function drawHUD() {
         ctx.fillText("DevMode: on", 525, 590);
     }
 
-    //ctx.fillStyle = "black";
-    //ctx.font = "20px Arial";
-    //ctx.fillText("Life: " + player.health, 5, 25);
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.fillText("Health: " + player.health + '/5', 5, 20);
 
-    //ctx.fillText("Weapon: " + player.weaponID, 5, 595);
+    ctx.fillText("Chests: " + player.chests + '/3?', 5, 595);
 
 }
