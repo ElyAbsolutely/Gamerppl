@@ -1236,7 +1236,7 @@ function enemyMove() {
     }
 }
 
-function playerDeath() { // Doesn't work properly anymore, hmm
+function playerDeath() {
     for (let i = 0; i < enemies.length; i++) {
 
         if (player.y < enemies[i].y + enemies[i].h && player.x < enemies[i].x + enemies[i].w && player.y + player.h > enemies[i].y && player.x + player.w > enemies[i].x) {
@@ -1246,7 +1246,6 @@ function playerDeath() { // Doesn't work properly anymore, hmm
             console.log('dead');
         }
     }
-
 }
 
 function detectWalls() {
@@ -1304,9 +1303,11 @@ function detectChests() {
 }
 
 function touchChests() {
+    // Animation when the chest is touched?
     for (let i = 0; chests.length > i; i++) {
         if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
             console.log('touch');
+            chests.splice(i, 1);
             player.chests += 1;
         }
     }
