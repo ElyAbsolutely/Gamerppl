@@ -74,7 +74,7 @@ const player = {
     w: 20,
     speed: 5,
     color: '#4614de',
-    active: "yes", // yes & no
+    active: true, // true / false
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
@@ -84,7 +84,7 @@ const player = {
     moveDir: "none", // none, up, left, down, right
     footsteps: 0,
 
-    chests: 0 // keeping count on how many chests have been touched
+    chests: 0 // keeping count on how many chests have been opened
 };
 
 const enemies = [
@@ -101,16 +101,16 @@ const enemies = [
         dx: 1.5,
         dy: 1.5
     },
-    // { // Bottom room inside
-    //     x: -100,
-    //     y: 1100,
-    //     w: 30,
-    //     h: 30,
-    //     speed: 5,
-    //     color: '#b50000',
-    //     dx: 1.5,
-    //     dy: 1.5
-    // },
+    { // Bottom room inside
+        x: -100,
+        y: 1100,
+        w: 30,
+        h: 30,
+        speed: 5,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
     { // Bottom room door
         x: 420,
         y: 1130,
@@ -153,7 +153,9 @@ const stage = {
 
     sky: 0,
     overlay: 0,
-    map: null
+    map: null,
+
+    endFrame: 0
 };
 
 function changeSky() {
@@ -768,56 +770,6 @@ const wall = [
         event: 0
     },
 
-    // Middle
-
-    { // river
-        x: 800,
-        y: -300,
-        h: 2000,
-        w: 250,
-        color: "#6396FA",
-        id: 2
-    },
-    {
-        x: 850,
-        y: -300,
-        h: 500,
-        w: 150,
-        color: "#4A83F5",
-        id: 0
-    },
-    {
-        x: 850,
-        y: 400,
-        h: 1300,
-        w: 150,
-        color: "#4A83F5",
-        id: 0
-    },
-    {
-        x: 775,
-        y: 200,
-        h: 200,
-        w: 300,
-        color: "#EF785A",
-        id: 2
-    },
-
-    {
-        x: 800,
-        y: -300,
-        h: 350,
-        w: 250,
-        id: 1
-    },
-    {
-        x: 800,
-        y: 550,
-        h: 650,
-        w: 250,
-        id: 1
-    },
-
     // JT
 
     // Ground
@@ -1111,7 +1063,55 @@ const wall = [
         id: 0
     },
 
+    // Middle
 
+    { // river
+        x: 800,
+        y: -300,
+        h: 2000,
+        w: 250,
+        color: "#6396FA",
+        id: 2
+    },
+    {
+        x: 850,
+        y: -300,
+        h: 500,
+        w: 150,
+        color: "#4A83F5",
+        id: 0
+    },
+    {
+        x: 850,
+        y: 400,
+        h: 1300,
+        w: 150,
+        color: "#4A83F5",
+        id: 0
+    },
+    {
+        x: 775,
+        y: 200,
+        h: 200,
+        w: 300,
+        color: "#EF785A",
+        id: 2
+    },
+
+    {
+        x: 800,
+        y: -300,
+        h: 350,
+        w: 250,
+        id: 1
+    },
+    {
+        x: 800,
+        y: 550,
+        h: 650,
+        w: 250,
+        id: 1
+    },
 ];
 
 const chests = [
@@ -1338,7 +1338,7 @@ function getDistance(x1, y1, x2, y2) {
 
 function enemyMove() {
     for (let i = 0; i < enemies.length; i++) {
-        let distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
         switch (enemies[i].h) {
             case 200:
@@ -1386,6 +1386,7 @@ function enemyMove() {
 
         }
     }
+    console.log(enemies);
 }
 
 function playerDeath() {
@@ -1516,7 +1517,8 @@ function triggerEvent(sasha) {
 
         case 0:
             console.log("Player has touched the escape area");
-
+            if (player.chests >= 0) // Currently 0, increase on release
+                player.active = false;
             return;
         case 1:
             stage.overlay = 4;
@@ -1563,7 +1565,7 @@ document.addEventListener("keyup", function (event) {
 document.addEventListener("keydown", function (event) {
 
     if (!(player.active))
-    return;
+        return;
 
     //move
     switch (event.key) {
@@ -1656,12 +1658,46 @@ function update() {
 
     drawOverlay();
 
-    enemyMove();
+    if (player.active) {
+        enemyMove();
 
-    playSounds();
-    drawHUD();
+        playSounds();
+        drawHUD();
+    } else {
+        endGame();
+    }
 
     requestAnimationFrame(update);
+}
+
+function endGame() {
+
+    switch (stage.endFrame) {
+        case 0:
+            stage.overlay = 10;
+            stage.endFrame++;
+            break;
+        case 50:
+        case 100:
+        case 150:
+        case 200:
+        case 250:
+        case 300:
+        case 350:
+        case 400:
+        case 450:
+        case 500:
+            stage.overlay++;
+            stage.endFrame++;
+            break;
+        case 525:
+            // End screen
+            break;
+        default:
+            stage.endFrame++;
+    }
+
+    // End screen
 }
 
 function resetGame() { // Kinda works?
@@ -1783,24 +1819,56 @@ function drawOverlay() {
             ctx.globalAlpha = 0.75;
             ctx.fillRect(0, 0, 600, 600);
             break;
-            case 7: // Blackout 1
+        case 10: // Blackout none
+            break;
+        case 11: // Blackout 1
             ctx.globalAlpha = 0.1;
-            ctx.fillStyle = "orange";
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, 600, 600);
             break;
-            case 8: // Blackout 1
-            ctx.globalAlpha = 0.1;
-            ctx.fillStyle = "orange";
+        case 12: // Blackout 2
+            ctx.globalAlpha = 0.2;
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, 600, 600);
             break;
-            case 9: // Blackout 1
-            ctx.globalAlpha = 0.1;
-            ctx.fillStyle = "orange";
+        case 13: // Blackout 3
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, 600, 600);
             break;
-            case 10: // Blackout 1
-            ctx.globalAlpha = 0.1;
-            ctx.fillStyle = "orange";
+        case 14: // Blackout 4
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 15: // Blackout 5
+            ctx.globalAlpha = 0.5;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 16: // Blackout 6
+            ctx.globalAlpha = 0.6;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 17: // Blackout 7
+            ctx.globalAlpha = 0.7;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 18: // Blackout 8
+            ctx.globalAlpha = 0.8;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 19: // Blackout 9
+            ctx.globalAlpha = 0.9;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 600);
+            break;
+        case 20: // Blackout 10
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, 600, 600);
             break;
         case 666: // It's A Secret To Everybody
@@ -1825,6 +1893,6 @@ function drawHUD() {
     ctx.font = "20px Arial";
     ctx.fillText("Health: " + player.health + '/5', 5, 20);
 
-    ctx.fillText("Chests: " + player.chests + '/4', 5, 595);
+    ctx.fillText("Chests: " + player.chests + '/3?', 5, 595);
 
 }
