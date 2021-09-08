@@ -141,8 +141,9 @@ const enemies = [
         h: 200,
         speed: 5,
         color: '#b50000',
-        dx: 1.5,
-        dy: 1.0
+        dx: 0.8,
+        dy: 1.2,
+        id: 1
     }
 ];
 
@@ -631,7 +632,7 @@ const wall = [
         w: 1500,
         color: "#4A83F5",
         id: 0
-    },{
+    }, {
         x: 3200,
         y: 200,
         h: 250,
@@ -1216,8 +1217,17 @@ function drawWalls() {
 
 function drawEnemies() {
     for (let i = 0; i < enemies.length; i++) {
-        ctx.fillStyle = enemies[i].color;
-        ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].w, enemies[i].h);
+        switch (enemies[i].id) {
+            default:
+                ctx.fillStyle = enemies[i].color;
+                ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].w, enemies[i].h);
+            case 1:
+                ctx.globalAlpha = 0.4;
+                ctx.fillStyle = enemies[i].color;
+                ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].w, enemies[i].h);
+                ctx.globalAlpha = 1.0;
+        }
+
     }
 }
 
@@ -1268,7 +1278,7 @@ function newPos() {
     detectWalls();
     touchChests();
     detectChests();
-    
+
 }
 
 function moveLeft() {
