@@ -1,27 +1,27 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const skyBtn = document.getElementById('sky-btn');
+// const skyBtn = document.getElementById('sky-btn');
 const overlayBtn = document.getElementById('overlay-btn');
 const soundBtn = document.getElementById('sound-btn');
 
 window.addEventListener('load', hideGame);
 window.addEventListener('reload', start);
 document.getElementById('start-btn').addEventListener('click', start);
-skyBtn.addEventListener('click', changeSky);
+// skyBtn.addEventListener('click', changeSky);
 overlayBtn.addEventListener('click', changeOverlay);
 soundBtn.addEventListener('click', toggleVolume);
 document.getElementById('end-btn').addEventListener('click', resetGame);
 
-skyBtn.disabled = true;
+// skyBtn.disabled = true;
 overlayBtn.disabled = true;
 soundBtn.disabled = true;
 
 //Asset Warmup
-var sky01 = new Image();
-sky01.src = "img/skybox/cloudyDay.jpg";
-var sky02 = new Image();
-sky02.src = "img/skybox/oceanSunset.jpg";
+// var sky01 = new Image();
+// sky01.src = "img/skybox/cloudyDay.jpg";
+// var sky02 = new Image();
+// sky02.src = "img/skybox/oceanSunset.jpg";
 var weapon01 = new Image();
 weapon01.src = "img/weapons/steelDagger.png";
 
@@ -33,7 +33,7 @@ var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
 function start() {
     showGame();
-    skyBtn.disabled = false;
+    // skyBtn.disabled = false;
     overlayBtn.disabled = false;
     soundBtn.disabled = false;
     update();
@@ -121,16 +121,6 @@ const enemies = [
         dx: 1.5,
         dy: 1.5
     },
-    /*{ // On the bridge
-        x: 880,
-        y: 275,
-        w: 35,
-        h: 35,
-        speed: 5,
-        color: '#b50000',
-        dx: 1.5,
-        dy: 1.5
-    },*/
     // Keep the same colour on enemies. It'll get confusing otherwise
     //JM - Right side of the river
 
@@ -158,13 +148,13 @@ const stage = {
     endFrame: 0
 };
 
-function changeSky() {
-    if (stage.sky == 2) {
-        stage.sky = 0;
-        return;
-    }
-    stage.sky++;
-}
+// function changeSky() {
+//     if (stage.sky == 2) {
+//         stage.sky = 0;
+//         return;
+//     }
+//     stage.sky++;
+// }
 
 function changeOverlay() {
     if (stage.overlay == 6) {
@@ -1353,6 +1343,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
+<<<<<<< HEAD
                 setTimeout(playerDeath(), 100);
                 break;
             case 35:
@@ -1368,6 +1359,9 @@ function enemyMove() {
                     }
                 }
                 setTimeout(playerDeath(), 100);
+=======
+                setTimeout(playerDeath() , 10);
+>>>>>>> 9a4c7fc7275f2448a3533f48e992642d2885039f
                 break;
             case 30:
                 if (distance < 250) {
@@ -1381,7 +1375,11 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
+<<<<<<< HEAD
                 setTimeout(playerDeath(), 100);
+=======
+                setTimeout(playerDeath() , 10);
+>>>>>>> 9a4c7fc7275f2448a3533f48e992642d2885039f
                 break;
 
         }
@@ -1393,8 +1391,8 @@ function playerDeath() {
     for (let i = 0; i < enemies.length; i++) {
 
         if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-            player.health -= 1;
-            console.log('player hit');
+            setTimeout(player.health -= 1, 1000 * 200);
+            setTimeout(console.log('player hit'), 1000 * 200);
         }
         // Needs tweaking
         // if (player.health === 0) {
@@ -1700,8 +1698,11 @@ function endGame() {
     // End screen
 }
 
-function resetGame() { // Kinda works?
-    location.reload();
+function resetGame() { // Canvas needs to reset to the original state, right now it doesn't.
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    start();
+    hideEnd();
+    showGame();
 }
 
 function toggleVolume() {
