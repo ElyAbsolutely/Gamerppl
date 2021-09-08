@@ -18,17 +18,9 @@ overlayBtn.disabled = true;
 soundBtn.disabled = true;
 
 //Asset Warmup
-// var sky01 = new Image();
-// sky01.src = "img/skybox/cloudyDay.jpg";
-// var sky02 = new Image();
-// sky02.src = "img/skybox/oceanSunset.jpg";
 var weapon01 = new Image();
 weapon01.src = "img/weapons/steelDagger.png";
 
-var footstep01 = new Audio("sounds/player/footsteps/concrete1.wav");
-var footstep02 = new Audio("sounds/player/footsteps/concrete2.wav");
-var footstep03 = new Audio("sounds/player/footsteps/concrete3.wav");
-var footstep04 = new Audio("sounds/player/footsteps/concrete4.wav");
 var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
 function start() {
@@ -96,7 +88,6 @@ const enemies = [
         y: -440,
         w: 30,
         h: 30,
-        speed: 5,
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
@@ -106,7 +97,6 @@ const enemies = [
         y: 1100,
         w: 30,
         h: 30,
-        speed: 5,
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
@@ -116,7 +106,6 @@ const enemies = [
         y: 1130,
         w: 30,
         h: 30,
-        speed: 5,
         color: '#b50000',
         dx: 1.5,
         dy: 1.5
@@ -129,12 +118,20 @@ const enemies = [
         y: 2225,
         w: 200,
         h: 200,
-        speed: 5,
         color: '#b50000',
         dx: 0.8,
         dy: 1.2,
         id: 1
-    }
+    },
+    { // Swamp
+        x: 1200,
+        y: 1500,
+        w: 30,
+        h: 30,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5
+    },
 ];
 
 const stage = {
@@ -147,14 +144,6 @@ const stage = {
 
     endFrame: 0
 };
-
-// function changeSky() {
-//     if (stage.sky == 2) {
-//         stage.sky = 0;
-//         return;
-//     }
-//     stage.sky++;
-// }
 
 function changeOverlay() {
     if (stage.overlay == 6) {
@@ -750,6 +739,51 @@ const wall = [
         color: "#EF785A",
         id: 2
     },
+
+    {
+        x: 950,
+        y: -1400,
+        h: 425,
+        w: 250,
+        color: "#B65709",
+        id: 6
+    }, {
+        x: 950,
+        y: -1400,
+        h: 425,
+        w: 20,
+        color: "#9B4805",
+        id: 6
+    }, {
+        x: 1200,
+        y: -1400,
+        h: 425,
+        w: 20,
+        color: "#9B4805",
+        id: 6
+    }, {
+        x: 950,
+        y: -995,
+        h: 20,
+        w: 250,
+        color: "#9B4805",
+        id: 6
+    }, {
+        x: 985,
+        y: -990,
+        h: 20,
+        w: 200,
+        color: "#9B4805",
+        id: 6
+    }, {
+        x: 1015,
+        y: -985,
+        h: 20,
+        w: 150,
+        color: "#9B4805",
+        id: 6
+    },
+
     { // Triggers end-game
         x: 1300,
         y: -1175,
@@ -1233,18 +1267,9 @@ function drawChests() {
     }
 }
 
-function clear() { //Testaan tauskakuva taivaan tekemistä
-    switch (stage.sky) {
-        case 0:
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            break;
-        case 1:
-            ctx.drawImage(sky01, 0, 0, canvas.width, canvas.height);
-            break;
-        case 2:
-            ctx.drawImage(sky02, 0, 0, canvas.width, canvas.height);
-            break;
-    }
+function clear() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 }
 
 function newPos() {
@@ -1276,7 +1301,7 @@ function moveLeft() {
         wall[i].x += player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].x += enemies[i].speed;
+        enemies[i].x += player.speed;
     }
     for (let i = 0; chests.length > i; i++) {
         chests[i].x += player.speed;
@@ -1288,7 +1313,7 @@ function moveRight() {
         wall[i].x -= player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].x -= enemies[i].speed;
+        enemies[i].x -= player.speed;
     }
     for (let i = 0; chests.length > i; i++) {
         chests[i].x -= player.speed;
@@ -1300,7 +1325,7 @@ function moveUp() {
         wall[i].y += player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].y += enemies[i].speed;
+        enemies[i].y += player.speed;
     }
     for (let i = 0; chests.length > i; i++) {
         chests[i].y += player.speed;
@@ -1312,7 +1337,7 @@ function moveDown() {
         wall[i].y -= player.speed;
     }
     for (let i = 0; enemies.length > i; i++) {
-        enemies[i].y -= enemies[i].speed;
+        enemies[i].y -= player.speed;
     }
     for (let i = 0; chests.length > i; i++) {
         chests[i].y -= player.speed;
@@ -1328,7 +1353,7 @@ function getDistance(x1, y1, x2, y2) {
 
 function enemyMove() {
     for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
+        const distance = getDistance(player.x + (player.w / 2), player.y + (player.h / 2), enemies[i].x + enemies[i].w / 2, enemies[i].y + enemies[i].h / 2);
 
         switch (enemies[i].h) {
             case 200:
@@ -1343,7 +1368,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 10);
+                setTimeout(playerDeath(), 10);
                 break;
             case 30:
                 if (distance < 250) {
@@ -1357,7 +1382,7 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                setTimeout(playerDeath() , 10);
+                setTimeout(playerDeath(), 10);
                 break;
 
         }
@@ -1628,7 +1653,9 @@ function update() {
 
     drawWalls();
     drawChests();
-    drawPlayer();
+
+    if (!(stage.endFrame >= 120))
+        drawPlayer();
     drawEnemies();
     drawAttack();
 
@@ -1648,32 +1675,52 @@ function update() {
 
 function endGame() {
 
+    if (stage.endFrame >= 180) {
+        for (let i = 0; wall.length > i; i++) {
+            wall[i].x += 1;
+
+            if (stage.endFrame >= 210 && wall[i].id == 6)
+                wall[i].y -= 1;
+        }
+    }
+
     switch (stage.endFrame) {
         case 0:
             stage.overlay = 10;
             stage.endFrame++;
             break;
-        case 50:
-        case 100:
-        case 150:
-        case 200:
-        case 250:
+        case 180:
+        case 220:
+        case 260:
         case 300:
-        case 350:
-        case 400:
-        case 450:
+        case 340:
+        case 380:
+        case 420:
+        case 460:
+        case 480:
         case 500:
             stage.overlay++;
-            stage.endFrame++;
-            break;
-        case 525:
-            // End screen
-            break;
         default:
             stage.endFrame++;
-    }
+            if (stage.endFrame < 580) {
+                return;
+            }
 
-    // End screen
+            // End screen
+
+            if (stage.endFrame <= 850) {
+                ctx.fillStyle = "silver";
+                ctx.font = "30px Arial";
+                ctx.fillText("Thank you for playing our game!", midx - 200, midy);
+            } if (stage.endFrame >= 925 && stage.endFrame <= 1200) {
+                ctx.fillStyle = "silver";
+                ctx.font = "30px Arial";
+                ctx.fillText("Made by --- & ---", midx - 200, midy);
+            }
+
+            if (stage.endFrame == 1400)
+                location.reload()
+    }
 }
 
 function resetGame() { // Canvas needs to reset to the original state, right now it doesn't.
@@ -1716,19 +1763,19 @@ function playSounds() {
             player.footsteps = 0;
             switch (Math.floor(Math.random() * 4)) {
                 case 0:
-                    footstep01.play();
+                    //footstep01.play();
                     console.log("footstepsound1");
                     return;
                 case 1:
-                    footstep02.play();
+                    //footstep02.play();
                     console.log("footstepsound2");
                     return;
                 case 2:
-                    footstep03.play();
+                    //footstep03.play();
                     console.log("footstepsound3");
                     return;
                 case 3:
-                    footstep04.play();
+                    //footstep04.play();
                     console.log("footstepsound4");
                     return;
             }
