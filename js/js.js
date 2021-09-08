@@ -1157,7 +1157,9 @@ function newPos() {
     }
 
     detectWalls();
+    touchChests();
     detectChests();
+    
 }
 
 function moveLeft() {
@@ -1230,15 +1232,14 @@ function enemyMove() {
                 enemies[i].y += enemies[i].dy;
             }
         }
-        death();
+        playerDeath();
     }
 }
 
-function death() { // Doesn't work properly anymore, hmm
+function playerDeath() { // Doesn't work properly anymore, hmm
     for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
 
-        if (distance <= enemies[i].w || distance <= player.w || distance <= enemies[i].h || distance <= player.h) {
+        if (player.y < enemies[i].y + enemies[i].h && player.x < enemies[i].x + enemies[i].w && player.y + player.h > enemies[i].y && player.x + player.w > enemies[i].x) {
             player.health -= 1;
             hideGame();
             showEnd();
@@ -1302,13 +1303,11 @@ function detectChests() {
     }
 }
 
-function openChests() { // Doesn't work
-    let distance = getDistance(player.x, player.y, chests.x, chests.y);
+function touchChests() {
     for (let i = 0; chests.length > i; i++) {
-        if (distance <= chests[i].w || distance <= player.w || distance <= chests[i].h || distance <= player.h) {
-            player.chests += 1;
-            chests.splice(i, 1);
+        if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
             console.log('touch');
+            player.chests += 1;
         }
     }
 }
@@ -1453,8 +1452,6 @@ function update() {
     drawOverlay();
 
     enemyMove();
-
-    openChests();
 
     playSounds();
     drawHUD();
