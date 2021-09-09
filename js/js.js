@@ -84,7 +84,8 @@ const enemies = [
         h: 30,
         color: '#b50000',
         dx: 1.5,
-        dy: 1.5
+        dy: 1.5,
+        id: 0
     },
     { // Bottom room inside
         x: -100,
@@ -93,7 +94,8 @@ const enemies = [
         h: 30,
         color: '#b50000',
         dx: 1.5,
-        dy: 1.5
+        dy: 1.5,
+        id: 0
     },
     { // Bottom room door
         x: 420,
@@ -102,7 +104,8 @@ const enemies = [
         h: 30,
         color: '#b50000',
         dx: 1.5,
-        dy: 1.5
+        dy: 1.5,
+        id: 0
     },
     // Keep the same colour on enemies. It'll get confusing otherwise
     //JM - Right side of the river
@@ -124,7 +127,8 @@ const enemies = [
         h: 30,
         color: '#b50000',
         dx: 1.5,
-        dy: 1.5
+        dy: 1.5,
+        id: 0
     },
 ];
 
@@ -631,13 +635,6 @@ const wall = [
         id: 2
     }, {
         x: 2800,
-        y: 100,
-        h: 200,
-        w: 100,
-        color: "#FCB983",
-        id: 2
-    }, {
-        x: 2800,
         y: 200,
         h: 100,
         w: 400,
@@ -650,6 +647,49 @@ const wall = [
         w: 100,
         color: "#FCB983",
         id: 2
+    },
+    { //Flowers
+        x: 2700,
+        y: 250,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 2300,
+        y: 30,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 2250,
+        y: 15,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 2100,
+        y: 40,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 2900,
+        y: 320,
+        color: "#524600",
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
+    }, {
+        x: 2940,
+        y: 335,
+        color: "#524600",
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
     },
 
     // Beach 1
@@ -677,6 +717,64 @@ const wall = [
         w: 115,
         color: "#FCB983",
         id: 2
+    },
+    //Flowers
+    {
+        x: 1230,
+        y: 520,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1080,
+        y: 100,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1680,
+        y: -720,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1550,
+        y: -770,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1240,
+        y: -760,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1280,
+        y: -730,
+        color: "#524600",
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1240,
+        y: -720,
+        color: "#524600",
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
+    }, {
+        x: 1540,
+        y: -550,
+        color: "#524600",
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
     },
     { // ocean
         x: 500,
@@ -724,7 +822,9 @@ const wall = [
         h: 425,
         w: 125,
         color: "#EF785A",
-        id: 2
+        color2: "#de5431",
+        id: 5,
+        decal: 2
     },
 
     {
@@ -776,7 +876,6 @@ const wall = [
         y: -1175,
         h: 100,
         w: 125,
-        color: "#EF785A",
         id: 3,
         event: 0
     },
@@ -820,174 +919,62 @@ const wall = [
 
     // Flowers
     // yellow
-    { // Left and right leaf
-        x: 750,
-        y: -50,
-        h: 10,
-        w: 30,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Top and bottom leaf
-        x: 760,
-        y: -60,
-        h: 30,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Middle
+    {
         x: 760,
         y: -50,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
     },
-    { // Left and right leaf
-        x: 700,
-        y: -100,
-        h: 10,
-        w: 30,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Top and bottom leaf
-        x: 710,
-        y: -110,
-        h: 30,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Middle
+    {
         x: 710,
         y: -100,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
     },
-    { // Left and right leaf
-        x: 760,
-        y: 550,
-        h: 10,
-        w: 30,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Top and bottom leaf
-        x: 770,
-        y: 540,
-        h: 30,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Middle
+    {
         x: 770,
         y: 550,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
     },
-    { // Left and right leaf
-        x: 750,
-        y: 850,
-        h: 10,
-        w: 30,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Top and bottom leaf
-        x: 760,
-        y: 840,
-        h: 30,
-        w: 10,
-        color: "#fcb503",
-        id: 2
-    },
-    { // Middle
+    {
         x: 760,
         y: 850,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#fcb503",
+        id: 5,
+        decal: 0
     },
     // white
-    { // Left and right leaf
-        x: 270,
-        y: 50,
-        h: 10,
-        w: 30,
-        color: "#f4f4f4",
-        id: 2
-    },
-    { // Top and bottom leaf
-        x: 280,
-        y: 40,
-        h: 30,
-        w: 10,
-        color: "#f4f4f4",
-        id: 2
-    },
-    { // Middle
+    {
         x: 280,
         y: 50,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
     },
-    { // Left and right leaf
-        x: 290,
-        y: 450,
-        h: 10,
-        w: 30,
-        color: "#f4f4f4",
-        id: 2
-    },
-    { // Top and bottom leaf
-        x: 300,
-        y: 440,
-        h: 30,
-        w: 10,
-        color: "#f4f4f4",
-        id: 2
-    },
-    { // Middle
+    {
         x: 300,
         y: 450,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
     },
-    { // Top and bottom leaf
-        x: -40,
-        y: 300,
-        h: 30,
-        w: 10,
-        color: "#f4f4f4",
-        id: 2
-    },
-    { // Left and right leaf
-        x: -50,
-        y: 310,
-        h: 10,
-        w: 30,
-        color: "#f4f4f4",
-        id: 2
-    },
-    { // Middle
+    {
         x: -40,
         y: 310,
-        h: 10,
-        w: 10,
         color: "#524600",
-        id: 2
+        color2: "#f4f4f4",
+        id: 5,
+        decal: 0
     },
 
     // Walls
@@ -1079,7 +1066,7 @@ const wall = [
     { // river
         x: 800,
         y: -300,
-        h: 2000,
+        h: 4000,
         w: 250,
         color: "#6396FA",
         id: 2
@@ -1095,7 +1082,7 @@ const wall = [
     {
         x: 850,
         y: 400,
-        h: 1300,
+        h: 3300,
         w: 150,
         color: "#4A83F5",
         id: 0
@@ -1103,10 +1090,10 @@ const wall = [
     {
         x: 775,
         y: 200,
-        h: 200,
-        w: 300,
         color: "#EF785A",
-        id: 2
+        color2: "#de5431",
+        id: 5,
+        decal: 1
     },
 
     {
@@ -1132,16 +1119,12 @@ const chests = [
     { // Left map side, bottom
         x: -50,
         y: 1125,
-        h: 60,
-        w: 90,
         color1: '#3b1e09',
         color2: '#f7b525'
     },
     { // Left map side, top
         x: 320,
         y: -460,
-        h: 90,
-        w: 60,
         color1: 'oak',
         color2: 'silver'
     },
@@ -1151,16 +1134,12 @@ const chests = [
     { // Estate
         x: 1630,
         y: 2555,
-        h: 40,
-        w: 50,
         color1: 'Sienna',
         color2: 'LightSteelBlue'
     },
     { // Beach 2
         x: 2825,
         y: 125,
-        h: 40,
-        w: 50,
         color1: 'oak',
         color2: 'SeaShell'
     },
@@ -1168,8 +1147,32 @@ const chests = [
 ];
 
 function drawPlayer() {
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.w, player.h);
+    switch (player.invisFrames) {
+        default:
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            break;
+        case 1: case 2: case 3: case 4:
+        case 9: case 10: case 11: case 12:
+        case 17: case 18: case 19: case 20:
+        case 25: case 26: case 27: case 28:
+        case 33: case 34: case 35: case 36:
+        case 41: case 42: case 43: case 44:
+        case 49: case 50: case 51: case 52:
+        case 57: case 58: case 59: case 60:
+        case 65: case 66: case 65: case 68:
+        case 73: case 74: case 75: case 76:
+        case 81: case 82: case 83: case 84:
+        case 89: case 90: case 91: case 92:
+        case 97: case 98: case 99: case 100:
+            return;
+        case -1:
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            return;
+    }
+    ctx.globalAlpha = 1.0;
 }
 
 function drawAttack() {
@@ -1205,23 +1208,44 @@ function drawWalls() {
             case 1:
                 if (gameSettings.devMode) {
                     ctx.strokeStyle = "black";
-                    ctx.beginPath();
-                    ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
-                    ctx.stroke();
+                    ctx.beginPath(); ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h); ctx.stroke();
                 }
                 break;
             case 3:
                 if (gameSettings.devMode) {
-                    ctx.strokeStyle = "orange";
-                    ctx.beginPath();
-                    ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
-                    ctx.stroke();
+                    ctx.strokeStyle = "yellow";
+                    ctx.beginPath(); ctx.rect(wall[i].x, wall[i].y, wall[i].w, wall[i].h); ctx.stroke();
                 }
                 break;
             default:
                 ctx.fillStyle = wall[i].color;
                 ctx.fillRect(wall[i].x, wall[i].y, wall[i].w, wall[i].h);
                 break;
+            case 5:
+                switch (wall[i].decal) {
+                    case 0:
+                        ctx.fillStyle = wall[i].color2;
+                        ctx.fillRect(wall[i].x - 10, wall[i].y, 30, 10);
+                        ctx.fillRect(wall[i].x, wall[i].y - 10, 10, 30);
+                        ctx.fillStyle = wall[i].color;
+                        ctx.fillRect(wall[i].x, wall[i].y, 10, 10);
+                        break;
+                    case 1:
+                        ctx.fillStyle = wall[i].color; ctx.fillRect(wall[i].x, wall[i].y, 300, 200);
+                        ctx.strokeStyle = wall[i].color2; ctx.lineWidth = 3;
+                        ctx.rect(wall[i].x, wall[i].y, 300, 200); ctx.stroke();
+                        ctx.rect(wall[i].x + 50, wall[i].y, 100, 200); ctx.stroke();
+                        ctx.rect(wall[i].x + 150, wall[i].y, 100, 200); ctx.stroke();
+                        break;
+                    case 2:
+                        ctx.fillStyle = wall[i].color; ctx.fillRect(wall[i].x, wall[i].y, 125, 425);
+                        ctx.strokeStyle = wall[i].color2; ctx.lineWidth = 3;
+                        ctx.beginPath(); ctx.rect(wall[i].x, wall[i].y, 125, 425); ctx.stroke();
+                        ctx.rect(wall[i].x, wall[i].y + 50, 125, 100); ctx.stroke();
+                        ctx.rect(wall[i].x, wall[i].y + 150, 125, 100); ctx.stroke();
+                        ctx.rect(wall[i].x, wall[i].y + 250, 125, 100); ctx.stroke();
+                        break;
+                }
         }
     }
 }
@@ -1238,19 +1262,17 @@ function drawEnemies() {
                 ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].w, enemies[i].h);
                 ctx.globalAlpha = 1.0;
         }
-
     }
 }
 
 function drawChests() {
     for (let i = 0; i < chests.length; i++) {
         ctx.fillStyle = chests[i].color1;
-        ctx.fillRect(chests[i].x, chests[i].y, chests[i].w, chests[i].h);
-        ctx.strokeStyle = chests[i].color2;
-        ctx.beginPath();
-        ctx.rect(chests[i].x, chests[i].y, chests[i].w, chests[i].h);
-        ctx.lineWidth = 3;
-        ctx.stroke();
+        ctx.fillRect(chests[i].x, chests[i].y, 50, 40);
+        ctx.strokeStyle = chests[i].color2; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.rect(chests[i].x, chests[i].y, 50, 40); ctx.stroke();
+        ctx.rect(chests[i].x, chests[i].y + 15, 50, 1); ctx.stroke();
+        ctx.rect(chests[i].x + 20, chests[i].y + 15, 10, 5); ctx.stroke();
     }
 }
 
@@ -1275,59 +1297,44 @@ function newPos() {
             moveRight();
             break;
     }
-
     detectWalls();
     touchChests();
-    detectChests();
-
 }
 
 function moveLeft() {
-    for (let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++)
         wall[i].x += player.speed;
-    }
-    for (let i = 0; enemies.length > i; i++) {
+    for (let i = 0; enemies.length > i; i++)
         enemies[i].x += player.speed;
-    }
-    for (let i = 0; chests.length > i; i++) {
+    for (let i = 0; chests.length > i; i++)
         chests[i].x += player.speed;
-    }
 }
 
 function moveRight() {
-    for (let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++)
         wall[i].x -= player.speed;
-    }
-    for (let i = 0; enemies.length > i; i++) {
+    for (let i = 0; enemies.length > i; i++)
         enemies[i].x -= player.speed;
-    }
-    for (let i = 0; chests.length > i; i++) {
+    for (let i = 0; chests.length > i; i++)
         chests[i].x -= player.speed;
-    }
 }
 
 function moveUp() {
-    for (let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++)
         wall[i].y += player.speed;
-    }
-    for (let i = 0; enemies.length > i; i++) {
+    for (let i = 0; enemies.length > i; i++)
         enemies[i].y += player.speed;
-    }
-    for (let i = 0; chests.length > i; i++) {
+    for (let i = 0; chests.length > i; i++)
         chests[i].y += player.speed;
-    }
 }
 
 function moveDown() {
-    for (let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++)
         wall[i].y -= player.speed;
-    }
-    for (let i = 0; enemies.length > i; i++) {
+    for (let i = 0; enemies.length > i; i++)
         enemies[i].y -= player.speed;
-    }
-    for (let i = 0; chests.length > i; i++) {
+    for (let i = 0; chests.length > i; i++)
         chests[i].y -= player.speed;
-    }
 }
 
 function getDistance(x1, y1, x2, y2) {
@@ -1338,45 +1345,56 @@ function getDistance(x1, y1, x2, y2) {
 }
 
 function enemyMove() {
-    if (player.invisFrames == 100) {
+
+    if (player.invisFrames == 100)
         player.invisFrames = -1;
-    } else if (player.invisFrames != -1) {
+    else if (player.invisFrames != -1)
         player.invisFrames++;
-    }
 
     for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x + (player.w / 2), player.y + (player.h / 2), enemies[i].x + enemies[i].w / 2, enemies[i].y + enemies[i].h / 2);
+        const distance = getDistance(player.x + (player.w / 2), player.y + (player.h / 2), enemies[i].x + (enemies[i].w / 2), enemies[i].y + (enemies[i].h / 2));
 
+        switch (enemies[i].id) {
 
-        if (distance < 250) {
-            if (player.x + player.w < enemies[i].x) {
-                enemies[i].x -= enemies[i].dx;
-            } else if (player.y + player.h < enemies[i].y) {
-                enemies[i].y -= enemies[i].dy;
-            } else if (player.x > enemies[i].x + enemies[i].w) {
-                enemies[i].x += enemies[i].dx;
-            } else if (player.y > enemies[i].y + enemies[i].h) {
-                enemies[i].y += enemies[i].dy;
-            }
+            case 1:
+                if (distance < 350) {
+                    if (player.x + player.w < enemies[i].x) {
+                        enemies[i].x -= enemies[i].dx;
+                    } else if (player.y + player.h < enemies[i].y) {
+                        enemies[i].y -= enemies[i].dy;
+                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                        enemies[i].x += enemies[i].dx;
+                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                        enemies[i].y += enemies[i].dy;
+                    }
+                }
+                break;
+
+            default:
+                if (distance < 250) {
+                    if (player.x + player.w < enemies[i].x) {
+                        enemies[i].x -= enemies[i].dx;
+                    } else if (player.y + player.h < enemies[i].y) {
+                        enemies[i].y -= enemies[i].dy;
+                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                        enemies[i].x += enemies[i].dx;
+                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                        enemies[i].y += enemies[i].dy;
+                    }
+                }
         }
-        enemyAttacksPlayer();
+        enemyAttacksPlayer(enemies[i]);
     }
 }
 
-
-function enemyAttacksPlayer() {
-    for (let i = 0; i < enemies.length; i++) {
-
-        if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-            takeDamage();
-        }
-    }
+function enemyAttacksPlayer(sierra) {
+    if (player.y <= sierra.y + sierra.h && player.x <= sierra.x + sierra.w && player.y + player.h >= sierra.y && player.x + player.w >= sierra.x)
+        takeDamage();
 }
 
 function takeDamage() {
-    if (player.invisFrames > -1) {
+    if (player.invisFrames > -1)
         return;
-    }
 
     player.health--;
     player.invisFrames = 0;
@@ -1392,31 +1410,31 @@ function playerDeath() {
 
 function attackDagger() {
 
-    if (player.attackFrames == -1) {
+    if (player.attackFrames == -1)
         return;
-    }
+
     for (let i = 0; i < enemies.length; i++) {
-        switch (player.attackDir) {
-            case "up":
-                if (player.y - 20 <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h - 20 >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-                    enemies.splice(i, 1);
+        switch (enemies[i].id) {
+            default:
+                switch (player.attackDir) {
+                    case "up":
+                        if (player.y - 20 <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h - 20 >= enemies[i].y && player.x + player.w >= enemies[i].x)
+                            enemies.splice(i, 1);
+                        break;
+                    case "down":
+                        if (player.y + 20 <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h + 20 >= enemies[i].y && player.x + player.w >= enemies[i].x)
+                            enemies.splice(i, 1);
+                        break;
+                    case "left":
+                        if (player.y <= enemies[i].y + enemies[i].h && player.x - 20 <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w - 20 >= enemies[i].x)
+                            enemies.splice(i, 1);
+                        break;
+                    case "right":
+                        if (player.y <= enemies[i].y + enemies[i].h && player.x + 20 <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w + 20 >= enemies[i].x)
+                            enemies.splice(i, 1);
+                        break;
                 }
-                break;
-            case "down":
-                if (player.y + 20 <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h + 20 >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-                    enemies.splice(i, 1);
-                }
-                break;
-            case "left":
-                if (player.y <= enemies[i].y + enemies[i].h && player.x - 20 <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w - 20 >= enemies[i].x) {
-                    enemies.splice(i, 1);
-                }
-                break;
-            case "right":
-                if (player.y <= enemies[i].y + enemies[i].h && player.x + 20 <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w + 20 >= enemies[i].x) {
-                    enemies.splice(i, 1);
-                }
-                break;
+            case 1:
         }
     }
 }
@@ -1427,8 +1445,7 @@ function detectWalls() {
 
         switch (wall[i].id) {
 
-            case 0:
-            case 1:
+            case 0: case 1:
                 if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
                     switch (player.moveDir) {
                         case "up":
@@ -1454,31 +1471,9 @@ function detectWalls() {
     }
 }
 
-function detectChests() {
-    for (let i = 0; chests.length > i; i++) {
-        if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
-            switch (player.moveDir) {
-                case "up":
-                    moveDown();
-                    return;
-                case "left":
-                    moveRight();
-                    return;
-                case "down":
-                    moveUp();
-                    return;
-                case "right":
-                    moveLeft();
-                    return;
-            }
-        }
-    }
-}
-
-// Animation when the chest is touched? Blinking or something? Right now just disappears when touched.
 function touchChests() {
     for (let i = 0; chests.length > i; i++) {
-        if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
+        if (player.y < chests[i].y + 40 && player.x < chests[i].x + 50 && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
             chests.splice(i, 1);
             player.chests++;
         }
@@ -1491,7 +1486,7 @@ function triggerEvent(sasha) {
         // 1 = overlay change
 
         case 0:
-            if (player.chests >= 0) // Currently 0, increase on release
+            if (player.chests >= 4) // Currently 0, increase on release
                 player.active = false;
             return;
         case 1:
@@ -1568,33 +1563,29 @@ document.addEventListener("keydown", function (event) {
 
         case "ArrowUp":
             //attact up
-            if (player.attackFrames != -1) {
+            if (player.attackFrames != -1)
                 return;
-            }
             player.attackDir = "up";
             player.attackFrames = 0;
             return;
         case "ArrowLeft":
             //attack left
-            if (player.attackFrames != -1) {
+            if (player.attackFrames != -1)
                 return;
-            }
             player.attackDir = "left";
             player.attackFrames = 0;
             return;
         case "ArrowDown":
             //attack down
-            if (player.attackFrames != -1) {
+            if (player.attackFrames != -1)
                 return;
-            }
             player.attackDir = "down";
             player.attackFrames = 0;
             return;
         case "ArrowRight":
             //attack right
-            if (player.attackFrames != -1) {
+            if (player.attackFrames != -1)
                 return;
-            }
             player.attackDir = "right";
             player.attackFrames = 0;
             return;
@@ -1604,12 +1595,10 @@ document.addEventListener("keydown", function (event) {
         case "o":
             // Increse speed
             if (gameSettings.devMode) {
-                if (player.speed == 5) {
+                if (player.speed == 5)
                     player.speed = 50;
-
-                } else {
+                else
                     player.speed = 5;
-                }
                 return;
             }
     }
@@ -1635,9 +1624,8 @@ function update() {
         enemyMove();
         playSounds();
         drawHUD();
-    } else {
+    } else
         endGame();
-    }
 
     requestAnimationFrame(update);
 }
@@ -1671,9 +1659,8 @@ function endGame() {
             stage.overlay++;
         default:
             stage.endFrame++;
-            if (stage.endFrame < 580) {
+            if (stage.endFrame < 580)
                 return;
-            }
 
             // End screen
 
@@ -1684,7 +1671,7 @@ function endGame() {
             } if (stage.endFrame >= 925 && stage.endFrame <= 1200) {
                 ctx.fillStyle = "silver";
                 ctx.font = "30px Arial";
-                ctx.fillText("Made by JT & JM", midx - 200, midy);
+                ctx.fillText("Made by JT & JM", midx - 180, midy);
             }
 
             if (stage.endFrame == 1400)
@@ -1699,25 +1686,23 @@ function resetGame() {
 function toggleVolume() {
     if (gameSettings.volume) {
         gameSettings.volume = false;
-        document.getElementById("sound").style.background = "red";
+        soundBtn.style.background = "red";
     } else {
         gameSettings.volume = true;
-        document.getElementById("sound").style.background = "green";
+        soundBtn.style.background = "darkgreen";
     }
 }
 
 function toggleDevMode() {
-    if (gameSettings.devMode) {
+    if (gameSettings.devMode)
         gameSettings.devMode = false;
-    } else {
+    else
         gameSettings.devMode = true;
-    }
 }
 
 function playSounds() {
-    if (!(gameSettings.volume)) {
+    if (!(gameSettings.volume))
         return;
-    }
 
     if (player.attackFrames == 2) {
         knifemelee01.play();
@@ -1747,9 +1732,8 @@ function playSounds() {
             }
         }
         player.footsteps++;
-    } else {
+    } else
         player.footsteps = 0;
-    }
 }
 
 function drawOverlay() {
@@ -1883,18 +1867,17 @@ function drawHUD() {
 
     if (stage.mapStartFrames < 250) {
         stage.mapStartFrames++;
-
         ctx.fillStyle = "black";
         ctx.font = "25px Arial";
         ctx.fillText("Find 4 chests to leave the island", 120, 280);
+    } else {
+        ctx.fillStyle = "black";
+        ctx.font = "20px Arial";
+        ctx.fillText("Health: " + player.health + "/6", 5, 20);
+
+        if (player.chests == 4)
+            ctx.fillText("The ship is waiting for you by the docks", 5, 595);
+        else
+            ctx.fillText("Chests: " + player.chests + "/4", 5, 595);
     }
-
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText("Health: " + player.health + "/6", 5, 20);
-
-    if (player.chests == 4)
-        ctx.fillText("The escape is ready by the docks", 5, 595);
-    else
-        ctx.fillText("Chests: " + player.chests + "/4", 5, 595);
 }
