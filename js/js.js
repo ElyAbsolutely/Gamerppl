@@ -501,10 +501,8 @@ function touchChests() {
 function triggerEvent(sasha) {
     switch (sasha) { // 0-99 varattu JM, 100-199 varattu JT
         // 0 = endgame
-        // 1 = overlay change
-
         case 0:
-            if (player.chests >= 4) // Currently 0, increase on release
+            if (player.chests >= 0) // Currently 0, increase on release
                 player.active = false;
             return;
         case 1:
@@ -630,7 +628,7 @@ function update() {
     drawWalls();
     drawChests();
 
-    if (!(stage.endFrame >= 120))
+    if (stage.endFrame <= 120)
         drawPlayer();
     attackDagger()
     drawEnemies();
