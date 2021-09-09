@@ -1,20 +1,14 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// const skyBtn = document.getElementById('sky-btn');
-const overlayBtn = document.getElementById('overlay-btn');
 const soundBtn = document.getElementById('sound-btn');
 
 window.addEventListener('load', hideGame);
 window.addEventListener('reload', start);
 document.getElementById('start-btn').addEventListener('click', start);
-// skyBtn.addEventListener('click', changeSky);
-overlayBtn.addEventListener('click', changeOverlay);
 soundBtn.addEventListener('click', toggleVolume);
 document.getElementById('end-btn').addEventListener('click', resetGame);
 
-// skyBtn.disabled = true;
-overlayBtn.disabled = true;
 soundBtn.disabled = true;
 
 //Asset Warmup
@@ -25,8 +19,6 @@ var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
 function start() {
     showGame();
-    // skyBtn.disabled = false;
-    overlayBtn.disabled = false;
     soundBtn.disabled = false;
     update();
 }
@@ -144,16 +136,9 @@ const stage = {
     overlay: 0,
     map: null,
 
+    mapStartFrames: 0,
     endFrame: 0
 };
-
-function changeOverlay() {
-    if (stage.overlay == 6) {
-        stage.overlay = 0;
-        return;
-    }
-    stage.overlay++;
-}
 
 // wall.id(0) = CAN be seen and WILL block player, wall.id(1) = CANNOT be seen and WILL block player, wall.id(2) = CAN be seen and will NOT block player
 //wall.id(3) = triggers a function on touch, is invisible and doesnt block the player, 0-99 varattu JM, 100-199 varattu JT
@@ -1494,7 +1479,6 @@ function detectChests() {
 function touchChests() {
     for (let i = 0; chests.length > i; i++) {
         if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
-            console.log('chest touch');
             chests.splice(i, 1);
             player.chests++;
         }
@@ -1507,7 +1491,6 @@ function triggerEvent(sasha) {
         // 1 = overlay change
 
         case 0:
-            console.log("Player has touched the escape area");
             if (player.chests >= 0) // Currently 0, increase on release
                 player.active = false;
             return;
@@ -1650,7 +1633,6 @@ function update() {
 
     if (player.active) {
         enemyMove();
-
         playSounds();
         drawHUD();
     } else {
@@ -1664,10 +1646,10 @@ function endGame() {
 
     if (stage.endFrame >= 180) {
         for (let i = 0; wall.length > i; i++) {
-            wall[i].x += 1;
+            wall[i].x++;
 
             if (stage.endFrame >= 210 && wall[i].id == 6)
-                wall[i].y -= 1;
+                wall[i].y--;
         }
     }
 
@@ -1899,8 +1881,20 @@ function drawHUD() {
         ctx.fillText("DevMode: on", 525, 590);
     }
 
-    ctx.fillStyle = "white";
+    if (stage.mapStartFrames < 250) {
+        stage.mapStartFrames++;
+
+        ctx.fillStyle = "black";
+        ctx.font = "25px Arial";
+        ctx.fillText("Find 4 chests to leave the island", 120, 280);
+    }
+
+    ctx.fillStyle = "black";
     ctx.font = "20px Arial";
-    ctx.fillText("Health: " + player.health + '/6', 5, 20);
-    ctx.fillText("Chests: " + player.chests + '/4', 5, 595);
+    ctx.fillText("Health: " + player.health + "/6", 5, 20);
+
+    if (player.chests == 4)
+        ctx.fillText("The escape is ready by the docks", 5, 595);
+    else
+        ctx.fillText("Chests: " + player.chests + "/4", 5, 595);
 }
