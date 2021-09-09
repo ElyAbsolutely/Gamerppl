@@ -70,8 +70,10 @@ const player = {
 
     attackFrames: -1, //max 25, -1 for default stance, 0 to start attacking
     attackDir: "none", // none, up, left, down, right
-    health: 5,
     weaponID: "Dagger",
+
+    health: 6,
+    invisFrames: -1, // Max 100
 
     moveDir: "none", // none, up, left, down, right
     footsteps: 0,
@@ -1269,7 +1271,6 @@ function drawChests() {
 
 function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
 }
 
 function newPos() {
@@ -1352,96 +1353,85 @@ function getDistance(x1, y1, x2, y2) {
 }
 
 function enemyMove() {
+    if (player.invisFrames == 100) {
+        player.invisFrames = -1;
+    } else if (player.invisFrames != -1) {
+        player.invisFrames++;
+    }
+
     for (let i = 0; i < enemies.length; i++) {
         const distance = getDistance(player.x + (player.w / 2), player.y + (player.h / 2), enemies[i].x + enemies[i].w / 2, enemies[i].y + enemies[i].h / 2);
 
-        switch (enemies[i].h) {
-            case 200:
-                if (distance < 320) {
-                    if (player.x + player.w < enemies[i].x) {
-                        enemies[i].x -= enemies[i].dx;
-                    } else if (player.y + player.h < enemies[i].y) {
-                        enemies[i].y -= enemies[i].dy;
-                    } else if (player.x > enemies[i].x + enemies[i].w) {
-                        enemies[i].x += enemies[i].dx;
-                    } else if (player.y > enemies[i].y + enemies[i].h) {
-                        enemies[i].y += enemies[i].dy;
-                    }
-                }
-                setTimeout(playerDeath(), 10);
-                break;
-            case 30:
-                if (distance < 250) {
-                    if (player.x + player.w < enemies[i].x) {
-                        enemies[i].x -= enemies[i].dx;
-                    } else if (player.y + player.h < enemies[i].y) {
-                        enemies[i].y -= enemies[i].dy;
-                    } else if (player.x > enemies[i].x + enemies[i].w) {
-                        enemies[i].x += enemies[i].dx;
-                    } else if (player.y > enemies[i].y + enemies[i].h) {
-                        enemies[i].y += enemies[i].dy;
-                    }
-                }
-                setTimeout(playerDeath(), 10);
-                break;
 
+        if (distance < 250) {
+            if (player.x + player.w < enemies[i].x) {
+                enemies[i].x -= enemies[i].dx;
+            } else if (player.y + player.h < enemies[i].y) {
+                enemies[i].y -= enemies[i].dy;
+            } else if (player.x > enemies[i].x + enemies[i].w) {
+                enemies[i].x += enemies[i].dx;
+            } else if (player.y > enemies[i].y + enemies[i].h) {
+                enemies[i].y += enemies[i].dy;
+            }
         }
+        enemyAttacksPlayer();
     }
-    console.log(enemies);
 }
 
-function playerDeath() {
+
+function enemyAttacksPlayer() {
     for (let i = 0; i < enemies.length; i++) {
 
         if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-            setTimeout(player.health -= 1, 1000 * 200);
-            setTimeout(console.log('player hit'), 1000 * 200);
-        }
-        // Needs tweaking
-        // if (player.health === 0) {
-        //     hideGame();
-        //     showEnd();
-        //     console.log('player dead');
-        // }
-    }
-}
-
-function attackUp() {
-    for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
-        if (enemies[i].y + enemies[i].h <= player.y && distance < 300) {
-            setTimeout(enemies.splice(i, 1), 10);
-            console.log('enemy dead');
+            takeDamage();
         }
     }
 }
 
-function attackRight() {
-    for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
-        if (enemies[i].x >= player.x + player.w && distance < 300) {
-            setTimeout(enemies.splice(i, 1), 10);
-            console.log('enemy dead');
-        }
+function takeDamage() {
+    if (player.invisFrames > -1) {
+        return;
     }
+
+    player.health--;
+    player.invisFrames = 0;
+
+    if (player.health == 0)
+        playerDeath();
 }
 
-function attackDown() {
-    for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
-        if (enemies[i].y >= player.y + player.h && distance < 300) {
-            setTimeout(enemies.splice(i, 1), 10);
-            console.log('enemy dead');
-        }
-    }
+function playerDeath() {
+    hideGame();
+    showEnd();
 }
 
-function attackLeft() {
+function attackDagger() {
+
+    if (player.attackFrames == -1) {
+        return;
+    }
     for (let i = 0; i < enemies.length; i++) {
-        const distance = getDistance(player.x, player.y, enemies[i].x, enemies[i].y);
-        if (enemies[i].x + enemies[i].w <= player.x && distance < 300) {
-            setTimeout(enemies.splice(i, 1), 10);
-            console.log('enemy dead');
+        switch (player.attackDir) {
+            case "up":
+                if (player.y - 20 <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h - 20 >= enemies[i].y && player.x + player.w >= enemies[i].x) {
+                    enemies.splice(i, 1);
+                }
+                break;
+            case "down":
+                if (player.y + 20 <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h + 20 >= enemies[i].y && player.x + player.w >= enemies[i].x) {
+                    enemies.splice(i, 1);
+                }
+                break;
+            case "left":
+                if (player.y <= enemies[i].y + enemies[i].h && player.x - 20 <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w - 20 >= enemies[i].x) {
+                    enemies.splice(i, 1);
+                }
+                break;
+            case "right":
+                if (player.y <= enemies[i].y + enemies[i].h && player.x + 20 <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w + 20 >= enemies[i].x) {
+                    enemies.splice(i, 1);
+                }
+                break;
         }
     }
 }
@@ -1505,8 +1495,8 @@ function touchChests() {
     for (let i = 0; chests.length > i; i++) {
         if (player.y < chests[i].y + chests[i].h && player.x < chests[i].x + chests[i].w && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
             console.log('chest touch');
-            setTimeout(chests.splice(i, 1), 10);
-            player.chests += 1;
+            chests.splice(i, 1);
+            player.chests++;
         }
     }
 }
@@ -1600,7 +1590,6 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "up";
             player.attackFrames = 0;
-            attackUp();
             return;
         case "ArrowLeft":
             //attack left
@@ -1609,7 +1598,6 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "left";
             player.attackFrames = 0;
-            attackLeft();
             return;
         case "ArrowDown":
             //attack down
@@ -1618,7 +1606,6 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "down";
             player.attackFrames = 0;
-            attackDown();
             return;
         case "ArrowRight":
             //attack right
@@ -1627,7 +1614,6 @@ document.addEventListener("keydown", function (event) {
             }
             player.attackDir = "right";
             player.attackFrames = 0;
-            attackRight();
             return;
 
         // Cheats
@@ -1656,6 +1642,7 @@ function update() {
 
     if (!(stage.endFrame >= 120))
         drawPlayer();
+    attackDagger()
     drawEnemies();
     drawAttack();
 
@@ -1715,19 +1702,16 @@ function endGame() {
             } if (stage.endFrame >= 925 && stage.endFrame <= 1200) {
                 ctx.fillStyle = "silver";
                 ctx.font = "30px Arial";
-                ctx.fillText("Made by --- & ---", midx - 200, midy);
+                ctx.fillText("Made by JT & JM", midx - 200, midy);
             }
 
             if (stage.endFrame == 1400)
-                location.reload()
+                resetGame();
     }
 }
 
-function resetGame() { // Canvas needs to reset to the original state, right now it doesn't.
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    start();
-    hideEnd();
-    showGame();
+function resetGame() {
+    location.reload();
 }
 
 function toggleVolume() {
@@ -1917,8 +1901,6 @@ function drawHUD() {
 
     ctx.fillStyle = "white";
     ctx.font = "20px Arial";
-    ctx.fillText("Health: " + player.health + '/5', 5, 20);
-
-    ctx.fillText("Chests: " + player.chests + '/3?', 5, 595);
-
+    ctx.fillText("Health: " + player.health + '/6', 5, 20);
+    ctx.fillText("Chests: " + player.chests + '/4', 5, 595);
 }
