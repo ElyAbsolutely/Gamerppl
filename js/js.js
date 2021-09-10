@@ -204,14 +204,14 @@ function drawDagger() {
     switch (player.attackDir) {
         case 'up':
             ctx.fillStyle = '#3d2904';
-            ctx.fillRect(player.x + 4, player.y - 12, 12, 4); //320 320
-            ctx.fillRect(player.x + 8, player.y - 8, 4, 6); //324 324
+            ctx.fillRect(player.x + 4, player.y - 12, 12, 4);
+            ctx.fillRect(player.x + 8, player.y - 8, 4, 6);
             ctx.fillStyle = '#949494';
-            ctx.fillRect(player.x + 7, player.y - 21, 6, 11); //323 309
+            ctx.fillRect(player.x + 7, player.y - 21, 6, 11);
             ctx.beginPath();
-            ctx.moveTo(player.x + 7, player.y - 21); //323 309
-            ctx.lineTo(player.x + 10, player.y - 24); //326 306
-            ctx.lineTo(player.x + 13, player.y - 21); //329 309
+            ctx.moveTo(player.x + 7, player.y - 21);
+            ctx.lineTo(player.x + 10, player.y - 24);
+            ctx.lineTo(player.x + 13, player.y - 21);
             ctx.closePath();
             ctx.fill();
             break;
@@ -235,9 +235,9 @@ function drawDagger() {
             ctx.fillStyle = '#949494';
             ctx.fillRect(player.x + 7, player.y + player.h + 10, 6, 11);
             ctx.beginPath();
-            ctx.moveTo(player.x + 7, player.y + player.h + 21); //323 309
-            ctx.lineTo(player.x + 10, player.y + player.h + 24); //326 306
-            ctx.lineTo(player.x + 13, player.y + player.h + 21); //329 309
+            ctx.moveTo(player.x + 7, player.y + player.h + 21);
+            ctx.lineTo(player.x + 10, player.y + player.h + 24);
+            ctx.lineTo(player.x + 13, player.y + player.h + 21);
             ctx.closePath();
             ctx.fill();
             break;
