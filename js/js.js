@@ -107,7 +107,7 @@ const enemies = [
         dy: 1.5,
         id: 0
     },
-    // Keep the same colour on enemies. It'll get confusing otherwise
+
     //JM - Right side of the river
 
     { // Estate Terror
@@ -551,25 +551,21 @@ document.addEventListener("keyup", function (event) {
     //Stop
     switch (event.key) {
         case "w":
-            if (player.moveDir == "up") {
+            if (player.moveDir == "up")
                 player.moveDir = "none";
-                return;
-            }
+            return;
         case "a":
-            if (player.moveDir == "left") {
+            if (player.moveDir == "left")
                 player.moveDir = "none";
-                return;
-            }
+            return;
         case "s":
-            if (player.moveDir == "down") {
+            if (player.moveDir == "down")
                 player.moveDir = "none";
-                return;
-            }
+            return;
         case "d":
-            if (player.moveDir == "right") {
+            if (player.moveDir == "right")
                 player.moveDir = "none";
-                return;
-            }
+            return;
     }
 })
 
