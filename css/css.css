@@ -44,6 +44,7 @@ body {
     background-color: red;
     color: #f4f4f4;
     margin: 0 10px;
+    cursor: pointer;
 }
 
 #start-btn, #end-btn {

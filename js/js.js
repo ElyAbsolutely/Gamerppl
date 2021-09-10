@@ -712,9 +712,10 @@ function update() {
         enemyMove();
         playSounds();
         drawHUD();
-    } else
+    } else {
         endGame();
-
+    }
+    
     requestAnimationFrame(update);
 }
 
@@ -1012,9 +1013,10 @@ function drawHUD() {
 
         ctx.fillStyle = "black";
         ctx.font = "20px Arial";
-        if (player.chests == 4)
+        if (player.chests == 4) {
             ctx.fillText("The ship is waiting for you by the docks", 5, 595);
-        else
+        } else {
             ctx.fillText("Chests: " + player.chests + "/4", 5, 595);
+        }
     }
 }
