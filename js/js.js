@@ -111,18 +111,53 @@ const enemies = [
     //JM - Right side of the river
 
     { // Estate Terror
-        x: 1200,
-        y: 2225,
+        x: 1300,
+        y: 2425,
         w: 200,
         h: 200,
         color: '#b50000',
         dx: 0.8,
         dy: 1.2,
         id: 1
-    },
-    { // Swamp
-        x: 1200,
+    }, { // Swamp
+        x: 1400,
         y: 1500,
+        w: 30,
+        h: 30,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5,
+        id: 0
+    }, { // Swamp2
+        x: 1800,
+        y: 1700,
+        w: 30,
+        h: 30,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5,
+        id: 0
+    }, { // Swamp3
+        x: 1700,
+        y: 1400,
+        w: 30,
+        h: 30,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5,
+        id: 0
+    }, { // Connector
+        x: 2800,
+        y: 1300,
+        w: 30,
+        h: 30,
+        color: '#b50000',
+        dx: 1.5,
+        dy: 1.5,
+        id: 0
+    }, { // Beach 2
+        x: 2900,
+        y: 350,
         w: 30,
         h: 30,
         color: '#b50000',
@@ -688,6 +723,9 @@ function endGame() {
                 ctx.fillStyle = "silver";
                 ctx.font = "30px Arial";
                 ctx.fillText("Made by JT & JM", midx - 180, midy);
+                ctx.font = "20px Arial";
+                ctx.fillText("https://github.com/JojoSnow", midx - 180, midy + 100);
+                ctx.fillText("https://github.com/ElyAbsolutely", midx - 180, midy + 200);
             }
 
             if (stage.endFrame == 1400)
