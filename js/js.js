@@ -98,7 +98,7 @@ const enemies = [
         id: 0
     },
     { // Bottom room door
-        x: 420,
+        x: 520,
         y: 1130,
         w: 30,
         h: 30,
@@ -199,6 +199,65 @@ const chests = [
 
 ];
 
+function drawDagger() {
+
+    switch (player.attackDir) {
+        case 'up':
+            ctx.fillStyle = '#3d2904';
+            ctx.fillRect(player.x + 4, player.y - 12, 12, 4); //320 320
+            ctx.fillRect(player.x + 8, player.y - 8, 4, 6); //324 324
+            ctx.fillStyle = '#949494';
+            ctx.fillRect(player.x + 7, player.y - 21, 6, 11); //323 309
+            ctx.beginPath();
+            ctx.moveTo(player.x + 7, player.y - 21); //323 309
+            ctx.lineTo(player.x + 10, player.y - 24); //326 306
+            ctx.lineTo(player.x + 13, player.y - 21); //329 309
+            ctx.closePath();
+            ctx.fill();
+            break;
+        case 'right':
+            ctx.fillStyle = '#3d2904';
+            ctx.fillRect(player.x + player.w + 8, player.y + player.h - 16, 4, 12);
+            ctx.fillRect(player.x + player.w + 2, player.y + player.h - 12, 6, 4);
+            ctx.fillStyle = '#949494';
+            ctx.fillRect(player.x + player.w + 10, player.y + player.h - 13, 11, 6);
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.w + 21, player.y + player.h - 13);
+            ctx.lineTo(player.x + player.w + 24, player.y + player.h - 10);
+            ctx.lineTo(player.x + player.w + 21, player.y + player.h - 7);
+            ctx.closePath();
+            ctx.fill();
+            break;
+        case 'down':
+            ctx.fillStyle = '#3d2904';
+            ctx.fillRect(player.x + 4, player.y + player.h + 8, 12, 4);
+            ctx.fillRect(player.x + 8, player.y + player.h + 2, 4, 6);
+            ctx.fillStyle = '#949494';
+            ctx.fillRect(player.x + 7, player.y + player.h + 10, 6, 11);
+            ctx.beginPath();
+            ctx.moveTo(player.x + 7, player.y + player.h + 21); //323 309
+            ctx.lineTo(player.x + 10, player.y + player.h + 24); //326 306
+            ctx.lineTo(player.x + 13, player.y + player.h + 21); //329 309
+            ctx.closePath();
+            ctx.fill();
+            break;
+        case 'left':
+            ctx.fillStyle = '#3d2904';
+            ctx.fillRect(player.x - 12, player.y + player.h - 16, 4, 12);
+            ctx.fillRect(player.x - 8, player.y + player.h - 12, 6, 4);
+            ctx.fillStyle = '#949494';
+            ctx.fillRect(player.x - 21, player.y + player.h - 13, 11, 6);
+            ctx.beginPath();
+            ctx.moveTo(player.x - 20, player.y + player.h - 13);
+            ctx.lineTo(player.x - 23, player.y + player.h - 10);
+            ctx.lineTo(player.x - 20, player.y + player.h - 7);
+            ctx.closePath();
+            ctx.fill();
+            break;
+    }
+
+}
+
 function drawPlayer() {
     switch (player.invisFrames) {
         default:
@@ -231,20 +290,7 @@ function drawPlayer() {
 function drawAttack() {
     if (player.attackFrames > -1) {
 
-        switch (player.attackDir) {
-            case "up":
-                ctx.drawImage(weapon01, player.x, player.y - player.h, player.h, player.w);
-                break;
-            case "left":
-                ctx.drawImage(weapon01, player.x - player.w, player.y, player.h, player.w);
-                break;
-            case "down":
-                ctx.drawImage(weapon01, player.x, player.y + player.h, player.h, player.w);
-                break;
-            case "right":
-                ctx.drawImage(weapon01, player.x + player.w, player.y, player.h, player.w);
-                break;
-        }
+        drawDagger();
 
         player.attackFrames++;
 
@@ -323,9 +369,13 @@ function drawChests() {
         ctx.fillStyle = chests[i].color1;
         ctx.fillRect(chests[i].x, chests[i].y, 50, 40);
         ctx.strokeStyle = chests[i].color2; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.rect(chests[i].x, chests[i].y, 50, 40); ctx.stroke();
-        ctx.rect(chests[i].x, chests[i].y + 15, 50, 1); ctx.stroke();
-        ctx.rect(chests[i].x + 20, chests[i].y + 15, 10, 5); ctx.stroke();
+        ctx.beginPath(); 
+        ctx.rect(chests[i].x, chests[i].y, 50, 40); 
+        ctx.stroke();
+        ctx.rect(chests[i].x, chests[i].y + 15, 50, 1); 
+        ctx.stroke();
+        ctx.rect(chests[i].x + 20, chests[i].y + 15, 10, 5); 
+        ctx.stroke();
     }
 }
 
@@ -658,13 +708,16 @@ function update() {
     clear();
 
     newPos();
-
+    
     drawWalls();
+    drawDagger();
     drawChests();
+    
 
-    if (stage.endFrame <= 120)
+    if (stage.endFrame <= 120) {
         drawPlayer();
-    attackDagger()
+    }
+    attackDagger();
     drawEnemies();
     drawAttack();
 
