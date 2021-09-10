@@ -107,7 +107,7 @@ const enemies = [
         dy: 1.5,
         id: 0
     },
-    // Keep the same colour on enemies. It'll get confusing otherwise
+
     //JM - Right side of the river
 
     { // Estate Terror
@@ -423,6 +423,8 @@ function playerHit() {
         //     console.log('player dead');
         // }
     }
+}
+
 function enemyAttacksPlayer(sierra) {
     if (player.y <= sierra.y + sierra.h && player.x <= sierra.x + sierra.w && player.y + player.h >= sierra.y && player.x + player.w >= sierra.x)
         takeDamage();
@@ -909,9 +911,11 @@ function drawHUD() {
         ctx.font = "20px Arial";
         ctx.fillText("Health: " + player.health + "/6", 5, 20);
 
-        if (player.chests == 4)
+        if (player.chests == 4) {
             ctx.fillText("The ship is waiting for you by the docks", 5, 595);
-        else
+        } else {
             ctx.fillText("Chests: " + player.chests + "/4", 5, 595);
+    
+        }
     }
 }
