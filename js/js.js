@@ -168,7 +168,7 @@ const enemies = [
 ];
 
 const stage = {
-    x: null, y: null,
+    x: midx, y: midy,
     sky: 0, overlay: 0,
     mapStartFrames: 0, endFrame: 0
 };
@@ -302,7 +302,7 @@ function drawAttack() {
 }
 
 function drawWalls() {
-    for (let i = 0; i < wall.length; i++) {
+    for (let i = 0; i < wall.length; i++)
         switch (wall[i].id) {
             case 1:
                 if (gameSettings.devMode) {
@@ -346,11 +346,10 @@ function drawWalls() {
                         break;
                 }
         }
-    }
 }
 
 function drawEnemies() {
-    for (let i = 0; i < enemies.length; i++) {
+    for (let i = 0; i < enemies.length; i++)
         switch (enemies[i].id) {
             default:
                 ctx.fillStyle = enemies[i].color;
@@ -361,7 +360,6 @@ function drawEnemies() {
                 ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].w, enemies[i].h);
                 ctx.globalAlpha = 1.0;
         }
-    }
 }
 
 function drawChests() {
@@ -411,6 +409,7 @@ function moveLeft() {
         enemies[i].x += player.speed;
     for (let i = 0; chests.length > i; i++)
         chests[i].x += player.speed;
+    stage.x -= player.speed;
 }
 
 function moveRight() {
@@ -420,6 +419,7 @@ function moveRight() {
         enemies[i].x -= player.speed;
     for (let i = 0; chests.length > i; i++)
         chests[i].x -= player.speed;
+    stage.x += player.speed;
 }
 
 function moveUp() {
@@ -429,6 +429,7 @@ function moveUp() {
         enemies[i].y += player.speed;
     for (let i = 0; chests.length > i; i++)
         chests[i].y += player.speed;
+    stage.y -= player.speed;
 }
 
 function moveDown() {
@@ -438,6 +439,7 @@ function moveDown() {
         enemies[i].y -= player.speed;
     for (let i = 0; chests.length > i; i++)
         chests[i].y -= player.speed;
+    stage.y += player.speed;
 }
 
 function getDistance(x1, y1, x2, y2) {
@@ -460,30 +462,26 @@ function enemyMove() {
         switch (enemies[i].id) {
 
             case 1:
-                if (distance < 350) {
-                    if (player.x + player.w < enemies[i].x) {
+                if (distance < 350)
+                    if (player.x + player.w < enemies[i].x)
                         enemies[i].x -= enemies[i].dx;
-                    } else if (player.y + player.h < enemies[i].y) {
+                    else if (player.y + player.h < enemies[i].y)
                         enemies[i].y -= enemies[i].dy;
-                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                    else if (player.x > enemies[i].x + enemies[i].w)
                         enemies[i].x += enemies[i].dx;
-                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                    else if (player.y > enemies[i].y + enemies[i].h)
                         enemies[i].y += enemies[i].dy;
-                    }
-                }
 
             default:
-                if (distance < 250) {
-                    if (player.x + player.w < enemies[i].x) {
+                if (distance < 250)
+                    if (player.x + player.w < enemies[i].x)
                         enemies[i].x -= enemies[i].dx;
-                    } else if (player.y + player.h < enemies[i].y) {
+                    else if (player.y + player.h < enemies[i].y)
                         enemies[i].y -= enemies[i].dy;
-                    } else if (player.x > enemies[i].x + enemies[i].w) {
+                    else if (player.x > enemies[i].x + enemies[i].w)
                         enemies[i].x += enemies[i].dx;
-                    } else if (player.y > enemies[i].y + enemies[i].h) {
+                    else if (player.y > enemies[i].y + enemies[i].h)
                         enemies[i].y += enemies[i].dy;
-                    }
-                }
         }
         enemyAttacksPlayer(enemies[i]);
     }
@@ -515,7 +513,7 @@ function attackDagger() {
     if (player.attackFrames == -1)
         return;
 
-    for (let i = 0; i < enemies.length; i++) {
+    for (let i = 0; i < enemies.length; i++)
         switch (enemies[i].id) {
             default:
                 switch (player.attackDir) {
@@ -538,17 +536,16 @@ function attackDagger() {
                 }
             case 1:
         }
-    }
 }
 
 function detectWalls() {
 
-    for (let i = 0; wall.length > i; i++) {
+    for (let i = 0; wall.length > i; i++)
 
         switch (wall[i].id) {
 
             case 0: case 1:
-                if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
+                if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x)
                     switch (player.moveDir) {
                         case "up":
                             moveDown();
@@ -563,23 +560,18 @@ function detectWalls() {
                             moveLeft();
                             return;
                     }
-                }
             case 3:
-                if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x) {
+                if (player.y < wall[i].y + wall[i].h && player.x < wall[i].x + wall[i].w && player.y + player.h > wall[i].y && player.x + player.w > wall[i].x)
                     triggerEvent(wall[i].event);
-                }
-                break;
         }
-    }
 }
 
 function touchChests() {
-    for (let i = 0; chests.length > i; i++) {
+    for (let i = 0; chests.length > i; i++)
         if (player.y < chests[i].y + 40 && player.x < chests[i].x + 50 && player.y + player.h > chests[i].y && player.x + player.w > chests[i].x) {
             chests.splice(i, 1);
             player.chests++;
         }
-    }
 }
 
 function triggerEvent(sasha) {
@@ -609,25 +601,21 @@ document.addEventListener("keyup", function (event) {
     //Stop
     switch (event.key) {
         case "w":
-            if (player.moveDir == "up") {
+            if (player.moveDir == "up")
                 player.moveDir = "none";
-                return;
-            }
+            return;
         case "a":
-            if (player.moveDir == "left") {
+            if (player.moveDir == "left")
                 player.moveDir = "none";
-                return;
-            }
+            return;
         case "s":
-            if (player.moveDir == "down") {
+            if (player.moveDir == "down")
                 player.moveDir = "none";
-                return;
-            }
+            return;
         case "d":
-            if (player.moveDir == "right") {
+            if (player.moveDir == "right")
                 player.moveDir = "none";
-                return;
-            }
+            return;
     }
 })
 
@@ -694,13 +682,11 @@ document.addEventListener("keydown", function (event) {
 
         case "o":
             // Increse speed
-            if (gameSettings.devMode) {
+            if (gameSettings.devMode)
                 if (player.speed == 5)
                     player.speed = 50;
                 else
                     player.speed = 5;
-                return;
-            }
     }
 })
 
@@ -810,10 +796,8 @@ function playSounds() {
     if (!(gameSettings.volume))
         return;
 
-    if (player.attackFrames == 2) {
+    if (player.attackFrames == 2)
         knifemelee01.play();
-        console.log("meleeknife1");
-    }
 
     if (!(player.moveDir == "none")) {
         if (player.footsteps == 17) {
@@ -969,6 +953,7 @@ function drawHUD() {
         ctx.fillStyle = "red";
         ctx.font = "10px Arial";
         ctx.fillText("DevMode: on", 525, 590);
+        ctx.fillText("Player POS X: " + stage.x + " Y: " + stage.y, 475, 15);
     }
 
     if (stage.mapStartFrames < 250) {
@@ -977,15 +962,60 @@ function drawHUD() {
         ctx.font = "25px Arial";
         ctx.fillText("Find 4 chests to leave the island", 120, 280);
     } else {
+        switch (player.health) {
+            case 6:
+                ctx.fillStyle = "#B5FF49";
+                ctx.fillRect(5, 5, 150, 20);
+                ctx.strokeStyle = "black"; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
+                break;
+            case 5:
+                ctx.fillStyle = "#B5FF49";
+                ctx.fillRect(5, 5, 125, 20);
+                ctx.fillStyle = "#FA5757";
+                ctx.fillRect(130, 5, 25, 20);
+                ctx.strokeStyle = "black"; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
+                break;
+            case 4:
+                ctx.fillStyle = "#B5FF49";
+                ctx.fillRect(5, 5, 100, 20);
+                ctx.fillStyle = "#FA5757";
+                ctx.fillRect(105, 5, 50, 20);
+                ctx.strokeStyle = "black"; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
+                break;
+            case 3:
+                ctx.fillStyle = "#B5FF49";
+                ctx.fillRect(5, 5, 75, 20);
+                ctx.fillStyle = "#FA5757";
+                ctx.fillRect(80, 5, 75, 20);
+                ctx.strokeStyle = "black"; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
+                break;
+            case 2:
+                ctx.fillStyle = "#B5FF49";
+                ctx.fillRect(5, 5, 50, 20);
+                ctx.fillStyle = "#FA5757";
+                ctx.fillRect(55, 5, 100, 20);
+                ctx.strokeStyle = "black"; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
+                break;
+            case 1:
+                ctx.fillStyle = "#B5FF49";
+                ctx.fillRect(5, 5, 25, 20);
+                ctx.fillStyle = "#FA5757";
+                ctx.fillRect(30, 5, 125, 20);
+                ctx.strokeStyle = "black"; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
+                break;
+        }
+
         ctx.fillStyle = "black";
         ctx.font = "20px Arial";
-        ctx.fillText("Health: " + player.health + "/6", 5, 20);
-
-        if (player.chests == 4) {
+        if (player.chests == 4)
             ctx.fillText("The ship is waiting for you by the docks", 5, 595);
-        } else {
+        else
             ctx.fillText("Chests: " + player.chests + "/4", 5, 595);
-    
-        }
     }
 }
