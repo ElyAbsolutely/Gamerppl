@@ -421,8 +421,6 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                playerHit();
-                break;
 
             default:
                 if (distance < 250) {
@@ -436,28 +434,11 @@ function enemyMove() {
                         enemies[i].y += enemies[i].dy;
                     }
                 }
-                playerHit();
-                break;
-
         }
         enemyAttacksPlayer(enemies[i]);
     }
 }
 
-function playerHit() { 
-    for (let i = 0; i < enemies.length; i++) {
-
-        if (player.y <= enemies[i].y + enemies[i].h && player.x <= enemies[i].x + enemies[i].w && player.y + player.h >= enemies[i].y && player.x + player.w >= enemies[i].x) {
-            player.health -= 1;
-            console.log('player hit');
-        }
-        // Needs tweaking
-        // if (player.health === 0) {
-        //     hideGame();
-        //     showEnd();
-        //     console.log('player dead');
-        // }
-    }
 function enemyAttacksPlayer(sierra) {
     if (player.y <= sierra.y + sierra.h && player.x <= sierra.x + sierra.w && player.y + player.h >= sierra.y && player.x + player.w >= sierra.x)
         takeDamage();
