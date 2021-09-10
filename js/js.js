@@ -203,7 +203,7 @@ function drawDagger() {
 
     switch (player.attackDir) {
         case 'up':
-            ctx.fillStyle = '#3d2904';
+            ctx.fillStyle = '#8a5a03';
             ctx.fillRect(player.x + 4, player.y - 12, 12, 4);
             ctx.fillRect(player.x + 8, player.y - 8, 4, 6);
             ctx.fillStyle = '#949494';
@@ -216,7 +216,7 @@ function drawDagger() {
             ctx.fill();
             break;
         case 'right':
-            ctx.fillStyle = '#3d2904';
+            ctx.fillStyle = '#8a5a03';
             ctx.fillRect(player.x + player.w + 8, player.y + player.h - 16, 4, 12);
             ctx.fillRect(player.x + player.w + 2, player.y + player.h - 12, 6, 4);
             ctx.fillStyle = '#949494';
@@ -229,7 +229,7 @@ function drawDagger() {
             ctx.fill();
             break;
         case 'down':
-            ctx.fillStyle = '#3d2904';
+            ctx.fillStyle = '#8a5a03';
             ctx.fillRect(player.x + 4, player.y + player.h + 8, 12, 4);
             ctx.fillRect(player.x + 8, player.y + player.h + 2, 4, 6);
             ctx.fillStyle = '#949494';
@@ -242,7 +242,7 @@ function drawDagger() {
             ctx.fill();
             break;
         case 'left':
-            ctx.fillStyle = '#3d2904';
+            ctx.fillStyle = '#8a5a03';
             ctx.fillRect(player.x - 12, player.y + player.h - 16, 4, 12);
             ctx.fillRect(player.x - 8, player.y + player.h - 12, 6, 4);
             ctx.fillStyle = '#949494';
@@ -696,7 +696,6 @@ function update() {
     newPos();
     
     drawWalls();
-    drawDagger();
     drawChests();
     
 
