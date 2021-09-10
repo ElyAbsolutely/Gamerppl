@@ -41,7 +41,7 @@ body {
     text-transform: capitalize;
     font-size: 14px;
     font-weight: bold;
-    background-color: #20461c;
+    background-color: red;
     color: #f4f4f4;
     margin: 0 10px;
 }
@@ -51,9 +51,6 @@ body {
     margin: 20px;
     font-size: 20px;
     border: 2px solid #05b905;
-}
-
-#sound-btn {
-    background-color: #d63c3c;
+    background-color: #072e06;
 }
 
