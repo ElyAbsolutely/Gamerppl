@@ -199,6 +199,37 @@ const chests = [
 
 ];
 
+const HUDchests = [
+    {
+        x: 5,
+        y: 575,
+        color1: 'rgba(158, 82, 19, 0.25)',
+        color2: 'rgba(253, 221, 11, 0.5)',
+        visible: false
+    },
+    {
+        x: 34,
+        y: 575,
+        color1: 'rgba(158, 82, 19, 0.25)',
+        color2: 'rgba(253, 221, 11, 0.5)', 
+        visible: false
+    },
+    {
+        x: 63,
+        y: 575,
+        color1: 'rgba(158, 82, 19, 0.25)',
+        color2: 'rgba(253, 221, 11, 0.5)',
+        visible: false
+    },
+    {
+        x: 92,
+        y: 575,
+        color1: 'rgba(158, 82, 19, 0.25)',
+        color2: 'rgba(253, 221, 11, 0.5)',  
+        visible: false
+    }
+]
+
 function drawDagger() {
 
     switch (player.attackDir) {
@@ -373,6 +404,25 @@ function drawChests() {
         ctx.rect(chests[i].x, chests[i].y + 15, 50, 1); 
         ctx.stroke();
         ctx.rect(chests[i].x + 20, chests[i].y + 15, 10, 5); 
+        ctx.stroke();
+    }
+}
+
+function drawHUDchests() {
+    for (let i = 0; HUDchests.length > i; i++) {
+        if (HUDchests[i].visible === true) {
+            HUDchests[i].color1 = '#3b1e09';
+            HUDchests[i].color2 = 'gold';
+        }
+        ctx.fillStyle = HUDchests[i].color1;
+        ctx.fillRect(HUDchests[i].x, HUDchests[i].y, 25, 20);
+        ctx.strokeStyle = HUDchests[i].color2;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.rect(HUDchests[i].x, HUDchests[i].y, 25, 20);
+        ctx.moveTo(HUDchests[i].x, HUDchests[i].y + 8);
+        ctx.lineTo(HUDchests[i].x + 26, HUDchests[i].y + 8);
+        ctx.rect(HUDchests[i].x + 10, HUDchests[i].y + 6, 4, 4);
         ctx.stroke();
     }
 }
@@ -1010,240 +1060,31 @@ function drawHUD() {
                 ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
                 break;
         }
-
-        let color1 = '#3b1e09';
-        let color2 = 'gold';
-        let color1rgba = 'rgba(158, 82, 19, 0.25)';
-        let color2rgba = 'rgba(253, 221, 11, 0.5)';
+        
         switch (player.chests) {
-            case 0:
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(5, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(5, 575, 25, 20);
-                ctx.moveTo(5, 583);
-                ctx.lineTo(30, 583);
-                ctx.rect(15, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(34, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(34, 575, 25, 20);
-                ctx.moveTo(34, 583);
-                ctx.lineTo(59, 583);
-                ctx.rect(44, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(63, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(63, 575, 25, 20);
-                ctx.moveTo(63, 583);
-                ctx.lineTo(88, 583);
-                ctx.rect(73, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(92, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(92, 575, 25, 20);
-                ctx.moveTo(92, 583);
-                ctx.lineTo(117, 583);
-                ctx.rect(102, 581, 4, 4);
-                ctx.stroke();
-                break;
             case 1:
-                ctx.fillStyle = color1;
-                ctx.fillRect(5, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(5, 575, 25, 20);
-                ctx.moveTo(5, 583);
-                ctx.lineTo(30, 583);
-                ctx.rect(15, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(34, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(34, 575, 25, 20);
-                ctx.moveTo(34, 583);
-                ctx.lineTo(59, 583);
-                ctx.rect(44, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(63, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(63, 575, 25, 20);
-                ctx.moveTo(63, 583);
-                ctx.lineTo(88, 583);
-                ctx.rect(73, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(92, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(92, 575, 25, 20);
-                ctx.moveTo(92, 583);
-                ctx.lineTo(117, 583);
-                ctx.rect(102, 581, 4, 4);
-                ctx.stroke();
+                HUDchests[0].visible = true;
+                drawHUDchests();
                 break;
             case 2:
-                ctx.fillStyle = color1;
-                ctx.fillRect(5, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(5, 575, 25, 20);
-                ctx.moveTo(5, 583);
-                ctx.lineTo(30, 583);
-                ctx.rect(15, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1;
-                ctx.fillRect(34, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(34, 575, 25, 20);
-                ctx.moveTo(34, 583);
-                ctx.lineTo(59, 583);
-                ctx.rect(44, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(63, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(63, 575, 25, 20);
-                ctx.moveTo(63, 583);
-                ctx.lineTo(88, 583);
-                ctx.rect(73, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(92, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(92, 575, 25, 20);
-                ctx.moveTo(92, 583);
-                ctx.lineTo(117, 583);
-                ctx.rect(102, 581, 4, 4);
-                ctx.stroke();
-                break;
+                HUDchests[1].visible = true;
+                drawHUDchests();
+                break;   
             case 3:
-                ctx.fillStyle = color1;
-                ctx.fillRect(5, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(5, 575, 25, 20);
-                ctx.moveTo(5, 583);
-                ctx.lineTo(30, 583);
-                ctx.rect(15, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1;
-                ctx.fillRect(34, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(34, 575, 25, 20);
-                ctx.moveTo(34, 583);
-                ctx.lineTo(59, 583);
-                ctx.rect(44, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1;
-                ctx.fillRect(63, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(63, 575, 25, 20);
-                ctx.moveTo(63, 583);
-                ctx.lineTo(88, 583);
-                ctx.rect(73, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1rgba;
-                ctx.fillRect(92, 575, 25, 20);
-                ctx.strokeStyle = color2rgba;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(92, 575, 25, 20);
-                ctx.moveTo(92, 583);
-                ctx.lineTo(117, 583);
-                ctx.rect(102, 581, 4, 4);
-                ctx.stroke();
+                HUDchests[2].visible = true;
+                drawHUDchests();
                 break;
             case 4:
-                ctx.fillStyle = color1;
-                ctx.fillRect(5, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(5, 575, 25, 20);
-                ctx.moveTo(5, 583);
-                ctx.lineTo(30, 583);
-                ctx.rect(15, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1;
-                ctx.fillRect(34, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(34, 575, 25, 20);
-                ctx.moveTo(34, 583);
-                ctx.lineTo(59, 583);
-                ctx.rect(44, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1;
-                ctx.fillRect(63, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(63, 575, 25, 20);
-                ctx.moveTo(63, 583);
-                ctx.lineTo(88, 583);
-                ctx.rect(73, 581, 4, 4);
-                ctx.stroke();
-            
-                ctx.fillStyle = color1;
-                ctx.fillRect(92, 575, 25, 20);
-                ctx.strokeStyle = color2;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.rect(92, 575, 25, 20);
-                ctx.moveTo(92, 583);
-                ctx.lineTo(117, 583);
-                ctx.rect(102, 581, 4, 4);
-                ctx.stroke();
+                HUDchests[3].visible = true;
+                drawHUDchests();
                 ctx.fillStyle = "black";
                 ctx.font = "20px Arial";
                 ctx.fillText("The ship is waiting for you by the docks", 122, 593);
                 break;
+            default:
+                drawHUDchests();
+                break;
         }
     }
 }
+
