@@ -35,23 +35,15 @@ body {
     background: #072e06;
 }
 
-.btns {
-    display: inline-block;
-    padding: 10px 20px;
-    text-transform: capitalize;
-    font-size: 14px;
-    font-weight: bold;
-    background-color: red;
-    color: #f4f4f4;
-    margin: 0 10px;
-    cursor: pointer;
-}
-
 #start-btn, #end-btn {
+    display: inline-block;
     padding: 15px 25px;
-    margin: 20px;
+    margin: 20px auto;
     font-size: 20px;
+    text-transform: capitalize;
     border: 2px solid #05b905;
     background-color: #072e06;
+    font-weight: bold;
+    cursor: pointer;
 }
 
