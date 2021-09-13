@@ -1,25 +1,13 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const soundBtn = document.getElementById('sound-btn');
-
 window.addEventListener('load', hideGame);
 window.addEventListener('reload', start);
 document.getElementById('start-btn').addEventListener('click', start);
-soundBtn.addEventListener('click', toggleVolume);
 document.getElementById('end-btn').addEventListener('click', resetGame);
-
-soundBtn.disabled = true;
-
-//Asset Warmup
-var weapon01 = new Image();
-weapon01.src = "img/weapons/steelDagger.png";
-
-var knifemelee01 = new Audio("sounds/player/weapons/knife_slash1.wav");
 
 function start() {
     showGame();
-    soundBtn.disabled = false;
     update();
 }
 
@@ -47,7 +35,6 @@ let midx = canvas.width / 2;
 let midy = canvas.height / 2;
 
 const gameSettings = {
-    volume: false,
     devMode: false
 };
 
@@ -211,7 +198,7 @@ const HUDchests = [
         x: 34,
         y: 575,
         color1: 'rgba(158, 82, 19, 0.25)',
-        color2: 'rgba(253, 221, 11, 0.5)', 
+        color2: 'rgba(253, 221, 11, 0.5)',
         visible: false
     },
     {
@@ -225,7 +212,7 @@ const HUDchests = [
         x: 92,
         y: 575,
         color1: 'rgba(158, 82, 19, 0.25)',
-        color2: 'rgba(253, 221, 11, 0.5)',  
+        color2: 'rgba(253, 221, 11, 0.5)',
         visible: false
     }
 ]
@@ -398,12 +385,12 @@ function drawChests() {
         ctx.fillStyle = chests[i].color1;
         ctx.fillRect(chests[i].x, chests[i].y, 50, 40);
         ctx.strokeStyle = chests[i].color2; ctx.lineWidth = 3;
-        ctx.beginPath(); 
-        ctx.rect(chests[i].x, chests[i].y, 50, 40); 
+        ctx.beginPath();
+        ctx.rect(chests[i].x, chests[i].y, 50, 40);
         ctx.stroke();
-        ctx.rect(chests[i].x, chests[i].y + 15, 50, 1); 
+        ctx.rect(chests[i].x, chests[i].y + 15, 50, 1);
         ctx.stroke();
-        ctx.rect(chests[i].x + 20, chests[i].y + 15, 10, 5); 
+        ctx.rect(chests[i].x + 20, chests[i].y + 15, 10, 5);
         ctx.stroke();
     }
 }
@@ -628,7 +615,7 @@ function triggerEvent(sasha) {
     switch (sasha) { // 0-99 varattu JM, 100-199 varattu JT
         // 0 = endgame
         case 0:
-            if (player.chests >= 0) // Currently 0, increase on release
+            if (player.chests >= 4) // Currently 0, increase on release
                 player.active = false;
             return;
         case 1:
@@ -676,7 +663,7 @@ document.addEventListener("keydown", function (event) {
 
     //move
     switch (event.key) {
-        case "r":
+        case "ö":
             //switch devMode
             toggleDevMode();
             return;
@@ -744,10 +731,10 @@ function update() {
     clear();
 
     newPos();
-    
+
     drawWalls();
     drawChests();
-    
+
 
     if (stage.endFrame <= 120) {
         drawPlayer();
@@ -760,7 +747,6 @@ function update() {
 
     if (player.active) {
         enemyMove();
-        playSounds();
         drawHUD();
     } else {
         endGame();
@@ -807,7 +793,8 @@ function endGame() {
                 ctx.fillStyle = "silver";
                 ctx.font = "30px Arial";
                 ctx.fillText("Thank you for playing our game!", midx - 200, midy);
-            } if (stage.endFrame >= 925 && stage.endFrame <= 1200) {
+            }
+            if (stage.endFrame >= 925 && stage.endFrame <= 1200) {
                 ctx.fillStyle = "silver";
                 ctx.font = "30px Arial";
                 ctx.fillText("Made by JT & JM", midx - 180, midy);
@@ -825,16 +812,6 @@ function resetGame() {
     location.reload();
 }
 
-function toggleVolume() {
-    if (gameSettings.volume) {
-        gameSettings.volume = false;
-        soundBtn.style.background = "red";
-    } else {
-        gameSettings.volume = true;
-        soundBtn.style.background = "darkgreen";
-    }
-}
-
 function toggleDevMode() {
     if (gameSettings.devMode)
         gameSettings.devMode = false;
@@ -842,59 +819,10 @@ function toggleDevMode() {
         gameSettings.devMode = true;
 }
 
-function playSounds() {
-    if (!(gameSettings.volume))
-        return;
-
-    if (player.attackFrames == 2)
-        knifemelee01.play();
-
-    if (!(player.moveDir == "none")) {
-        if (player.footsteps == 17) {
-            player.footsteps = 0;
-            switch (Math.floor(Math.random() * 4)) {
-                case 0:
-                    //footstep01.play();
-                    console.log("footstepsound1");
-                    return;
-                case 1:
-                    //footstep02.play();
-                    console.log("footstepsound2");
-                    return;
-                case 2:
-                    //footstep03.play();
-                    console.log("footstepsound3");
-                    return;
-                case 3:
-                    //footstep04.play();
-                    console.log("footstepsound4");
-                    return;
-            }
-        }
-        player.footsteps++;
-    } else
-        player.footsteps = 0;
-}
-
 function drawOverlay() {
 
     switch (stage.overlay) {
         case 0: // Empty
-            break;
-        case 1: // Warm sunset
-            ctx.globalAlpha = 0.1;
-            ctx.fillStyle = "orange";
-            ctx.fillRect(0, 0, 600, 600);
-            break;
-        case 2: // Nighttime
-            ctx.globalAlpha = 0.6;
-            ctx.fillStyle = "darkblue";
-            ctx.fillRect(0, 0, 600, 600);
-            break;
-        case 3: // Nuclear fallout / Alien
-            ctx.globalAlpha = 0.4;
-            ctx.fillStyle = "green";
-            ctx.fillRect(0, 0, 600, 600);
             break;
         case 4: // Foggy level 1
             ctx.globalAlpha = 0.2;
@@ -987,12 +915,6 @@ function drawOverlay() {
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, 600, 600);
             break;
-        case 666: // It's A Secret To Everybody
-            return;
-            ctx.globalAlpha = 0.6;
-            ctx.fillStyle = "darkblue";
-            ctx.fillRect(0, 0, 600, 600);
-            break;
     }
     ctx.globalAlpha = 1.0;
 }
@@ -1060,7 +982,7 @@ function drawHUD() {
                 ctx.beginPath(); ctx.rect(5, 5, 150, 20); ctx.stroke();
                 break;
         }
-        
+
         switch (player.chests) {
             case 1:
                 HUDchests[0].visible = true;
@@ -1069,7 +991,7 @@ function drawHUD() {
             case 2:
                 HUDchests[1].visible = true;
                 drawHUDchests();
-                break;   
+                break;
             case 3:
                 HUDchests[2].visible = true;
                 drawHUDchests();
